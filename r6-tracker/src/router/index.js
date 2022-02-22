@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import DetailOperator from '../views/DetailOperator.vue'
+import LoginForm from '../views/LoginForm.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
     name: 'DetailOperator',
     component: DetailOperator
   },
+  {
+    path: '/login',
+    name: 'LoginForm',
+    component: LoginForm
+  }
 ]
 
 const router = new VueRouter({

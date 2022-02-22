@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     operators: [],
-    operator: null
+    operator: null,
+    isLogin: false
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     SET_OPERATOR(state, payload){
       state.operator = payload
+    },
+    SET_ISLOGIN(state, status){
+      state.isLogin = status
     }
   },
   actions: {
@@ -40,6 +44,22 @@ export default new Vuex.Store({
       })
       .catch((err) => {
         console.log(err.response)
+      })
+    },
+    userLogin(context, payload){
+      return new Promise ((resolve, rejects) => {
+        axios.post('http://localhost:3000/users/login', payload)
+          .then((resp) => {
+            console.log(resp.data)
+            localStorage.access_token = resp.data.access_token
+            context.commit('SET_ISLOGIN', true)
+            resolve()
+          })
+          .catch((err) => {
+            console.log(err.response)
+            rejects(err.response)
+          })
+
       })
     }
   },
