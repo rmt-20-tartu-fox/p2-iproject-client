@@ -9,7 +9,9 @@ export default new Vuex.Store({
   state: {
     operators: [],
     operator: null,
-    isLogin: false
+    isLogin: false,
+    strats: [],
+    strat: null
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     SET_ISLOGIN(state, status){
       state.isLogin = status
+    },
+    SET_STRATS(state, payload){
+      state.strats = payload
+    },
+    SET_STRAT(state, payload){
+      state.strat = payload
     }
   },
   actions: {
@@ -78,6 +86,27 @@ export default new Vuex.Store({
           })
 
       })
+    },
+    getAllStrats(context){
+      axios.get('http://localhost:3000/strats')
+        .then((resp) => {
+          // console.log(JSON.stringify(resp.data, null, 2))
+          context.commit('SET_STRATS', resp.data)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    getOneStrat(context, id){
+      // console.log(id)
+      axios.get(`http://localhost:3000/strats/${id}`)
+        .then((resp) => {
+          console.log(resp.data)
+          context.commit('SET_STRAT', resp.data)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
     }
   },
   modules: {

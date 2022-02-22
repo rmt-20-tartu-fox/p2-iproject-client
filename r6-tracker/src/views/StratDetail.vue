@@ -1,11 +1,11 @@
 <template>
-  <!-- eslint-disable -->
-  <div class="homePage">
-    <button type="button" class='btn btn-warning' @click.prevent="filterOperator('Attacker')">ATTACKER</button>
-    <button type="button" class='btn btn-primary'@click.prevent="filterOperator('Defender')">DEFENDER</button>
+  <!-- eslint-disable  -->
+  <div v-if='strat !== null'>
+    <img v-bind:src='strat.Map.imgUrl'>
+
     <div class="container">
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-5 row-cols-xl-5 justify-content-center" style="width:100%;">
-        <div class="col mb-5"    v-for='operator in operators' v-bind:key='operator.id'>
+        <div class="col mb-5"    v-for='operator in strat.myOperators' v-bind:key='operator.id'>
 
           <div class="card  shadow-lg p-3 mb-5 bg-dark shadow-lg border border-secondary red" style="width: 18rem; border-bottom-left-radius: 75px;">
             <img class="card-img-top" alt="Card image cap" v-bind:src='operator.imageUrl'>
@@ -22,30 +22,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
 /* eslint-disable */
-
 export default {
-  name: 'Home',
+  name: 'StratDetail',
   created(){
-    this.$store.dispatch('getAllOperators',this.role)
+    this.$store.dispatch('getOneStrat', this.$route.params.id)
   },
   computed: {
-    operators(){
-      return this.$store.state.operators
-    }
-  },
-  data(){
-    return {
-      role: ''
+    strat(){
+      return this.$store.state.strat
     }
   },
   methods: {
-    filterOperator(role){
-      // console.log(role)
-      this.role = role
-      this.$store.dispatch('getAllOperators', role)
-    },
     seeDetail(id){
       // console.log(id)
       // this.$store.dispatch('getOneOperator', id)
@@ -54,3 +42,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
