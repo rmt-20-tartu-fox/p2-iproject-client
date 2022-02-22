@@ -23,8 +23,8 @@ export default {
   name: 'LoginForm',
   data(){
     return {
-      email,
-      password
+      email: '',
+      password: ''
     }
   },
   methods: {

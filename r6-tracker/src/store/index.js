@@ -12,7 +12,8 @@ export default new Vuex.Store({
     isLogin: false,
     strats: [],
     strat: null,
-    maps: []
+    maps: [],
+    friend: null
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     SET_MAPS(state, payload){
       state.maps = payload
+    },
+    SET_FRIEND(state, payload){
+      state.friend = payload
     }
   },
   actions: {
@@ -140,6 +144,22 @@ export default new Vuex.Store({
 
       })
       
+    },
+    checkFriend(context, payload){
+      console.log(payload, "<<<<")
+      axios.post('http://localhost:3000/friends', payload, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+      .then((resp) => {
+        console.log(resp.data)
+        context.commit('SET_FRIEND', resp.data)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+
     }
   },
   modules: {
