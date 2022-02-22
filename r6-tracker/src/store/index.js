@@ -56,7 +56,24 @@ export default new Vuex.Store({
             resolve()
           })
           .catch((err) => {
-            console.log(err.response)
+            // console.log(err.response)
+            rejects(err.response)
+          })
+
+      })
+    },
+    userRegister(context, payload){
+      // console.log(payload)
+      return new Promise ((resolve, rejects) => {
+        axios.post('http://localhost:3000/users/register', payload)
+          .then((resp) => {
+            console.log(resp.data)
+            localStorage.access_token = resp.data.access_token
+            context.commit('SET_ISLOGIN', true)
+            resolve()
+          })
+          .catch((err) => {
+            // console.log(err.response)
             rejects(err.response)
           })
 
