@@ -1,8 +1,66 @@
-<template></template>
+<template>
+  <div class="min-w-screen min-h-screen bg-gray-100 flex">
+    <div class="w-1/4 min-h-screen bg-white"></div>
+    <div class="w-3/4 min-h-screen flex items-center justify-center">
+      <form
+        action=""
+        class="bg-white w-1/2 px-5 py-10 flex flex-col block items-center justify-center rounded"
+        @submit.prevent="login"
+      >
+        <h2 class="text-lg mb-4">Sign In</h2>
+
+        <label for="" class="mb-4">Email</label>
+        <input
+          type="email"
+          v-model="user.email"
+          class="mb-4 w-3/4 rounded border-gray-400 border p-1"
+        />
+
+        <label for="" class="mb-4">Password</label>
+        <input
+          type="password"
+          v-model="user.password"
+          class="mb-4 w-3/4 rounded border-gray-400 border p-1"
+        />
+        <input
+          type="submit"
+          value="Submit"
+          class="bg-blue-400 w-3/4 rounded p-2 mt-5 mb-5"
+        />
+        <!-- <router-link to="/register" class="mb-2">Sign up</router-link>
+        <router-link to="/" class="mt-2">Back to home</router-link> -->
+      </form>
+    </div>
+  </div>
+</template>
 
 <script>
 export default {
   name: `Login`,
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async login() {
+      await this.$store.dispatch("login", this.user);
+      if (this.isLogin) {
+        this.$router.push({ name: `Home` });
+      }
+    },
+  },
+  created() {
+    this.$store.commit("SET_IS_LOGIN_PAGE", true);
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin;
+    },
+  },
 };
 </script>
 
