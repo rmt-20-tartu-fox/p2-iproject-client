@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../src/assets/icon/around-the-world.ico" style="height: 16px;">
+
+  <link href="../src/assets/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <link rel="stylesheet" type="text/css" href="../src/assets/css/slider_styles.css" />
+  <script language="javascript" type="text/javascript" src="../src/plugins/scripts/mootools-1.2.1-core.js"></script>
+  <script language="javascript" type="text/javascript" src="../src/plugins/scripts/mootools-1.2-more.js"></script>
+  <script language="javascript" type="text/javascript" src="../src/plugins/scripts/slideitmoo-1.1.js"></script>
+  <script language="javascript" type="text/javascript">
+    window.addEvents({
+      'domready': function () {
+        /* thumbnails example , div containers */
+        new SlideItMoo({
+          overallContainer: 'SlideItMoo_outer',
+          elementScrolled: 'SlideItMoo_inner',
+          thumbsContainer: 'SlideItMoo_items',
+          itemsVisible: 4,
+          elemsSlide: 2,
+          duration: 300,
+          itemsSelector: '.SlideItMoo_element',
+          itemWidth: 204,
+          showControls: 1
+        });
+      },
+    });
+  </script>
+
+</head>
+
+<body>
+  <!-- <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript> -->
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+
+
+</body>
+
+</html>
