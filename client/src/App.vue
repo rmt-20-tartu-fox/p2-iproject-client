@@ -6,9 +6,56 @@
       <router-link to="/birthPage"></router-link>
       <router-link to="/login">Login</router-link>
     </nav>
+    <canvas id="canvas1"></canvas>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      frameX: 0,
+    };
+  },
+  methods: {
+    animate() {
+      const canvas = document.getElementById("canvas1");
+      const ctx = canvas.getContext("2d");
+      const CANVAS_WIDTH = (canvas.width = 600);
+      const CANVAS_HEIGHT = (canvas.height = 600);
+
+      const playerImage = new Image();
+      playerImage.src =
+        "https://www.frankslaboratory.co.uk/downloads/shadow_dog.png";
+      const spriteWidth = 575;
+      const spriteHeight = 523;
+
+      let frameX = this.frameX;
+      let frameY = 0;
+
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      ctx.drawImage(
+        playerImage,
+        frameX * spriteWidth,
+        frameY * spriteHeight,
+        spriteWidth,
+        spriteHeight,
+        0,
+        0,
+        spriteWidth,
+        spriteHeight
+      );
+      if (frameX < 6) this.frameX++;
+      else this.frameX = 0;
+      requestAnimationFrame(this.animate);
+    },
+  },
+  mounted() {
+    this.animate();
+  },
+};
+</script>
 
 <style>
 #app {
@@ -34,5 +81,15 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#canvas1 {
+  border: 5px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
 }
 </style>

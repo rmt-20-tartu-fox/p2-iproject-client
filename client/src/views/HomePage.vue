@@ -40,7 +40,10 @@ export default {
       console.log(`BERHASILLLLLLL`);
     },
   },
-  created() {},
+  created() {
+    // only when needed
+    // return this.$store.dispatch("getWeather");
+  },
 };
 </script>
 

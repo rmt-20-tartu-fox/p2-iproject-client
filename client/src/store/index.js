@@ -55,6 +55,18 @@ export default new Vuex.Store({
         },
       });
     },
+    async getWeather() {
+      navigator.geolocation.getCurrentPosition((success) => {
+        const { latitude, longitude } = success.coords;
+
+        const data = axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${""}`
+          )
+          .then((res) => console.log(res));
+        console.log(data);
+      });
+    },
   },
   modules: {},
 });
