@@ -8,6 +8,7 @@ import RegisterForm from '../views/RegisterForm.vue'
 import StratsList from '../views/StratsList.vue'
 import StratDetail from '../views/StratDetail.vue'
 import AddStrat from '../views/AddStratForm.vue'
+import CheckFriend from '../views/CheckFriend.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/addstrat',
     name: 'AddStrat',
     component: AddStrat
+  },
+  {
+    path: '/check-friend',
+    name: 'CheckFriend',
+    component: CheckFriend
   }
 ]
 
