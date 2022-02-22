@@ -5,7 +5,7 @@
     <button type="button" class='btn btn-primary'@click.prevent="filterOperator('Defender')">DEFENDER</button>
     <div class="container">
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-5 row-cols-xl-5 justify-content-center" style="width:100%;">
-        <div class="col mb-5"    v-for='operator in operators' v-bind:key='operator.id'>
+        <div class="col-3 mb-5 mx-5"    v-for='operator in operators' v-bind:key='operator.id' >
 
           <div class="card  shadow-lg p-3 mb-5 bg-dark shadow-lg border border-secondary red" style="width: 18rem; border-bottom-left-radius: 75px;">
             <img class="card-img-top" alt="Card image cap" v-bind:src='operator.imageUrl'>
@@ -19,6 +19,17 @@
       </div>
     </div>
   </div>
+  <!-- <div class="row row-cols-xl-5">
+    <div class="col-2" v-for='operator in operators' v-bind:key='operator.id' >
+      <div class="card  shadow-lg p-3 mb-5 bg-dark shadow-lg border border-secondary red" style="width: 18rem; border-bottom-left-radius: 75px;">
+        <img class="card-img-top" alt="Card image cap" v-bind:src='operator.imageUrl'>
+        <div class="card-body " >
+          <h5 class="card-title text-dark">{{operator.name}}</h5>
+          <button class="btn btn-link btn-outline-primary" v-on:click.prevent='seeDetail(operator.id)'>See Detail</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </template>
 
 <script>
