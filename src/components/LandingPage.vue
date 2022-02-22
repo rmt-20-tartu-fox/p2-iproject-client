@@ -38,7 +38,7 @@ export default {
   computed: {
     booksFilm(){
       return this.$store.state.booksFilm
-    },
+    }
   },
   created(){
     this.getBookBySubject()

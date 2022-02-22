@@ -7,14 +7,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     booksFilm: [],
-    title: "love"
+    booksSearch: [],
+    title: ""
   },
   mutations: {
     SET_BOOKS(state, payload){
       state.booksFilm = payload
     },
 
-    SET_SEARCH_TITLE(state, payload){
+    SET_BOOKS_SEARCH(state, payload){
+      state.booksSearch = payload
+    },
+
+    SET_TITLE(state, payload){
       state.title = payload
     }
   },
@@ -22,12 +27,26 @@ export default new Vuex.Store({
     getBookBySubject(context){
       serverApi.get("/books")
         .then(res => {
-          console.log(res.data);
           context.commit("SET_BOOKS", res.data)
         })
         .catch(err => {
           console.log(err.response.data.message);
         })
+    },
+
+    getBookByTitle(context){
+      serverApi.get("/books/search",{
+        params: {
+          title: this.state.title
+        }
+      })
+      .then(res => {
+        context.commit("SET_BOOKS_SEARCH", res.data)
+      })
+      .catch(err => {
+        console.log(err.response.data.message);
+      })
+
     }
   },
   modules: {},

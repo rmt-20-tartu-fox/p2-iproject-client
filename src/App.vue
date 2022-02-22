@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <nav id="main_nav" class="navbar navbar-expand-lg navbar-light fixed-top navbar-expand-lg bg-white shadow mb-3" style="width:100%">
+   <nav id="main_nav" class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow" style="width:100%">
         <div class="container d-flex justify-content-between align-items-center">
             <router-link class="navbar-brand h1" to="/">
                 <img class="mx-3 mb-2" src="./assets/fdnslogo.png" alt="" width="40" height="45">
@@ -12,7 +12,7 @@
 
             <div class="align-self-center justify-content-lg-between" id="navbar-toggler-success">
                 <div class="flex-fill mx-xl-5 mb-2">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-xl-3 text-center text-dark">
                         <li class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/">Home</router-link>
                         </li>
@@ -28,12 +28,6 @@
                         <li class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/mybook">Sign up</router-link>
                         </li>
-                        <li class="nav-item d-flex align-item-right">
-                          <form @submit.prevent="getSearchTitle" class="form-inline my-2 my-lg-0">
-                            <input v-model="title" class="form-control mr-sm-2 p-2" type="search" placeholder="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                          </form>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -46,17 +40,6 @@
 <script>
 export default {
   name: "Navbar",
-  data(){
-    return {
-      title: ""
-    }
-  },
-  methods: {
-    getSearchTitle(){
-      const title = this.title
-      this.$store.commit("SET_SEARCH_TITLE", title)
-    }
-  }
 }
 </script>
 
