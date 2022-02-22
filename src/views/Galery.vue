@@ -1,12 +1,22 @@
 <template>
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-      
+    <div class="mt-5">
     </div>
 </template>
 
 <script>
+// import assemblyApi from "../apis/assemblyApi"
 export default {
-  name: "Galery"
+  name: "Galery",
+  methods: {
+    getSound(){
+      let speechRecognition = window.webkitSpeechRecognition
+      let recognition = new speechRecognition()
+      recognition.continous = true
+      recognition.onstart = ()=> {
+        console.log('record on');
+      }
+    }
+  }
 }
 </script>
 
