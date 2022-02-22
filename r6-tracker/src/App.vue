@@ -6,7 +6,8 @@
       <router-link to="/login">login</router-link> |
       <router-link to="/strats">strats</router-link> |
       <router-link to="/addstrat">addstrat</router-link> |
-      <router-link to="/check-friend">check-friend</router-link>
+      <router-link to="/check-friend">check-friend</router-link> |
+      <router-link to="/my-strat">my-strat</router-link> |
     </div>
     <router-view/>
   </div>
