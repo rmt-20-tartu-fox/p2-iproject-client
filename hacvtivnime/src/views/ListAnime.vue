@@ -122,9 +122,9 @@ export default {
       this.$store.commit("setPageAnime", n);
       this.$store.dispatch("getAnimes");
     },
-    // getAnimeDetail(id) {
-    //   this.$router.push(`/manga/${id}`)
-    // }
+    getAnimeDetail(id) {
+      this.$router.push(`/anime/${id}`)
+    }
   },
 };
 </script>

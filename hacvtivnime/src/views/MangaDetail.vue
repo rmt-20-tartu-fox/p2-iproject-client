@@ -30,7 +30,7 @@
                   <hr />
                   <p class="m-0">
                     Chapters: <strong style="color:red">{{ manga.chapters }}</strong
-                    >, Volume: <strong style="color:red">{{ manga.volumes }}</strong>, Score: <strong style="color:red">{{ manga.scored }}</strong>,
+                    >, Volume: <strong style="color:red">{{ manga.volumes }}</strong>, Rating: <strong style="color:red">{{ manga.scored }}</strong>,
                     Rank: <strong style="color:red">{{ manga.rank }}</strong>, Popularity: <strong style="color:red">{{ manga.popularity }}</strong>
                   </p>
                   <h4 class="m-0">Authors: {{ manga.authors[0].name }}</h4>
@@ -61,7 +61,6 @@ export default {
     },
   },
   created() {
-    console.log();
     this.$store.dispatch("getMangaDetail", this.$route.params.id);
   },
 };

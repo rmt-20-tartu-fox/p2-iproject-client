@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import ListManga from '../views/ListManga.vue'
 import ListAnime from '../views/ListAnime.vue'
 import MangaDetail from '../views/MangaDetail.vue'
+import AnimeDetail from '../views/AnimeDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -34,11 +35,11 @@ const routes = [
     name: 'ListAnime',
     component: ListAnime
   },
-  // {
-  //   path: '/anime/:id',
-  //   name: 'MangaDetail',
-  //   component: MangaDetail
-  // },
+  {
+    path: '/anime/:id',
+    name: 'AnimeDetail',
+    component: AnimeDetail
+  },
 ]
 
 const router = new VueRouter({

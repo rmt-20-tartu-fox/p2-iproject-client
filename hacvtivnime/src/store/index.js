@@ -69,15 +69,16 @@ export default new Vuex.Store({
           console.log(err);
         })
     },
-    // getAnimeDetail(context, payload) {
-    //   axios.get(`/manga/${payload}`)
-    //     .then(resp => { 
-    //       context.commit('setMangaDetail', resp.data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     })
-    // },
+    getAnimeDetail(context, payload) {
+      console.log(payload);
+      axios.get(`/animes/${payload}`)
+        .then(resp => { 
+          context.commit('setAnimeDetail', resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
   },
   modules: {
   }
