@@ -9,9 +9,24 @@
       <router-link to="/check-friend">check-friend</router-link> |
       <router-link to="/my-strat">my-strat</router-link> |
     </div>
+
+    <NavBar />
     <router-view/>
   </div>
 </template>
+
+<script>
+/* eslint-disable */
+import NavBar from './components/NavBar.vue'
+export default{
+  name: 'App',
+  components: {
+    NavBar
+  }
+
+}
+</script>
+
 
 <style>
 #app {
