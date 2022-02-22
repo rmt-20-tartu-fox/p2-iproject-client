@@ -13,7 +13,8 @@ export default new Vuex.Store({
     strats: [],
     strat: null,
     maps: [],
-    friend: null
+    friend: null,
+    myStrats: []
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     SET_FRIEND(state, payload){
       state.friend = payload
+    },
+    SET_MYSTRATS(state, payload){
+      state.myStrats = payload
     }
   },
   actions: {
@@ -160,6 +164,23 @@ export default new Vuex.Store({
         console.log(err.response)
       })
 
+    },
+    getMyStrats(context){
+      axios.get('http://localhost:3000/mystrats', {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then((resp) => {
+          console.log(JSON.stringify(resp.data, null, 2))
+          context.commit('SET_MYSTRATS', resp.data)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    deleteMyStrat(context, id){
+      console.log(id)
     }
   },
   modules: {
