@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../api/axios'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isLoggedIn: false,
     mangas: [],
     manga: {},
     animes: [],
     anime: {},
+    topMangas: [],
+    topAnimes: [],
+    favoriteMangas: [],
+    favoriteAnimes: [],
     paginationManga: {
       page: 1,
       totalPage: 10,
@@ -20,6 +26,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setIsLoggedIn(state, payload) {
+      state.isLoggedIn = payload
+    },
     setPageManga(state, payload) {
       state.paginationManga.page = payload
     },
@@ -29,22 +38,64 @@ export default new Vuex.Store({
     setMangas(state, payload){
       state.mangas = payload
     },
+    setTopMangas(state, payload){
+      state.topMangas = payload
+    },
     setMangaDetail(state, payload){
       state.manga = payload
     },
     setAnimes(state, payload){
       state.animes = payload
     },
+    setTopAnimes(state, payload){
+      state.topAnimes = payload
+    },
     setAnimeDetail(state, payload){
       state.anime = payload
     },
+    setFavoriteManga(state, payload){
+      state.favoriteMangas = payload
+    },
+    setFavoriteAnime(state, payload) {
+      state.favoriteAnimes = payload
+    }
   },
   actions: {
+    register(_, payload) {
+      axios.post('/register', payload)
+        .then(resp => {
+          console.log(resp);
+          router.push('/')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    login(context, payload) {
+      axios.post('/login', payload)
+        .then(resp => {
+          localStorage.setItem('access_token', resp.data.access_token)
+          context.commit('setIsLoggedIn', true)
+          router.push('/')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
     getMangas(context) {
       const page = this.state.paginationManga.page
       axios.get(`/mangas?page=${page}`)
         .then(resp => { 
           context.commit('setMangas', resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    getTopMangas(context) {
+      axios.get(`/tops/mangas`)
+        .then(resp => { 
+          context.commit('setTopMangas', resp.data)
         })
         .catch(err => {
           console.log(err);
@@ -69,8 +120,16 @@ export default new Vuex.Store({
           console.log(err);
         })
     },
+    getTopAnimes(context) {
+      axios.get(`/tops/animes`)
+        .then(resp => { 
+          context.commit('setTopAnimes', resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
     getAnimeDetail(context, payload) {
-      console.log(payload);
       axios.get(`/animes/${payload}`)
         .then(resp => { 
           context.commit('setAnimeDetail', resp.data)
@@ -79,6 +138,37 @@ export default new Vuex.Store({
           console.log(err);
         })
     },
+    getFavoriteManga(context){
+      axios.get(`/myfavoritesmangas`, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(resp => { 
+          context.commit('setFavoriteManga', resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    getFavoriteAnime(context){
+      axios.get(`/myfavoritesanimes`, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(resp => { 
+          context.commit('setFavoriteAnime', resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    logout(context) {
+      localStorage.clear()
+      context.commit('setIsLoggedIn', false)
+      router.push('/login')
+    }
   },
   modules: {
   }

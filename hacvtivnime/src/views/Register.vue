@@ -6,17 +6,17 @@
             <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
                 <div class="form-container">
                     <form class="form-horizontal">
-                        <h3 class="title">User Login</h3>
+                        <h3 class="title">Register</h3>
                         <div class="form-group">
                             <span class="input-icon"><i class="fa fa-user"></i></span>
-                            <input v-model="formLogin.email" class="form-control" type="email" placeholder="Username">
+                            <input v-model="formRegister.email" class="form-control" type="email" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <span class="input-icon"><i class="fa fa-lock"></i></span>
-                            <input v-model="formLogin.password" class="form-control" type="password" placeholder="Password">
+                            <input v-model="formRegister.password" class="form-control" type="password" placeholder="Password">
                         </div>
-                        <span class="forgot-pass"><a href="#">Dont have an account? Register!</a></span>
-                        <button @click.prevent="loginUser" class="btn signin">Login</button>
+                        <span class="forgot-pass"><a href="#">Have an account? Login!</a></span>
+                        <button  @click.prevent="registerUser" class="btn signin">Register</button>
                     </form>
                 </div>
             </div>
@@ -28,20 +28,20 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
-      formLogin : {
+      formRegister : {
         email:'',
         password: ''
       }
     }
   },
   methods: {
-    loginUser() {
-      this.$store.dispatch("login", this.formLogin);
+    registerUser() {
+      this.$store.dispatch("register", this.formRegister);
     },
-  }
+  },
 };
 </script>
 

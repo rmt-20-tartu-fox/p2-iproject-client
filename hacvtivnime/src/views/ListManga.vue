@@ -7,7 +7,7 @@
         <div class="py-1 mb-3" style="background-color: #636e72">
           <div class="container px-4 px-lg-5 my-1">
             <div class="text-center text-light">
-              <h6 class="display-4 fw-bolder">List Manga</h6>
+              <h6 class="display-5 fw-bolder">List Manga</h6>
             </div>
           </div>
         </div>

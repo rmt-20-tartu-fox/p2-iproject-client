@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <ListManga></ListManga>
+    <Recommendations></Recommendations>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ListManga from './ListManga.vue'
+import Recommendations from './Recommendations.vue'
 
 export default {
   name: 'Home',
   components: {
-    ListManga
+    Recommendations
   }
 }
 </script>
