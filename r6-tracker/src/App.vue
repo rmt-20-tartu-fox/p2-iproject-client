@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login">login</router-link> |
-      <router-link to="/strats">strats</router-link>
+      <router-link to="/strats">strats</router-link> |
+      <router-link to="/addstrat">addstrat</router-link>
     </div>
     <router-view/>
   </div>

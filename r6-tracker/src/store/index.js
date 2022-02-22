@@ -11,7 +11,8 @@ export default new Vuex.Store({
     operator: null,
     isLogin: false,
     strats: [],
-    strat: null
+    strat: null,
+    maps: []
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_STRAT(state, payload){
       state.strat = payload
+    },
+    SET_MAPS(state, payload){
+      state.maps = payload
     }
   },
   actions: {
@@ -107,6 +111,35 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.response)
         })
+    },
+    getAllMaps(context){
+      axios.get('http://localhost:3000/maps')
+        .then((resp) => {
+          console.log(resp.data)
+          context.commit('SET_MAPS', resp.data)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+        
+    },
+    addNewStrat(context, payload){
+      console.log(payload)
+      return new Promise((resolve, rejects) => {
+        axios.post('http://localhost:3000/strats', payload, {
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+          .then(() => {
+            resolve()
+          })
+          .catch((err) => {
+            rejects(err.response)
+          })
+
+      })
+      
     }
   },
   modules: {

@@ -7,6 +7,7 @@ import LoginForm from '../views/LoginForm.vue'
 import RegisterForm from '../views/RegisterForm.vue'
 import StratsList from '../views/StratsList.vue'
 import StratDetail from '../views/StratDetail.vue'
+import AddStrat from '../views/AddStratForm.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/strats/:id',
     name: 'StratDetail',
     component: StratDetail
+  },
+  {
+    path: '/addstrat',
+    name: 'AddStrat',
+    component: AddStrat
   }
 ]
 
