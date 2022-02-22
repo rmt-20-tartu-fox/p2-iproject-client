@@ -36,6 +36,7 @@ export default {
       }
       this.$store.dispatch('userLogin', payload)
         .then(() => {
+          console.log("oK")
           this.$router.push({name: 'Home'})
         })
         .catch((err) => {
