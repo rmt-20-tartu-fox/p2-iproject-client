@@ -310,12 +310,15 @@ export default {
       data.array.forEach((el) => {
         el.status = "progres";
       });
-      console.log(data, "ksdkshdksh");
       this.arrInProgress = data;
     },
   },
   created() {
-    this.$store.dispatch("getCollection");
+    // this.$store.dispatch("getCollection");
+    this.$store.dispatch("listenDataBase");
+  },
+  beforeDestroy() {
+    this.$store.dispatch("listenDataBase", true);
   },
 };
 </script>
