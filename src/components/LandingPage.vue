@@ -21,7 +21,7 @@
                     <div class="text-left text-light">
                         <p class="card-text bg-dark">{{book.title}}</p>
                         <a :href="'https://archive.org/details/'+book.availability.identifier" class="btn btn-sm btn-warning b-lg-3 px-lg-6">READ</a>
-                        <span class="btn btn-sm btn-warning b-lg-3 px-lg-6">ADD</span>
+                        <button @click="addBookmark(book.cover_id)" type="submit" class="btn btn-sm btn-warning b-lg-3 px-lg-6">ADD</button>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,17 @@ export default {
   methods: {
     getBookBySubject(){
       this.$store.dispatch("getBookBySubject")
+    },
+
+    addBookmark(bookKey){
+      this.$store.dispatch("addBookmark", bookKey)
+        .then(res => {
+          console.log(res);
+          this.$router.push("/mybook")
+        })
+        .catch(err =>{
+          console.log(err);
+        })
     }
   }
 }
