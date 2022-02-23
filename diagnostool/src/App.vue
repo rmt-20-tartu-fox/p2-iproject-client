@@ -1,29 +1,70 @@
 <template>
   <div id="app">
-    <div id="nav"><router-link to="/">Home</router-link> |</div>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid row justify-content-between">
+          <router-link class="navbar-brand col-2" to="/">DiagnosTool</router-link>
+          <button
+            class="navbar-toggler col-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse col-6 justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <router-link to="/" class="nav-link active" aria-current="page"
+                  >Home</router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/diagnose"
+                  >Symptom Checker</router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/location"
+                  >Hospitals</router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/chat">Chat</router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.2rem !important;
 }
 
-#nav {
-  padding: 30px;
+.card {
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+body {
+  background-color: #fff;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.navbar {
+  background-color: #9e9ea7 !important;
 }
 </style>
