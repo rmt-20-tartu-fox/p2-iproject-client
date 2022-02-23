@@ -15,6 +15,7 @@
       <!-- <p>Link for download</p> -->
     </div>
     <button
+      v-if="dataPage !== 'Cart'"
       class="w-1/3 rounded p-2 bg-blue-300 ml-2 mb-4 mt-3 item-center"
       @click.prevent="buyBook"
     >
@@ -38,11 +39,11 @@ export default {
       this.$router.push(`/cart/${this.book.id}`);
     },
   },
-  // computed: {
-  //   dataDetailBook() {
-  //     return this.$store.state.book;
-  //   },
-  // },
+  computed: {
+    dataPage() {
+      return this.$store.state.page;
+    },
+  },
 };
 </script>
 
