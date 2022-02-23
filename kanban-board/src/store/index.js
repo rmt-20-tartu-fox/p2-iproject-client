@@ -1,6 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { auth, db, signInWithEmailAndPassword } from "../../firebase/index";
+import {
+  auth,
+  db,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "../../firebase/index";
 import router from "../router/index.js";
 import Swal from "sweetalert2";
 import {
@@ -13,26 +18,33 @@ import {
   updateDoc,
   onSnapshot,
 } from "firebase/firestore";
+import axios from "axios";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     issue: [],
     datailIssue: {},
+    dataWeather: {},
+    icon: "",
   },
   mutations: {
     SET_ISSUE(state, payload) {
       state.issue = payload;
     },
     SET_DETAIL_ISSUE(state, payload) {
-      console.log(payload, "indiadkakjdnkasjd");
       state.datailIssue = payload;
+    },
+    SET_WEATHER(state, payload) {
+      state.dataWeather = payload;
+    },
+    SET_ICON(state, payload) {
+      state.icon = payload;
     },
   },
   actions: {
     register(context, { email, password }) {
-      auth()
-        .createUserWithEmailAndPassword(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((resp) => {
           Swal.fire({
             icon: "success",
@@ -40,7 +52,8 @@ export default new Vuex.Store({
             showConfirmButton: false,
             timer: 1500,
           });
-          localStorage.setItem("access_token", resp.user._delegate.accessToken);
+          localStorage.setItem("access_token", resp.user.accessToken);
+          localStorage.setItem("email", resp.user.email);
           router.push("/board");
         })
         .catch((error) => {
@@ -56,8 +69,8 @@ export default new Vuex.Store({
             showConfirmButton: false,
             timer: 1500,
           });
-          console.log(resp);
           localStorage.setItem("access_token", resp.user.accessToken);
+          localStorage.setItem("email", resp.user.email);
           router.push("/board");
         })
         .catch((error) => {
@@ -82,16 +95,9 @@ export default new Vuex.Store({
       addDoc(collection(db, "addedIssue"), {
         ...payload,
         status: "open",
+        icon: context.state.icon,
       })
-        .then((data) => {
-          // const newData = {
-          //   ...payload,
-          //   status: "open",
-          //   id: data.id,
-          // };
-          // const newIssue = [newData, ...context.state.issue];
-          // context.commit("SET_ISSUE", newIssue);
-          // context.dispatch("getCollection");
+        .then(() => {
           Swal.fire({
             icon: "success",
             title: "SUCCESS ADD ISSUE",
@@ -128,11 +134,6 @@ export default new Vuex.Store({
     deleteIssue(context, payload) {
       deleteDoc(doc(db, "addedIssue", payload))
         .then(() => {
-          // const data = context.state.issue;
-          // const newData = data.filter((el) => {
-          //   return el.id !== payload;
-          // });
-          // context.commit("SET_ISSUE", newData);
           Swal.fire({
             icon: "success",
             title: "Success Delete",
@@ -150,11 +151,46 @@ export default new Vuex.Store({
         snap.docs.forEach((doc) => {
           formated.push({ ...doc.data(), id: doc.id });
         });
+        console.log(formated);
         context.commit("SET_ISSUE", formated);
       });
       if (isUnsubcribe) {
         unsub();
       }
+    },
+    weather(context) {
+      axios
+        .get(
+          "http://api.openweathermap.org/data/2.5/weather?lat=-5.0&lon=120.0&appid=da70b468d4446f0b823148298fd3f2d8"
+        )
+        .then((data) => {
+          const result = {
+            negara: data.data.name,
+            weather: data.data.weather[0],
+          };
+          context.commit("SET_WEATHER", result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getIcon(context) {
+      axios
+        .get(
+          `https://boiling-ravine-28201.herokuapp.com/icon?email=${localStorage.getItem(
+            "email"
+          )}`,
+          "Access-Control-Allow-Origin"
+        )
+        // https://boiling-ravine-28201.herokuapp.com
+        // http://localhost:3000/
+        .then(({ data }) => {
+          const icon = data.data.embed_url;
+          context.commit("SET_ICON", icon);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 });
