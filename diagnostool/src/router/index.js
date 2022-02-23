@@ -5,6 +5,8 @@ import Diagnose from "../views/Diagnose.vue";
 import Result from "../views/Result.vue";
 import Location from "../views/Location.vue";
 import Nearby from "../views/NearbyPlace.vue";
+import Chat from "../views/Chat.vue";
+import DoctorChat from "../views/DoctorChat.vue";
 
 Vue.use(VueRouter);
 
@@ -37,6 +39,16 @@ const routes = [
         component: Nearby,
       },
     ],
+  },
+  {
+    path: "/chat",
+    name: "Chat",
+    component: Chat,
+  },
+  {
+    path: "/doctor",
+    name: "Doctor",
+    component: DoctorChat,
   },
 ];
 
