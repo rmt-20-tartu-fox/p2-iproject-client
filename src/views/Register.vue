@@ -7,15 +7,15 @@
         </div>
         <div class="row justify-content-evenly p-3 mx-5">
           <div class="col col-md-5 bg-white p-4 rounded-xl">
-            <form class="justify-content-center">
+            <form @submit.prevent="sendRegisterData" class="justify-content-center">
               <div class="form-group mt-2">
-                <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
+                <input v-model="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
               </div>
               <div class="form-group mt-2">
-                <input type="password" class="form-control" placeholder="Password" />
+                <input v-model="password" type="password" class="form-control" placeholder="Password" />
               </div>
               <div class="form-group mt-2">
-                <input type="date" class="form-control" placeholder="Date of Birth" />
+                <input v-model="dateOfBirth" type="date" class="form-control" placeholder="Date of Birth" />
               </div>
               <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary mt-2">Sign Up</button></div>
             </form>
@@ -29,6 +29,30 @@
 <script>
 export default {
   name: "Register",
+  data: function () {
+    return {
+      email: "",
+      password: "",
+      dateOfBirth: "",
+    };
+  },
+  methods: {
+    sendRegisterData: async function () {
+      await this.$store.dispatch("register", {
+        email: this.email,
+        password: this.password,
+        dateOfBirth: this.dateOfBirth,
+      });
+      if (this.registration) {
+        this.$router.push({ name: "Login" });
+      }
+    },
+  },
+  computed: {
+    registration: function () {
+      return this.$store.state.isRegistered;
+    },
+  },
 };
 </script>
 

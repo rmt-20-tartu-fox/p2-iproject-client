@@ -34,16 +34,12 @@ export default {
   },
   methods: {
     sendLoginData: async function () {
-      console.log({
-        email: this.email,
-        password: this.password,
-      });
       await this.$store.dispatch("login", {
         email: this.email,
         password: this.password,
       });
       if (this.loginStatus) {
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "ProfileFormCreate" });
       }
     },
   },
