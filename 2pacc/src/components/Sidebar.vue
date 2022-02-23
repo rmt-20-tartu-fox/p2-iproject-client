@@ -29,6 +29,11 @@ export default {
   components: {
     SidebarButton,
   },
+  data() {
+    return {
+      CategoryId: "",
+    };
+  },
   computed: {
     categories() {
       return this.$store.state.categories;

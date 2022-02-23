@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     memesDb: [],
     memesApi: [],
+    likes: [],
     jokes: [],
     categories: [],
   },
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     FETCH_CATEGORIES(state, categories) {
       state.categories = categories;
+    },
+    FETCH_LIKES(state, likes) {
+      state.likes = likes;
     },
   },
   actions: {
@@ -72,9 +76,13 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    fetchMemesDb(context) {
+    fetchMemesDb(context, payload) {
+      if (!payload) {
+        payload = "";
+      }
+
       axios
-        .get("/memes/db", {
+        .get(`/memes/db?CategoryId=${payload}`, {
           headers: { access_token: localStorage.access_token },
         })
         .then((resp) => {
@@ -130,6 +138,53 @@ export default new Vuex.Store({
             reject(err);
           });
       });
+    },
+    addLikes(context, payload) {
+      axios
+        .post(
+          `/likes/${payload}`,
+          {},
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        )
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getLikes(context) {
+      axios
+        .get("/likes", {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        })
+        .then((resp) => {
+          console.log(resp.data, "<<<< likes get");
+          context.commit("FETCH_LIKES", resp.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    removeLike(context, payload) {
+      axios
+        .delete(`/likes/${payload}`, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        })
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   modules: {},

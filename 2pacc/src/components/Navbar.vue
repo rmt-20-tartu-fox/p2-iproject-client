@@ -6,7 +6,8 @@
     <div class="directory-nav">
       <a href="#" v-on:click.prevent="changePage('/')">Home</a>
       <a href="#" v-on:click.prevent="changePage('/shuffle')">Shuffle Meme</a>
-      <a href="#">Likes</a>
+      <a href="#" v-on:click.prevent="changePage('/jokes')">Jokes</a>
+      <a href="#" v-on:click.prevent="changePage('/likes')">Likes</a>
     </div>
     <div class="profile-nav">
       <a href="#" v-on:click.prevent="logout">Log Out</a>

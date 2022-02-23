@@ -1,7 +1,7 @@
 <template>
   <div class="content-meme">
     <div class="addForm">
-      <h1>Add Post</h1>
+      <h1>Share your meme to the world</h1>
       <div class="addFormCard">
         <form
           action=""
