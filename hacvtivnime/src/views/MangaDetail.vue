@@ -39,7 +39,7 @@
               <!-- Product actions-->
               <div class="card-footer p-2 border-top-0 bg-secondary">
                 <div class="text-center">
-                  <a class="btn btn-sm btn-danger mt-auto" href="#"
+                  <a @click.prevent="addFavoriteManga(manga.mal_id)" class="btn btn-sm btn-danger mt-auto" href="#"
                     >Add to Favorite</a
                   >
                 </div>
@@ -63,6 +63,11 @@ export default {
   created() {
     this.$store.dispatch("getMangaDetail", this.$route.params.id);
   },
+  methods: {
+    addFavoriteManga(id) {
+      this.$store.dispatch("addFavoriteManga", id);
+    }
+  }
 };
 </script>
 

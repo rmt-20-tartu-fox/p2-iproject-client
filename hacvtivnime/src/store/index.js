@@ -65,7 +65,7 @@ export default new Vuex.Store({
       axios.post('/register', payload)
         .then(resp => {
           console.log(resp);
-          router.push('/')
+          router.push('/login')
         })
         .catch(err => {
           console.log(err);
@@ -138,6 +138,33 @@ export default new Vuex.Store({
           console.log(err);
         })
     },
+    addFavoriteManga(context, payload){
+      console.log(payload);
+      axios.post(`/mangafavorites/${payload}`, {}, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(() => { 
+          router.push('/myfavorite')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    addFavoriteAnime(context, payload){
+      axios.post(`/animefavorites/${payload}`, {}, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(() => { 
+          router.push('/myfavorite')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
     getFavoriteManga(context){
       axios.get(`/myfavoritesmangas`, {
         headers: {
@@ -164,6 +191,21 @@ export default new Vuex.Store({
           console.log(err);
         })
     },
+    deleteMyFavorite(context, id) {
+      console.log(id);
+      axios.delete(`/myfavorites/${id}`, {
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(() => {
+          context.dispatch('getFavoriteManga')
+          context.dispatch('getFavoriteAnime')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },  
     logout(context) {
       localStorage.clear()
       context.commit('setIsLoggedIn', false)

@@ -49,6 +49,16 @@
                 </div>
               </div>
               <!-- Product actions-->
+              <div class="card-footer p-2 border-top-0 bg-secondary">
+                <div class="text-center m-1">
+                  <a
+                    @click.prevent="deleteFavorite(manga.id)"
+                    class="btn btn-sm btn-danger mt-auto"
+                    href="#"
+                    >Delete from favorite</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -104,6 +114,16 @@
                 </div>
               </div>
               <!-- Product actions-->
+              <div class="card-footer p-2 border-top-0 bg-secondary">
+                <div class="text-center m-1">
+                  <a
+                    @click.prevent="deleteFavorite(anime.id)"
+                    class="btn btn-sm btn-danger mt-auto"
+                    href="#"
+                    >Delete from favorite</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -135,6 +155,12 @@ export default {
     this.$store.dispatch("getFavoriteManga");
     this.$store.dispatch("getFavoriteAnime");
   },
+  methods: {
+    deleteFavorite(id) {
+      console.log(id);
+      this.$store.dispatch("deleteMyFavorite", id);
+    }
+  }
 }
 </script>
 
