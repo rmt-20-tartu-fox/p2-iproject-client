@@ -58,7 +58,7 @@ export default new Vuex.Store({
     },
     setFavoriteAnime(state, payload) {
       state.favoriteAnimes = payload
-    }
+    },
   },
   actions: {
     nodeMailer(_, payload) {

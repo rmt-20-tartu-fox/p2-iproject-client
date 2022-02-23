@@ -44,7 +44,7 @@
                   >
                 </div>
                 <div class="text-center p-2" v-if="$store.state.isLoggedIn == true">
-                  <a @click.prevent="payButton" class="btn btn-sm btn-primary mt-auto" href="#"
+                  <a @click.prevent="payButton(manga.title)" class="btn btn-sm btn-primary mt-auto" href="#"
                     >Order this manga</a
                   >
                 </div>

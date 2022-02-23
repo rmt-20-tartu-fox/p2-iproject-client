@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
+    "sweetalert2": "^11.4.4",
     "vue": "^2.6.11",
     "vue-disqus": "^4.0.1",
     "vue-google-login": "^2.0.5",

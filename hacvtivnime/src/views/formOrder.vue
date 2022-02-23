@@ -11,7 +11,6 @@
                 border="0"
               />
               <h2 class="text-center">Form Order</h2>
-              <p>You can reset your password here.</p>
               <form
                 @submit.prevent="pay"
                 id="register-form"
