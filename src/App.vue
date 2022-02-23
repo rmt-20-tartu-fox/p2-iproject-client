@@ -19,14 +19,14 @@
                         <li class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/galery">Galery</router-link>
                         </li>
-                        <li class="nav-item">
+                        <li  v-if="showButton === false" class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/mybook">My Books</router-link>
                         </li>
-                        <li class="nav-item ml-5">
-                            <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/mybook">Sign in</router-link>
+                        <li v-if="showButton === false"  class="nav-item ml-5">
+                            <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/login">Sign in</router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/mybook">Sign up</router-link>
+                        <li v-if="showButton === false" class="nav-item">
+                            <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/register">Sign up</router-link>
                         </li>
                     </ul>
                 </div>
@@ -40,6 +40,16 @@
 <script>
 export default {
   name: "Navbar",
+  data(){
+    return {
+      showButton: false
+    }
+  },
+  created(){
+    if (localStorage.access_token) {
+      this.showNavbar = true
+    }
+  }
 }
 </script>
 

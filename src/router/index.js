@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Galery from "../views/Galery.vue";
 import MyBook from "../views/MyBook.vue";
-
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,23 @@ const routes = [
     path: "/mybook",
     name: "MyBook",
     component: MyBook,
+    beforeEnter: ((to, from, next) =>{
+      if (!localStorage.access_token) {
+        next("/login")
+      }else {
+        next()
+      }
+    })
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
   {
     path: "/about",
