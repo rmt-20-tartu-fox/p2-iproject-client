@@ -19,8 +19,8 @@
       
 
     </div>
-    <div class='opContent'>
-        <h4 style="color:white; text-align: center;"><b><i>{{operator.quote}} --{{operator.name.toUpperCase()}}</i></b></h4>
+    <div class='opContent box' style="border-radius:12px; opacity:0.8;">
+        <h4 style="color:white; text-align: center;"><b><i>"{{operator.quote}}"" --{{operator.name.toUpperCase()}}</i></b></h4>
         <h5 style="color:white; text-align: left;"><b><i>{{operator.content}} -- Harry(Director of Rainbow)</i></b></h5>
     </div>
     
@@ -51,6 +51,10 @@ export default {
   padding-top: 30px;
   display: flex;
   flex-direction: column;
+  /* position: absolute;
+  left: 70px; */
+  margin-left:70px ;
+  align-items: flex-start;
 }
 .imgOp{
   width: 800px;
@@ -71,7 +75,8 @@ export default {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  align-self: center;
+  align-self: flex-start;
+  /* background-color: grey; */
   width: 60vw;
 }
 .codeAb{

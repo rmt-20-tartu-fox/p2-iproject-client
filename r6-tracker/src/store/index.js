@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import swal from 'sweetalert';
 
 Vue.use(Vuex)
 
@@ -60,7 +61,12 @@ export default new Vuex.Store({
           context.commit('SET_OPERATORS', resp.data)
         })
         .catch((err) => {
-          console.log(err.response)
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
+          console.log(err.response.data.message)
         })
 
     },
@@ -74,6 +80,11 @@ export default new Vuex.Store({
         context.commit('SET_OPERATOR', resp.data)
       })
       .catch((err) => {
+        swal({
+          title: `${err.response.data.message}`,
+          icon: "error",
+          button: "OK!",
+        });
         console.log(err.response)
       })
     },
@@ -84,10 +95,22 @@ export default new Vuex.Store({
             console.log(resp.data)
             localStorage.access_token = resp.data.access_token
             context.commit('SET_ISLOGIN', true)
+            swal({
+              title: `Welcome Operator`,
+              text: `You Are Logged In as ${resp.data.payload.username}!`,
+              icon: "success",
+              button: "OK!",
+            });
             resolve()
           })
           .catch((err) => {
             // console.log(err.response)
+            console.log(err.response.data.message)
+            swal({
+              title: `${err.response.data.message}`,
+              icon: "error",
+              button: "OK!",
+            });
             rejects(err.response)
           })
 
@@ -101,10 +124,21 @@ export default new Vuex.Store({
             console.log(resp.data)
             localStorage.access_token = resp.data.access_token
             context.commit('SET_ISLOGIN', true)
+            swal({
+              title: `Welcome Operator`,
+              text: `You Are Logged In as ${resp.data.payload.username}!`,
+              icon: "success",
+              button: "OK!",
+            });
             resolve()
           })
           .catch((err) => {
             // console.log(err.response)
+            swal({
+              title: `${err.response.data.message}`,
+              icon: "error",
+              button: "OK!",
+            });
             rejects(err.response)
           })
 
@@ -117,6 +151,11 @@ export default new Vuex.Store({
           context.commit('SET_STRATS', resp.data)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
     },
@@ -128,6 +167,11 @@ export default new Vuex.Store({
           context.commit('SET_STRAT', resp.data)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
     },
@@ -138,6 +182,11 @@ export default new Vuex.Store({
           context.commit('SET_MAPS', resp.data)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
         
@@ -154,6 +203,11 @@ export default new Vuex.Store({
             resolve()
           })
           .catch((err) => {
+            swal({
+              title: `${err.response.data.message}`,
+              icon: "error",
+              button: "OK!",
+            });
             rejects(err.response)
           })
 
@@ -172,6 +226,11 @@ export default new Vuex.Store({
         context.commit('SET_FRIEND', resp.data)
       })
       .catch((err) => {
+        swal({
+          title: `${err.response.data}`,
+          icon: "error",
+          button: "OK!",
+        });
         console.log(err.response.data)
       })
 
@@ -188,6 +247,11 @@ export default new Vuex.Store({
           context.commit('SET_MYSTRATS', resp.data)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
     },
@@ -200,9 +264,19 @@ export default new Vuex.Store({
           }
         })
         .then((resp) => {
+          swal({
+            title: `${resp.data.message}`,
+            icon: "warning",
+            button: "OK!",
+          });
           resolve(resp.data.message)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           rejects(err.response)
         })
       })
@@ -213,6 +287,11 @@ export default new Vuex.Store({
           context.commit('SET_NEWSES', resp.data)
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
     },
@@ -223,6 +302,11 @@ export default new Vuex.Store({
           context.commit('SET_NEWS', resp.data[id])
         })
         .catch((err) => {
+          swal({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            button: "OK!",
+          });
           console.log(err.response)
         })
     }

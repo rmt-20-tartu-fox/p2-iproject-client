@@ -9,16 +9,17 @@
     <div v-if='strat !== null' class="stratDetail">
       <div class="map">
         <div class='mapContent'>
-          <h2 class='mapTitle'><b><i>{{strat.Map.name}}</i></b></h2>
-          <img v-bind:src='strat.Map.imgUrl'>
+          <h2 class='mapTitle box'><b><i>{{strat.Map.name}}</i></b></h2>
+          <img v-bind:src='strat.Map.imgUrl' style="width:960px;">
         </div>
-        <div class='description'>
+        <img v-bind:src="qr" class='qrCode'>
+        <div class='description box'>
           <p>{{strat.description}}</p>
         </div>
       </div>
 
       <div class="titleOp" style=" width:100vw;">
-        <h2 class='title' ><b><i>OPERATORS</i></b></h2>
+        <h2 class='title box' ><b><i>OPERATORS</i></b></h2>
         <div class="row row-cols-xl-5 operator">
           <div class="col-2" v-for='operator in strat.myOperators' v-bind:key='operator.id' >
             <OpCard v-bind:operator='operator'/>
@@ -33,6 +34,7 @@
 <script>
 /* eslint-disable */
 import OpCard from '../components/OpCard.vue'
+import axios from 'axios'
 export default {
   name: 'StratDetail',
   components: {
@@ -113,12 +115,12 @@ export default {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   font-family: system-ui;
   opacity: 0.8;
   text-align: left;
-  color: #000;
+  color:honeydew;
 }
 .mapTitle{
   color:white; 
@@ -149,5 +151,11 @@ export default {
   width: 30vw;
   align-self: center;
   border-radius: 20px;
+}
+
+.qrCode{
+  position: absolute;
+  left: 69px;
+  top: 209px;
 }
 </style>
