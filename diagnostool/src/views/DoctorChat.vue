@@ -9,8 +9,11 @@
       @newOwnMessage="onNewOwnMessage"
     ></vueChat>
     <section>
-      <h3>Dokter: name</h3>
+      <h3 class="mt-3">Dokter: {{ user }}</h3>
       <status>Aktif</status>
+      <button @click="logoutHandler" class="btn btn-secondary ml-4">
+        Logout
+      </button>
     </section>
   </div>
 </template>
@@ -22,6 +25,7 @@ export default {
   name: "DoctorChat",
   data: function () {
     return {
+      user: localStorage.user,
       id: 1,
       message: {},
     };
@@ -32,6 +36,11 @@ export default {
     },
   },
   methods: {
+    logoutHandler() {
+      localStorage.clear();
+      this.$store.commit("setIsLogin", false);
+      this.$router.push("/login");
+    },
     onNewOwnMessage(message) {
       // console.log(this.chats);
       // console.log(message);
