@@ -131,8 +131,11 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>
+<style>
 #diagnose {
   display: flex !important;
+  flex-direction: column;
   flex-grow: 1 !important;
 }
 #diagnose-header {
