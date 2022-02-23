@@ -21,6 +21,7 @@
             </div>
             <div class="add-issue">
               <input
+                required
                 class="input-issue"
                 type="text"
                 placeholder="Subject"
@@ -32,6 +33,7 @@
             </div>
             <div class="add-issue">
               <input
+                required
                 class="description"
                 type="text"
                 placeholder="Add a description"
@@ -43,6 +45,7 @@
             </div>
             <div class="add-issue">
               <DatePicker
+                required
                 class="input-issue"
                 v-model="dueDate"
                 valueType="format"
@@ -76,9 +79,9 @@
               <div
                 class="list-group-item"
                 v-for="element in arrBacklog"
-                :key="element.name"
+                :key="element.id"
               >
-                {{ element.name }}
+                {{ element.title }}
               </div>
             </draggable>
           </div>
@@ -94,9 +97,9 @@
               <div
                 class="list-group-item"
                 v-for="element in arrInProgress"
-                :key="element.name"
+                :key="element.id"
               >
-                {{ element.name }}
+                {{ element.title }}
               </div>
             </draggable>
           </div>
@@ -112,9 +115,9 @@
               <div
                 class="list-group-item"
                 v-for="element in arrTested"
-                :key="element.name"
+                :key="element.id"
               >
-                {{ element.name }}
+                {{ element.title }}
               </div>
             </draggable>
           </div>
@@ -130,9 +133,14 @@
               <div
                 class="list-group-item"
                 v-for="element in arrDone"
-                :key="element.name"
+                :key="element.id"
               >
-                {{ element.name }}
+                {{ element.title }}
+                <img
+                  @click="idIssue(element.id)"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuiAd0d4Bc1TkUFUy558kC2YaQbXX30klLFg&usqp=CAU"
+                  alt=""
+                />
               </div>
             </draggable>
           </div>
@@ -159,16 +167,28 @@ export default {
       description: "",
       dueDate: null,
       newTask: "",
-      arrBacklog: [
-        { name: "Test 1" },
-        { name: "Test 2" },
-        { name: "Test 3" },
-        { name: "Test 4" },
-      ],
+      arrBacklog: [],
       arrInProgress: [],
       arrTested: [],
       arrDone: [],
     };
+  },
+  computed: {
+    addIssueData() {
+      const data = this.$store.state.issue;
+      const arrTemp = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].status === "open") {
+          arrTemp.push(data[i]);
+        }
+      }
+      return arrTemp;
+    },
+  },
+  watch: {
+    addIssueData: function (newVal) {
+      this.arrBacklog = newVal;
+    },
   },
   methods: {
     add() {
@@ -184,6 +204,12 @@ export default {
         description: this.description,
         dueDate: this.dueDate,
       });
+      this.title = "";
+      this.description = "";
+      this.dueDate = "";
+    },
+    idIssue(id) {
+      this.$store.dispatch("deleteIssue", id);
     },
   },
   created() {
@@ -213,5 +239,10 @@ export default {
   font-weight: bold;
   width: 200px;
   height: 50px;
+}
+img {
+  width: 20px;
+  float: right;
+  cursor: pointer;
 }
 </style>

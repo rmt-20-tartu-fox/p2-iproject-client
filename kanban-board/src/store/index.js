@@ -3,7 +3,13 @@ import Vuex from "vuex";
 import { auth, db } from "../../firebase/index";
 import router from "../router/index.js";
 import Swal from "sweetalert2";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,7 +18,6 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_ISSUE(state, payload) {
-      console.log(payload, "kasndjndsn");
       state.issue = payload;
     },
   },
@@ -72,10 +77,20 @@ export default new Vuex.Store({
       })
         .then((data) => {
           console.log(data);
+          Swal.fire({
+            icon: "success",
+            title: "SUCCESS ADD ISSUE",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((err) => {
           console.log(err.message);
         });
+    },
+    deleteIssue(context, payload) {
+      console.log(payload, "askdnksn");
+      deleteDoc(doc(db, "addedIssue", payload));
     },
   },
 });
