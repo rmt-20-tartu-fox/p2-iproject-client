@@ -2,7 +2,7 @@
   <div id="app">
     <div class="navbar-menu flex-row">
       <nav class="navMenu">
-        <a href="#"> home </a>
+        <a href="#"><router-link to="/">home</router-link></a>
         <a href="#"> bookmark </a>
         <a href="#"> login </a>
         <a href="#"> logout </a>
