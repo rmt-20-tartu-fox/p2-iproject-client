@@ -9,26 +9,7 @@
         </div>
       </div>
       <b-navbar toggleable="lg" type="dark">
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <!-- <b-nav-item-dropdown text="Meal Type" right>
-            <b-dropdown-item
-              v-for="mealType in mealTypes"
-              :key="mealType"
-              href="#"
-              @click.prevent="setMealType(mealType)"
-              >{{ mealType }}</b-dropdown-item
-            >
-          </b-nav-item-dropdown> -->
-          <!-- <b-nav-item-dropdown text="Category" right>
-              <b-dropdown-item
-                @click.prevent="setCategory(category.name)"
-                v-for="category in categories"
-                :key="category.id"
-                href="#"
-                >{{ category.name }}</b-dropdown-item
-              >
-            </b-nav-item-dropdown> -->
           <b-nav-form @submit.prevent="fetchRecipes">
             <b-form-input
               size="sm"
@@ -46,19 +27,10 @@
               >Search</b-button
             >
           </b-nav-form>
-          <!-- <b-button
-              size="sm"
-              class="my-2 my-sm-0"
-              type="button"
-              @click.prevent="setCleatFilter"
-              >Clear Filter</b-button
-            > -->
         </b-navbar-nav>
       </b-navbar>
     </header>
     <br />
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">
         <div

@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import NewLoginView from "../views/newLoginView.vue";
 import RecipeDetailsView from "../views/RecipeDetailsView.vue";
 import wishListView from "../views/wishListView.vue";
+import registerView from "../views/registerView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,6 +28,12 @@ const routes = [
     name: "wishListView",
     component: wishListView,
   },
+  {
+    path: "/register",
+    name: "registerView",
+    component: registerView,
+  },
+
   // {
   //   path: "/about",
   //   name: "about",
