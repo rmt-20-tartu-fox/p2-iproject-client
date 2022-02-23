@@ -1,12 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">login</router-link> |
+      <router-link to="/strats">strats</router-link> |
+      <router-link to="/addstrat">addstrat</router-link> |
+      <router-link to="/check-friend">check-friend</router-link> |
+      <router-link to="/my-strat">my-strat</router-link> |
+    </div> -->
+
+    <NavBar />
     <router-view/>
   </div>
 </template>
+
+<script>
+/* eslint-disable */
+import NavBar from './components/NavBar.vue'
+export default{
+  name: 'App',
+  components: {
+    NavBar
+  }
+
+}
+</script>
+
 
 <style>
 #app {
