@@ -43,8 +43,8 @@
 
 <script>
 import Multiselect from "vue-multiselect";
-import symptoms from "../data/dummySymptoms";
-// import symptoms from "../data/symptoms";
+// import symptoms from "../data/dummySymptoms";
+import symptoms from "../data/symptoms";
 import api from "../apis/server";
 import Swal from "sweetalert2";
 import Spinner from "vue-simple-spinner";
