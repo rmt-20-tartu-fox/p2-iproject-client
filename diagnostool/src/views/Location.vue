@@ -1,6 +1,7 @@
 <template>
   <section id="maps">
     <h1>To view nearby hospitals, please enter your current location</h1>
+    <Spinner v-if="isLoading"></Spinner>
     <div class="card">
       <form @submit.prevent="getNearby">
         <div class="mb-3">
@@ -23,16 +24,22 @@
 <script>
 import Swal from "sweetalert2";
 import api from "../apis/server";
+import Spinner from "vue-simple-spinner";
 export default {
   name: "Location",
+  components: {
+    Spinner,
+  },
   data: function () {
     return {
       location: "",
       radius: 0,
+      isLoading: false,
     };
   },
   methods: {
     getNearby() {
+      this.isLoading = true;
       api
         .post("/nearby", { location: this.location, radius: this.radius })
         .then((resp) => {
@@ -43,6 +50,7 @@ export default {
               text: "Something went wrong!",
               footer: "Did you enter the location correctly?",
             });
+            this.isLoading = false;
           } else {
             if (resp.data.features.length == 0) {
               Swal.fire({
@@ -50,15 +58,20 @@ export default {
                 title: "Oops...",
                 text: "There is no hospitals within the current radius, please enter another value",
               });
+              this.isLoading = false;
             } else {
               this.$store.commit("setNearby", resp.data.features);
               this.$router.push({ name: "Nearby" }).catch(() => {
                 console.log("done");
               });
+              this.isLoading = false;
             }
           }
         })
-        .catch((err) => console.log(err.response.data));
+        .catch((err) => {
+          console.log(err.response.data);
+          this.isLoading = false;
+        });
     },
   },
 };
