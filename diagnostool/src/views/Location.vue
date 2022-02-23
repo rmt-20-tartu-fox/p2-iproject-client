@@ -1,8 +1,10 @@
 <template>
   <section id="maps">
-    <h1>To view nearby hospitals, please enter your current location</h1>
+    <h1 class="mt-4 mb-2">
+      To view nearby hospitals, please enter your current location
+    </h1>
     <Spinner v-if="isLoading"></Spinner>
-    <div class="card">
+    <div class="card mb-4">
       <form @submit.prevent="getNearby">
         <div class="mb-3">
           <label class="form-label">Current Location</label>

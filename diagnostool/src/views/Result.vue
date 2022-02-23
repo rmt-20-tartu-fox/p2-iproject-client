@@ -1,6 +1,6 @@
 <template>
   <section id="result" class="mb-3">
-    <h1>Based on your data, you might have this disease:</h1>
+    <h1>Based on your data, you might have these disease:</h1>
     <div class="card">
       <table class="table">
         <thead>
@@ -8,7 +8,7 @@
             <th scope="col">Id</th>
             <th scope="col">Issue Name</th>
             <th scope="col">Diagnostic accuracy</th>
-            <th scope="col">International clasification of Disease code</th>
+            <th scope="col">International Clasification of Disease Code</th>
             <th scope="col">Specialization</th>
           </tr>
         </thead>
@@ -16,7 +16,7 @@
           <tr v-for="res in result" v-bind:key="res.Issue.ID">
             <td>{{ res.Issue.ID }}</td>
             <td>{{ res.Issue.Name }}</td>
-            <td>{{ res.Issue.Accuracy }} % (percent)</td>
+            <td>{{ res.Issue.Accuracy }}% (percent)</td>
             <td>{{ res.Issue.Icd }}</td>
             <td>{{ res.Specialisation.map((el) => el.Name).join(", ") }}</td>
           </tr>

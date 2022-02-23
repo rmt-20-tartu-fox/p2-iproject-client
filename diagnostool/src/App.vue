@@ -3,8 +3,8 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid row justify-content-between">
-          <router-link class="navbar-brand col-2" to="/"
-            >DiagnosTool</router-link
+          <router-link id="brand-link" class="navbar-brand col-2" to="/"
+            ><i class="fa-solid fa-user-doctor"></i> | DiagnosTool</router-link
           >
           <button
             class="navbar-toggler col-2"
@@ -20,6 +20,7 @@
           <div
             class="collapse navbar-collapse col-6 justify-content-end"
             id="navbarNav"
+            align="right"
           >
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -32,8 +33,10 @@
                   >Hospitals</router-link
                 >
               </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/chat">Chat</router-link>
+              <li id="chat" class="nav-item">
+                <router-link class="nav-link" to="/chat"
+                  >Live Chat   <i class="fa-solid fa-angle-right"></i
+                ></router-link>
               </li>
             </ul>
           </div>
@@ -44,7 +47,7 @@
     <HFooter></HFooter>
   </div>
 </template>
-
+ 
 <script>
 import HFooter from "vue-hacktiv8-footer";
 export default {
@@ -57,10 +60,20 @@ export default {
 #app {
   width: 80%;
   margin: 0 auto;
-  font-size: 1rem !important;
+
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding: 0;
+  border-radius: 16px;
+}
+
+#app label {
+  text-align: left !important;
+}
+
+#brand-link {
+  text-align: left;
 }
 
 .card {
@@ -71,9 +84,51 @@ export default {
 
 body {
   background-color: #fff;
+  text-align: left;
+  font-size: 1rem !important;
+}
+
+body h1,
+body p {
+  text-align: left;
 }
 
 .navbar {
-  background-color: #9e9ea7 !important;
+  background-color: #2d31fa !important;
+}
+
+nav {
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.navbar a {
+  color: #dff6ff !important;
+}
+
+.navbar a:hover,
+.navbar a:active {
+  color: #f7f7f7 !important;
+}
+
+#chat {
+  background-color: #dff6ff;
+  border-radius: 24px;
+  padding: 2px 6px;
+  margin-left: 12px;
+}
+
+#chat a {
+  color: #051367 !important;
+}
+
+#chat:hover,
+#chat.active {
+  background-color: #051367 !important;
+}
+
+#chat a:hover,
+#chat a:active {
+  color: #f7f7f7 !important;
 }
 </style>

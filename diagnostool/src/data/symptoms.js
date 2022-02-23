@@ -1124,3 +1124,5 @@ let symptoms = [
     Name: "Yellowish discoloration of the white part of the eye",
   },
 ];
+
+export default symptoms;

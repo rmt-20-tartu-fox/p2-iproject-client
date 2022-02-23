@@ -1,6 +1,6 @@
 <template>
   <section id="nearby-result">
-    <h1>
+    <h1 class="mb-2">
       Based on your location, this is list of hospitals nearby your location
     </h1>
     <b-card
@@ -14,6 +14,7 @@
     </b-card>
     <div class="overflow-auto">
       <b-pagination
+        id="page"
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"

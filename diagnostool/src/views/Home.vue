@@ -6,7 +6,7 @@
         Our symptom checker algorithm can detect more than 700 hundreds disease
         to serve the needs of our user
       </p>
-      <button @click="diagnoseHandler" class="btn btn-primary">
+      <button @click="diagnoseHandler" class="btn btn-lg btn-primary">
         Get Your Diagnosis
       </button>
     </div>
@@ -49,7 +49,8 @@ export default {
 }
 
 #heading button {
-  width: 50%;
+  width: 30%;
+  background-color: #2d31fa !important;
 }
 
 #image {

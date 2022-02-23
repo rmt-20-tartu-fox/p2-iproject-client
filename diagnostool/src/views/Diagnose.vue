@@ -1,6 +1,6 @@
 <template>
   <section id="diagnose">
-    <h1 id="diagnose-header" align="center">
+    <h1 id="diagnose-header" class="mt-4 mb-2">
       Please enter your information below, to determine your disease
     </h1>
     <Spinner v-if="isLoading"></Spinner>
@@ -44,6 +44,7 @@
 <script>
 import Multiselect from "vue-multiselect";
 import symptoms from "../data/dummySymptoms";
+// import symptoms from "../data/symptoms";
 import api from "../apis/server";
 import Swal from "sweetalert2";
 import Spinner from "vue-simple-spinner";
@@ -138,6 +139,11 @@ export default {
   flex-direction: column;
   flex-grow: 1 !important;
 }
+
+#diagnose label {
+  text-align: left !important;
+}
+
 #diagnose-header {
   text-align: center;
 }
