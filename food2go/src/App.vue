@@ -4,6 +4,7 @@
       class="w-full min-h-screen bg-gradient-to-b from-red-200 to-transparent via-transparent"
     >
       <Navbar></Navbar>
+      <router-view></router-view>
     </div>
   </div>
 </template>
