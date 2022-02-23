@@ -70,4 +70,8 @@ export default {
 </script>
 
 <style>
+.sign-in {
+  display: flex;
+  flex-grow: 1;
+}
 </style>

@@ -47,6 +47,10 @@ export default {
 </script>
 
 <style>
+#result {
+  display: flex;
+  flex-grow: 1;
+}
 #result > h1 {
   text-align: center;
 }

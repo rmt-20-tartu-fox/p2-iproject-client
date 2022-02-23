@@ -30,6 +30,7 @@ export default {
 <style>
 #home {
   display: flex;
+  flex-grow: 1;
 }
 
 #heading {

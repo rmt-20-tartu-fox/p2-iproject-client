@@ -73,3 +73,10 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
+
+//di parent display flex, felx direction colum
+// min-height 100vh
+
+//di children
+//display flex
+//flex grow 1

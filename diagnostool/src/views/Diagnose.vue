@@ -123,6 +123,10 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
+#diagnose {
+  display: flex !important;
+  flex-grow: 1 !important;
+}
 #diagnose-header {
   text-align: center;
 }

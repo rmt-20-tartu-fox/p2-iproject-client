@@ -65,6 +65,11 @@ export default {
 </script>
 
 <style>
+#maps {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 #maps h1 {
   text-align: center;
 }

@@ -57,7 +57,10 @@ export default {
 #app {
   width: 80%;
   margin: 0 auto;
-  font-size: 1.2rem !important;
+  font-size: 1rem !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .card {

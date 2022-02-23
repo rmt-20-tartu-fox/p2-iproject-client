@@ -50,5 +50,7 @@ export default {
 #patient {
   margin: 0 auto !important;
   padding: 16px;
+  display: flex;
+  flex-grow: 1;
 }
 </style>
