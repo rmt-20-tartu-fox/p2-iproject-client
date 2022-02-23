@@ -13,6 +13,8 @@ export default new Vuex.Store({
     currentPage: 1,
     totalBooks: "",
     book: "",
+    token: "",
+    url: "",
   },
   mutations: {
     SET_IS_LOGIN(state, payload) {
@@ -33,6 +35,13 @@ export default new Vuex.Store({
     },
     SET_BOOK(state, payload) {
       state.book = payload;
+    },
+    SET_TOKEN(state, payload) {
+      state.token = payload.token;
+      state.url = payload.redirect_url;
+    },
+    SET_URL(state, payload) {
+      state.token = payload;
     },
   },
   actions: {
@@ -84,6 +93,54 @@ export default new Vuex.Store({
         });
         if (resp.status == 200) {
           context.commit("SET_BOOK", resp.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async payment(context, payload) {
+      try {
+        const resp = await url.post(
+          "/customers/payment",
+          {
+            price: payload.price,
+            first_name: payload.first_name,
+            last_name: payload.last_name,
+            quantity: payload.quantity,
+            itemName: payload.itemName,
+          },
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+        context.commit("SET_TOKEN", resp.data);
+        // context.commit("SET_URL", resp.data.redirect_url);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async createTransaction(context, payload) {
+      try {
+        console.log(payload);
+        const resp = await url.post(
+          "/customers/transactions",
+          {
+            BookId: payload.BookId,
+            order_id: payload.order_id,
+            transaction_status: payload.transaction_status,
+          },
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+        if (resp.status == 201) {
+          context.commit("SET_PAGE", "Home");
         }
       } catch (error) {
         console.log(error);

@@ -9,7 +9,7 @@
     </div>
     <div class="ml-2">
       <p>{{ book.title }}</p>
-      <p>{{ formatPrice() }}</p>
+      <p>{{ formatPrice }}</p>
       <p>{{ book.language }}</p>
       <p>{{ book.totalTime }}</p>
       <!-- <p>Link for download</p> -->
@@ -29,12 +29,6 @@ export default {
   name: `BookCard`,
   props: ["book"],
   methods: {
-    formatPrice() {
-      return this.book.price.toLocaleString("id", {
-        style: "currency",
-        currency: "IDR",
-      });
-    },
     buyBook() {
       this.$router.push(`/cart/${this.book.id}`);
     },
@@ -42,6 +36,16 @@ export default {
   computed: {
     dataPage() {
       return this.$store.state.page;
+    },
+    formatPrice() {
+      if (this.book.price) {
+        return this.book.price.toLocaleString("id", {
+          style: "currency",
+          currency: "IDR",
+        });
+      } else {
+        return this.book.price;
+      }
     },
   },
 };

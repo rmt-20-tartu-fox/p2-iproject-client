@@ -53,6 +53,7 @@ export default {
   },
   created() {
     this.fetchBooks();
+    this.$store.commit("SET_PAGE", "");
   },
   methods: {
     fetchBooks() {
