@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Diagnose from "../views/Diagnose.vue";
 import Result from "../views/Result.vue";
+import Location from "../views/Location.vue";
+import Nearby from "../views/NearbyPlace.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,18 @@ const routes = [
         path: "result",
         name: "Result",
         component: Result,
+      },
+    ],
+  },
+  {
+    path: "/location",
+    name: "Location",
+    component: Location,
+    children: [
+      {
+        path: "nearby",
+        name: "Nearby",
+        component: Nearby,
       },
     ],
   },
