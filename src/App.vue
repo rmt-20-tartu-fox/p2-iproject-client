@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
-      <router-link to="/about">About</router-link> |
+      <router-link to="/historylist">History</router-link> |
       <router-link to="/formcashflow">Data</router-link> |
       <router-link to="/getcashflow"></router-link> |
       <router-link to="/formBalance">Add Balance</router-link>

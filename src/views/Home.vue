@@ -156,16 +156,9 @@ export default {
         this.$store.commit("SET_ISLOGGEDIN", true);
       }
     },
-    async checkAll() {
-      await this.$store.dispatch("getUsd");
-      await this.$store.dispatch("getEur");
-      await this.$store.dispatch("getBtc");
-      await this.$store.dispatch("getEth");
-    },
   },
   async beforeCreated() {
     await this.checkLog();
-    await this.checkAll();
   },
 };
 </script>

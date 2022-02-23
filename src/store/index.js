@@ -16,6 +16,7 @@ export default new Vuex.Store({
     balanceTotal: "",
     spending: "",
     income: "",
+    type: ""
   },
   mutations: {
     SET_ISLOGGEDIN(state, payload) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     SET_HISTORY(state, payload) {
       state.histories = payload
+    },
+    SET_TYPE(state, payload) {
+      state.type = payload
     },
     SET_BALANCE(state, payload) {
       state.balances = payload

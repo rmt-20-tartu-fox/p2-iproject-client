@@ -65,7 +65,6 @@ export default {
       await this.$store.dispatch("getEth");
     },
     async updateData1() {
-      await this.$store.dispatch("fetchHistory");
       let temp = [];
       temp.push([
         { type: "date", label: "year" },
@@ -139,7 +138,6 @@ export default {
       this.chartData1 = temp;
     },
     async updateData2() {
-      await this.$store.dispatch("fetchHistory");
       let temp = [];
       temp.push([
         { type: "date", label: "year" },
@@ -188,7 +186,6 @@ export default {
       this.chartData2 = temp;
     },
     async updateData3() {
-      await this.$store.dispatch("fetchHistory");
       let temp = [];
       temp.push([
         { type: "date", label: "year" },
@@ -231,6 +228,7 @@ export default {
 
   async created() {
     await this.checkAll();
+    await this.$store.dispatch("fetchHistory");
     await this.updateData1();
     await this.updateData2();
     await this.updateData3();
