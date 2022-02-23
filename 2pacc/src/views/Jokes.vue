@@ -2,14 +2,30 @@
   <div class="cont">
     <navbar></navbar>
     <main class="jokes">
-      <div>
-        <h1>You have 1 of 5 daily jokes remaining</h1>
+      <div class="jokes-header">
+        <h1>Dad jokes to ruin your day!</h1>
       </div>
       <div class="jokes-card">
         <h1>{{ joke.setup }}</h1>
-        <button v-if="isAnswer == false">Show Punchline</button>
-        <h1 v-if="isAnswer == true">{{ joke.punchline }}</h1>
-        <button v-if="isAnswer == true">Next Jokes</button>
+        <br />
+        <button
+          v-if="isAnswered == false"
+          v-on:click.prevent="changeIsAnswered(true)"
+        >
+          Show Punchline
+        </button>
+        <br />
+        <h1 v-if="isAnswered == true">{{ joke.punchline }}</h1>
+        <br />
+        <button
+          v-if="isAnswered == true"
+          v-on:click.prevent="
+            changeIsAnswered(false);
+            fetchJokes();
+          "
+        >
+          Next Jokes
+        </button>
       </div>
     </main>
   </div>
@@ -26,7 +42,7 @@ export default {
   },
   data() {
     return {
-      isAnswer: false,
+      isAnswered: false,
     };
   },
   created() {
@@ -34,12 +50,15 @@ export default {
   },
   computed: {
     joke() {
-      return this.$store.state.jokes[localStorage.countJokes];
+      return this.$store.state.jokes[0];
     },
   },
   methods: {
     fetchJokes() {
       this.$store.dispatch("fetchJokes");
+    },
+    changeIsAnswered(to) {
+      this.isAnswered = to;
     },
   },
 };

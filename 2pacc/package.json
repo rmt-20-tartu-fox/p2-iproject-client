@@ -11,6 +11,7 @@
     "axios": "^0.26.0",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
+    "sweetalert2": "^11.4.4",
     "vue": "^2.6.11",
     "vue-hacktiv8-footer": "^0.0.9",
     "vue-router": "^3.2.0",

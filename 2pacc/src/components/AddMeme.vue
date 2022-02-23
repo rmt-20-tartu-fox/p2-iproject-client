@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "AddMeme",
   data() {
@@ -74,7 +76,25 @@ export default {
 
       console.log(fd, "<<<<<<<<< fd fd");
 
-      this.$store.dispatch("addMeme", fd);
+      this.$store
+        .dispatch("addMeme", fd)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Meme uploaded to the world",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Failed!",
+            text: "Please fill all the form",
+            showConfirmButton: true,
+          });
+        });
     },
     previewFiles(event) {
       console.log(event.target.files[0]);

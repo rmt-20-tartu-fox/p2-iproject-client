@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 // css
 import "../assets/Login_v2/vendor/bootstrap/css/bootstrap.min.css";
 import "../assets/Login_v2/fonts/font-awesome-4.7.0/css/font-awesome.min.css";
@@ -83,10 +85,22 @@ export default {
       this.$store
         .dispatch("login", payload)
         .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Log In successful!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           this.$router.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.error, "<<<<<<<");
+          Swal.fire({
+            icon: "error",
+            title: "Failed!",
+            text: "Please check your email or password",
+            showConfirmButton: true,
+          });
         });
     },
     changePage(to) {

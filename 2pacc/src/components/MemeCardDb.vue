@@ -13,12 +13,21 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "MemeCardDb",
   props: ["meme"],
   methods: {
     addLikes(id) {
-      this.$store.dispatch("addLikes", id);
+      this.$store.dispatch("addLikes", id).then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Meme burned!!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
     },
   },
 };

@@ -13,12 +13,20 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "MemeCardLike",
   props: ["like"],
   methods: {
     removeLike(id) {
       this.$store.dispatch("removeLike", id).then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Meme not burned anymore :(",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getLikes();
       });
     },

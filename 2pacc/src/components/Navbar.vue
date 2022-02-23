@@ -7,7 +7,7 @@
       <a href="#" v-on:click.prevent="changePage('/')">Home</a>
       <a href="#" v-on:click.prevent="changePage('/shuffle')">Shuffle Meme</a>
       <a href="#" v-on:click.prevent="changePage('/jokes')">Jokes</a>
-      <a href="#" v-on:click.prevent="changePage('/likes')">Likes</a>
+      <a href="#" v-on:click.prevent="changePage('/likes')">Burned</a>
     </div>
     <div class="profile-nav">
       <a href="#" v-on:click.prevent="logout">Log Out</a>
