@@ -10,7 +10,7 @@
     <div class="flex items-center">
       <ul>
         <li class="inline ml-10" @click.prevent="homePage">Home</li>
-        <li class="inline ml-10">Cart</li>
+        <li class="inline ml-10">My Book</li>
       </ul>
     </div>
     <div class="flex items-center">

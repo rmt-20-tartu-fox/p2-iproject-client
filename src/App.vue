@@ -20,6 +20,14 @@ export default {
     isLoginPage() {
       return this.$store.state.isLoginPage;
     },
+    isLogin() {
+      return this.$store.state.isLogin;
+    },
+  },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("SET_IS_LOGIN", true);
+    }
   },
 };
 </script>
