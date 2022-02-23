@@ -130,19 +130,17 @@
       </div>
     </section>
     <!-- Footer-->
-    <footer class="py-5 bg-danger">
-      <div class="container">
-        <p class="m-0 text-center text-white">
-          Copyright &copy; HactiveNime 2022
-        </p>
-      </div>
-    </footer>
+    <HFooter></HFooter>
   </div>
 </template>
 
 <script>
+import HFooter from 'vue-hacktiv8-footer'
 export default {
   name: 'Recommendations',
+  components: {
+    HFooter
+  },
   computed: {
     mangas() {
       return this.$store.state.topMangas;

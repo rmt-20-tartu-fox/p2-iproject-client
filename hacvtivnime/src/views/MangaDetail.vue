@@ -43,29 +43,53 @@
                     >Add to Favorite</a
                   >
                 </div>
+                <div class="text-center p-2" v-if="$store.state.isLoggedIn == true">
+                  <a @click.prevent="payButton" class="btn btn-sm btn-primary mt-auto" href="#"
+                    >Order this manga</a
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <div class="comments">
+      <Disqus shortname="hactivnime" />
+    </div>
   </div>
 </template>
 
 <script>
+import { Disqus } from "vue-disqus";
 export default {
   name: "MangaDetail",
+  components: {
+    Disqus,
+  },
+  data() {
+    return {
+      baseUrl: window.location.origin,
+      identifier: this.$route.path,
+      title: this.$page.title,
+      category_id: "manga",
+    };
+  },
   computed: {
     manga() {
       return this.$store.state.manga;
     },
   },
   created() {
+    if (localStorage.access_token) this.$store.commit('setIsLoggedIn', true)
     this.$store.dispatch("getMangaDetail", this.$route.params.id);
   },
   methods: {
     addFavoriteManga(id) {
       this.$store.dispatch("addFavoriteManga", id);
+    },
+    payButton() {
+      this.$router.push('/payment')
     }
   }
 };

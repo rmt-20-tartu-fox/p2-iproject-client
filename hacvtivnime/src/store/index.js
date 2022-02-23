@@ -61,10 +61,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    register(_, payload) {
+    nodeMailer(_, payload) {
+      console.log(payload);
+      axios.post('/email', payload)
+        .then(() => {})
+        .catch(err => console.log(err))
+    },
+    register(context, payload) {
       axios.post('/register', payload)
         .then(resp => {
-          console.log(resp);
+          context.dispatch('nodeMailer', resp.data)
           router.push('/login')
         })
         .catch(err => {
@@ -206,6 +212,26 @@ export default new Vuex.Store({
           console.log(err);
         })
     },  
+    payment(context, payload) {
+      axios.post('/midtrans', payload, {
+        headers : {
+          access_token: localStorage.access_token
+        }
+      })
+      .then(resp => {
+        window.snap.pay(resp.data.token, {
+          onSuccess: function (result) {
+            console.log(result);
+          },
+          onClose: function () {
+            alert("you closed the popup without finishing the payment");
+          },
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
     logout(context) {
       localStorage.clear()
       context.commit('setIsLoggedIn', false)

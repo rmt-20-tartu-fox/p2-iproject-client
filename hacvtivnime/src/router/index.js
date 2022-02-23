@@ -8,11 +8,12 @@ import ListAnime from '../views/ListAnime.vue'
 import MangaDetail from '../views/MangaDetail.vue'
 import AnimeDetail from '../views/AnimeDetail.vue'
 import MyFavorite from '../views/MyFavorite.vue'
+import OrderForm from '../views/formOrder.vue'
+
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
@@ -52,12 +53,30 @@ const routes = [
     name: 'MyFavorite',
     component: MyFavorite
   },
+  {
+    path: '/payment',
+    name: 'OrderForm',
+    component: OrderForm
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path == '/myfavorite' && !localStorage.access_token) next({
+    path: '/login'
+  })
+  else if (to.path == '/login' && localStorage.access_token) next({
+    path: '/'
+  })
+  else if (to.path == '/register' && localStorage.access_token) next({
+    path: '/'
+  })
+  else next()
 })
 
 export default router
