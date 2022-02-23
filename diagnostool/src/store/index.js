@@ -7,6 +7,15 @@ export default new Vuex.Store({
   state: {
     diagnoseResult: [],
     nearby: [],
+    chats: [
+      {
+        id: 1,
+        author: "Doctor",
+        contents: "Selamat datang, silahkan chat keluhan anda",
+        imageUrl: "",
+        date: "09:00:36",
+      },
+    ],
   },
   mutations: {
     setDiagnoseResult(state, payload) {
@@ -15,7 +24,28 @@ export default new Vuex.Store({
     setNearby(state, payload) {
       state.nearby = payload;
     },
+    SOCKET_SENDTOCLIENT(state, newMsg) {
+      // console.log("dari store, send to client");
+      state.chats.push(newMsg);
+      // console.log(newMsg, "Payload 0 dari store");
+      // console.log(state.chats);
+    },
   },
-  actions: {},
+  actions: {
+    //* Socket
+    //! kalau listen, penamaan wajib mengikuti aturan
+    socket_connect() {
+      console.log("connected", this._vm.$socket);
+    },
+
+    socket_disconnect() {
+      console.log("Disconnected", this._vm.$socket);
+    },
+
+    //? Ini untuk mengirim, bukan listen
+    sendCustomEventToServer(_, payload) {
+      this._vm.$socket.client.emit("customeEventFromClient", payload);
+    },
+  },
   modules: {},
 });
