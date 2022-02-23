@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" >
     <div class="container-fluid">
       <a class="navbar-brand" href="" @click.prevent="toPage('Home')"><img src='https://staticctf.akamaized.net/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/DAwqy5hMljnxm7evA5ASN/c902c02d624b1cd2712a8cda5e891928/r6s-y6-logo.png' ></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

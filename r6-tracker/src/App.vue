@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login">login</router-link> |
@@ -8,7 +8,7 @@
       <router-link to="/addstrat">addstrat</router-link> |
       <router-link to="/check-friend">check-friend</router-link> |
       <router-link to="/my-strat">my-strat</router-link> |
-    </div>
+    </div> -->
 
     <NavBar />
     <router-view/>

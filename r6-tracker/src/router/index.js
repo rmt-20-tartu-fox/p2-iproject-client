@@ -10,6 +10,7 @@ import StratDetail from '../views/StratDetail.vue'
 import AddStrat from '../views/AddStratForm.vue'
 import CheckFriend from '../views/CheckFriend.vue'
 import MyStrat from '../views/MyStrat.vue'
+import News from '../views/NewsDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,11 @@ const routes = [
     path: '/my-strat',
     name: 'MyStrat',
     component: MyStrat
+  },
+  {
+    path: '/news/:id',
+    name: 'News',
+    component: News
   }
 ]
 

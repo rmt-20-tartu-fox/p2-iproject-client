@@ -14,7 +14,9 @@ export default new Vuex.Store({
     strat: null,
     maps: [],
     friend: null,
-    myStrats: []
+    myStrats: [],
+    newses: [],
+    news: null
   },
   mutations: {
     SET_OPERATORS(state, payload){
@@ -40,12 +42,19 @@ export default new Vuex.Store({
     },
     SET_MYSTRATS(state, payload){
       state.myStrats = payload
+    },
+    SET_NEWSES(state, payload){
+      state.newses = payload
+    },
+    SET_NEWS(state, payload){
+      state.news = payload
     }
   },
   actions: {
     getAllOperators(context, role){
       console.log(role)
-      axios.get(`http://localhost:3000/operators?role=${role}`)
+      // https://r6-tracker-v1.herokuapp.com/operators
+      axios.get(`https://r6-tracker-v1.herokuapp.com/operators?role=${role}`)
         .then((resp) => {
           console.log(resp.data)
           context.commit('SET_OPERATORS', resp.data)
@@ -57,8 +66,10 @@ export default new Vuex.Store({
     },
     getOneOperator(context, id){
       // console.log(id)
-      axios.get(`http://localhost:3000/operators/${id}`)
+      axios.get(`https://r6-tracker-v1.herokuapp.com/operators/${id}`)
       .then((resp) => {
+        let temp = resp.data.videoUrl.split('/')
+        resp.data.videoUrl = temp[temp.length - 1]
         console.log(resp.data)
         context.commit('SET_OPERATOR', resp.data)
       })
@@ -68,7 +79,7 @@ export default new Vuex.Store({
     },
     userLogin(context, payload){
       return new Promise ((resolve, rejects) => {
-        axios.post('http://localhost:3000/users/login', payload)
+        axios.post('https://r6-tracker-v1.herokuapp.com/users/login', payload)
           .then((resp) => {
             console.log(resp.data)
             localStorage.access_token = resp.data.access_token
@@ -85,7 +96,7 @@ export default new Vuex.Store({
     userRegister(context, payload){
       // console.log(payload)
       return new Promise ((resolve, rejects) => {
-        axios.post('http://localhost:3000/users/register', payload)
+        axios.post('https://r6-tracker-v1.herokuapp.com/users/register', payload)
           .then((resp) => {
             console.log(resp.data)
             localStorage.access_token = resp.data.access_token
@@ -100,7 +111,7 @@ export default new Vuex.Store({
       })
     },
     getAllStrats(context){
-      axios.get('http://localhost:3000/strats')
+      axios.get('https://r6-tracker-v1.herokuapp.com/strats')
         .then((resp) => {
           // console.log(JSON.stringify(resp.data, null, 2))
           context.commit('SET_STRATS', resp.data)
@@ -111,7 +122,7 @@ export default new Vuex.Store({
     },
     getOneStrat(context, id){
       // console.log(id)
-      axios.get(`http://localhost:3000/strats/${id}`)
+      axios.get(`https://r6-tracker-v1.herokuapp.com/strats/${id}`)
         .then((resp) => {
           console.log(resp.data)
           context.commit('SET_STRAT', resp.data)
@@ -121,7 +132,7 @@ export default new Vuex.Store({
         })
     },
     getAllMaps(context){
-      axios.get('http://localhost:3000/maps')
+      axios.get('https://r6-tracker-v1.herokuapp.com/maps')
         .then((resp) => {
           console.log(resp.data)
           context.commit('SET_MAPS', resp.data)
@@ -134,7 +145,7 @@ export default new Vuex.Store({
     addNewStrat(context, payload){
       console.log(payload)
       return new Promise((resolve, rejects) => {
-        axios.post('http://localhost:3000/strats', payload, {
+        axios.post('https://r6-tracker-v1.herokuapp.com/strats', payload, {
           headers: {
             access_token: localStorage.access_token
           }
@@ -151,7 +162,7 @@ export default new Vuex.Store({
     },
     checkFriend(context, payload){
       console.log(payload, "<<<<")
-      axios.post('http://localhost:3000/friends', payload, {
+      axios.post('https://r6-tracker-v1.herokuapp.com/friends', payload, {
         headers: {
           access_token: localStorage.access_token
         }
@@ -161,12 +172,12 @@ export default new Vuex.Store({
         context.commit('SET_FRIEND', resp.data)
       })
       .catch((err) => {
-        console.log(err.response)
+        console.log(err.response.data)
       })
 
     },
     getMyStrats(context){
-      axios.get('http://localhost:3000/mystrats', {
+      axios.get('https://r6-tracker-v1.herokuapp.com/mystrats', {
         headers: {
           access_token: localStorage.access_token
         }
@@ -183,7 +194,7 @@ export default new Vuex.Store({
     deleteMyStrat(context, id){
       
       return new Promise ((resolve, rejects) => {
-        axios.delete(`http://localhost:3000/mystrats/${+id}`, {
+        axios.delete(`https://r6-tracker-v1.herokuapp.com/mystrats/${+id}`, {
           headers: {
             access_token: localStorage.access_token
           }
@@ -195,6 +206,25 @@ export default new Vuex.Store({
           rejects(err.response)
         })
       })
+    },
+    getAllNews(context){
+      axios.get('https://r6-tracker-v1.herokuapp.com/friends')
+        .then((resp) => {
+          context.commit('SET_NEWSES', resp.data)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    getOneNews(context, id){
+      axios.get('https://r6-tracker-v1.herokuapp.com/friends')
+        .then((resp) => {
+          console.log(resp.data[id])
+          context.commit('SET_NEWS', resp.data[id])
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
     }
   },
   modules: {

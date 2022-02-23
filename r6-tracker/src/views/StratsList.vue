@@ -33,6 +33,9 @@ export default {
   name: 'StratsList',
   created(){
     this.$store.dispatch('getAllStrats')
+    if (localStorage.access_token){
+      this.$store.commit('SET_ISLOGIN', true)
+    }
   },
   computed: {
     strats(){
