@@ -6,7 +6,7 @@
       >
         <BookCard :book="dataBook"></BookCard>
         <!-- <div class="w-2/3 bg-blue-100 h-40 mb-5 mt-12"></div> -->
-        <input type="number" v-model="quantity" />
+        <!-- <input type="number" v-model="quantity" /> -->
       </div>
     </div>
     <div class="w-1/2 bg-white flex items-center justify-center">
@@ -67,13 +67,6 @@ export default {
     this.fetchDetailMovie();
     this.$store.commit("SET_PAGE", "Cart");
   },
-  // mounted() {
-  //   const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
-  //   const myMidtransClientKey = "SB-Mid-client-mO1eRTUNvkoVhRzZ";
-  //   let scriptTag = document.createElement("script");
-  //   scriptTag.src = midtransScriptUrl;
-  //   scriptTag.setAttribute("data-client-key", myMidtransClientKey);
-  // },
   methods: {
     fetchDetailMovie() {
       this.$store.dispatch("detailBook", { id: this.$route.params.id });
@@ -83,7 +76,7 @@ export default {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         price: this.dataBook.price,
-        quantity: this.quantity,
+        quantity: 1,
         itemName: this.dataBook.title,
       });
       if (this.dataToken) {
@@ -97,24 +90,40 @@ export default {
                 transaction_status: "Completed",
               })
               .then(() => {
-                if (this.dataPage == "Home") {
+                if (ctx.dataPage == "Home") {
                   ctx.$router.push({ name: `Home` });
                 }
               });
           },
           onPending: function (result) {
-            /* You may add your own implementation here */
-            // alert("wating your payment!");
-            console.log(result);
+            ctx.$store
+              .dispatch("createTransaction", {
+                BookId: ctx.dataBook.id,
+                order_id: result.order_id,
+                transaction_status: "Pending",
+              })
+              .then(() => {
+                if (ctx.dataPage == "Home") {
+                  ctx.$router.push({ name: `Home` });
+                }
+              });
           },
           onError: function (result) {
-            /* You may add your own implementation here */
-            // alert("payment failed!");
-            console.log(result);
+            ctx.$store
+              .dispatch("createTransaction", {
+                BookId: ctx.dataBook.id,
+                order_id: result.order_id,
+                transaction_status: "Failed",
+              })
+              .then(() => {
+                if (ctx.dataPage == "Home") {
+                  ctx.$router.push({ name: `Home` });
+                }
+              });
           },
           onClose: function () {
             /* You may add your own implementation here */
-            alert("you closed the popup without finishing the payment");
+            // alert("you closed the popup without finishing the payment");
           },
         });
       }

@@ -13,9 +13,10 @@
       <p>{{ book.language }}</p>
       <p>{{ book.totalTime }}</p>
       <!-- <p>Link for download</p> -->
+      <!-- <a :href="book.link" class="text-blue-900">Download</a> -->
     </div>
     <button
-      v-if="dataPage !== 'Cart'"
+      v-if="dataPage !== 'Cart' && isLogin"
       class="w-1/3 rounded p-2 bg-blue-300 ml-2 mb-4 mt-3 item-center"
       @click.prevent="buyBook"
     >
@@ -46,6 +47,9 @@ export default {
       } else {
         return this.book.price;
       }
+    },
+    isLogin() {
+      return this.$store.state.isLogin;
     },
   },
 };

@@ -14,7 +14,8 @@ export default new Vuex.Store({
     totalBooks: "",
     book: "",
     token: "",
-    url: "",
+    myBook: "",
+    title: "",
   },
   mutations: {
     SET_IS_LOGIN(state, payload) {
@@ -38,13 +39,30 @@ export default new Vuex.Store({
     },
     SET_TOKEN(state, payload) {
       state.token = payload.token;
-      state.url = payload.redirect_url;
     },
-    SET_URL(state, payload) {
-      state.token = payload;
+    SET_MY_BOOK(state, payload) {
+      state.myBook = payload;
+    },
+    SET_TITLE(state, payload) {
+      state.title = payload;
     },
   },
   actions: {
+    async onSuccess(context, payload) {
+      try {
+        let id_token = payload.getAuthResponse().id_token;
+        const resp = await url.post("/customers/login-google", {
+          token: id_token,
+        });
+        localStorage.setItem("access_token", resp.data.access_token);
+        if (resp.status == 200) {
+          context.commit("SET_IS_LOGIN", true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     async login(context, payload) {
       try {
         const resp = await url.post("/customers/login", {
@@ -77,8 +95,16 @@ export default new Vuex.Store({
 
     async fetchBooks(context, payload) {
       try {
-        const resp = await url.get(`/customers/books?page=${payload.page}`);
+        let baseUrl;
+        if (payload.title) {
+          baseUrl = `/customers/books?page=${payload.page}&title=${payload.title}`;
+        } else {
+          baseUrl = `/customers/books?page=${payload.page}`;
+        }
+
+        const resp = await url.get(baseUrl);
         context.commit("SET_BOOKS", resp.data);
+        // context.commit("SET_CURRENT_PAGE", payload);
       } catch (error) {
         console.log(error);
       }
@@ -117,7 +143,6 @@ export default new Vuex.Store({
           }
         );
         context.commit("SET_TOKEN", resp.data);
-        // context.commit("SET_URL", resp.data.redirect_url);
       } catch (error) {
         console.log(error);
       }
@@ -125,7 +150,6 @@ export default new Vuex.Store({
 
     async createTransaction(context, payload) {
       try {
-        console.log(payload);
         const resp = await url.post(
           "/customers/transactions",
           {
@@ -142,6 +166,19 @@ export default new Vuex.Store({
         if (resp.status == 201) {
           context.commit("SET_PAGE", "Home");
         }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async fetchMyBook(context) {
+      try {
+        const resp = await url.get("/customers/transactions", {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        context.commit("SET_MY_BOOK", resp.data);
       } catch (error) {
         console.log(error);
       }

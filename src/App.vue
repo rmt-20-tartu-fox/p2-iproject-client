@@ -17,9 +17,6 @@ export default {
     Navbar,
   },
   computed: {
-    isLoginPage() {
-      return this.$store.state.isLoginPage;
-    },
     isLogin() {
       return this.$store.state.isLogin;
     },
