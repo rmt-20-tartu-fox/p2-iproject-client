@@ -37,6 +37,7 @@
 
 <script>
 /* eslint-disable */
+import swal from 'sweetalert';
 export default {
   name: 'NavBar',
   created(){
@@ -51,9 +52,27 @@ export default {
 
     },
     userLogout(){
-      localStorage.removeItem('access_token')
-       this.$store.commit('SET_ISLOGIN', false)
-      this.$router.push({name: 'LoginForm'})
+      swal({
+          title: "We Still Need You Operator?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Thank You For Your Services!", {
+              icon: "success",
+            });
+            localStorage.removeItem('access_token')
+            this.$store.commit('SET_ISLOGIN', false)
+            this.$router.push({name: 'LoginForm'})
+          } else {
+            swal({
+                title: "One OpFor is Remaining!",
+                buttons: true,
+            });
+          }
+        })
     }
   }
 }

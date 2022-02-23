@@ -49,6 +49,7 @@ export default {
 .imageCard{
   display: flex;
   flex-direction: column;
+  /* opacity: 0.8; */
 }
 .image1 {
   position: relative;
@@ -93,5 +94,6 @@ export default {
   background-color: #0dd;
   box-shadow: inset 0 0 0 rgba(0,170,170,0.5), 0 0 1.5em rgba(0,170,170,0.7);
 }
+
 
 </style>
