@@ -39,21 +39,23 @@
         <div>
           <p class="mb-5 text-3xl font-bold">{{ petName.name }}</p>
           <div class="badge badge-outline">Hunger</div>
-          <progress
-            :value="hunger"
-            class="progress progress-primary w-56"
-            max="100"
-          ></progress>
-          <form
-            class="flex gap-2"
-            @submit.prevent="submit"
-            enctype="multipart/form-data"
-          >
-            <label class="btn" for="file-upload"> Send </label>
-            <input @change="upload" id="file-upload" type="file" />
+          <div class="mt-50">
+            <progress
+              :value="hunger"
+              class="mt-15 progress progress-primary w-56"
+              max="100"
+            ></progress>
+            <form
+              class="flex gap-2"
+              @submit.prevent="submit"
+              enctype="multipart/form-data"
+            >
+              <label class="btn" for="file-upload"> Send </label>
+              <input @change="upload" id="file-upload" type="file" />
 
-            <button class="btn">Feed</button>
-          </form>
+              <button class="btn">Feed</button>
+            </form>
+          </div>
           <!-- SVG 1 - ASK THE CRAVINGS -->
           <div class="flex flex-row mt-5">
             <a @click.prevent="askCravings" href="#">
@@ -63,12 +65,19 @@
                 width="50"
               />
             </a>
-            <a class="ml-5 mt-1" @click.prevent="roll" href="#">
+            <a class="ml-3 mt-1" @click.prevent="roll" href="#">
               <img title="Do rolling" src="../assets/roll.svg" width="40" />
+            </a>
+            <a class="ml-5 mt-1" @click.prevent="stand" href="#">
+              <img title="Stand" src="../assets/stand.svg" width="40" />
+            </a>
+            <a class="ml-3 mt-1" @click.prevent="bite" href="#">
+              <img title="Bite" src="../assets/bite.svg" width="40" />
             </a>
           </div>
           <!-- SVG 2 - ASK THE CRAVINGS -->
           <ShareNetwork
+            class="mt-20"
             network="twitter"
             url="http://localhost:8080/"
             title="Hi! This game is so cool just like the creator!"
@@ -141,6 +150,14 @@ export default {
     },
     roll() {
       const payload = { set: 6 };
+      this.$store.dispatch("changeAnimation", payload);
+    },
+    stand() {
+      const payload = { set: 1 };
+      this.$store.dispatch("changeAnimation", payload);
+    },
+    bite() {
+      const payload = { set: 7 };
       this.$store.dispatch("changeAnimation", payload);
     },
   },
