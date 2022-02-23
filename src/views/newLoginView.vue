@@ -17,7 +17,7 @@
               <h2>Log In</h2>
             </div>
             <div class="col">
-              <form control="" class="form-group">
+              <form control="" class="form-group" @submit.prevent="login">
                 <div class="row">
                   <input
                     type="text"
@@ -25,6 +25,7 @@
                     id="username"
                     class="form__input"
                     placeholder="Username"
+                    v-model="email"
                   />
                 </div>
                 <div class="row">
@@ -35,6 +36,7 @@
                     id="password"
                     class="form__input"
                     placeholder="Password"
+                    v-model="password"
                   />
                 </div>
                 <div class="form-group">
@@ -66,6 +68,24 @@
 <script>
 export default {
   name: "NewLoginVue",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("login", data).then(() => {
+        this.email = "";
+        this.password = "";
+      });
+    },
+  },
 };
 </script>
 

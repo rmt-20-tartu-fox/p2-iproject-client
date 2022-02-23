@@ -4,15 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
-    <!-- <NavBarComponent /> -->
+    <NavBarComponent />
     <router-view />
   </div>
 </template>
 
 <script>
-// import NavBarComponent from "./components/NavBarComponent.vue";
+import NavBarComponent from "./components/NavBarComponent.vue";
 export default {
-  // components: { NavBarComponent },
+  components: { NavBarComponent },
 };
 </script>
 
