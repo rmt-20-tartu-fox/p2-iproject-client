@@ -4,7 +4,7 @@
       Based on your location, this is list of hospitals nearby your location
     </h1>
     <b-card
-      class="mb-2"
+      class="mb-2 p-1"
       v-for="near in nearby"
       v-bind:key="near.place_id"
       :per-page="perPage"

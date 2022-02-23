@@ -2,8 +2,7 @@
   <div>
     <div id="map">
       <div id="detail">
-        <h3>Hospital Detail</h3>
-        <h6>Name: {{ near.properties.name }}</h6>
+        <h3>{{ near.properties.name }}</h3>
         <h6>City: {{ near.properties.city }}</h6>
         <h6>Address: {{ near.properties.address_line2 }}</h6>
       </div>

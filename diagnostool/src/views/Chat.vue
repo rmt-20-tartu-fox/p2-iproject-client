@@ -45,12 +45,15 @@ export default {
 
 <style>
 #patient .window {
-  margin: 0 auto !important;
+  margin: auto !important;
+  width: 700px;
+  height: 700px;
 }
 #patient {
-  margin: 0 auto !important;
+  margin: auto !important;
   padding: 16px;
   display: flex;
   flex-grow: 1;
+  height: 800px;
 }
 </style>

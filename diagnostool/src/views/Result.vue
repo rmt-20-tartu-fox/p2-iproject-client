@@ -1,5 +1,5 @@
 <template>
-  <section id="result">
+  <section id="result" class="mb-3">
     <h1>Based on your data, you might have this disease:</h1>
     <div class="card">
       <table class="table">
@@ -16,7 +16,7 @@
           <tr v-for="res in result" v-bind:key="res.Issue.ID">
             <td>{{ res.Issue.ID }}</td>
             <td>{{ res.Issue.Name }}</td>
-            <td>{{ res.Issue.Accuracy }} percent</td>
+            <td>{{ res.Issue.Accuracy }} % (percent)</td>
             <td>{{ res.Issue.Icd }}</td>
             <td>{{ res.Specialisation.map((el) => el.Name).join(", ") }}</td>
           </tr>
@@ -49,6 +49,7 @@ export default {
 <style>
 #result {
   display: flex;
+  flex-direction: column !important;
   flex-grow: 1;
 }
 #result > h1 {

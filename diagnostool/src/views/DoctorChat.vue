@@ -8,12 +8,17 @@
       :initialAuthorId="id"
       @newOwnMessage="onNewOwnMessage"
     ></vueChat>
-    <section>
+    <section id="doc-detail" class="card">
       <h3 class="mt-3">Dokter: {{ user }}</h3>
-      <status>Aktif</status>
-      <button @click="logoutHandler" class="btn btn-secondary ml-4">
-        Logout
-      </button>
+      <div id="doc-detail__stat">
+        <status class="status mb-3">Aktif</status>
+        <button @click="logoutHandler" class="btn btn-danger mb-3">
+          Logout
+        </button>
+      </div>
+      <div class="doc-img mt-3">
+        <img src="../assets/doctor.jpg" alt="doc-img" />
+      </div>
     </section>
   </div>
 </template>
@@ -60,13 +65,50 @@ export default {
 
 <style>
 #doctor {
-  padding: 16px;
-  width: 600px !important;
+  padding: 32px 16px 16px 16px;
+  height: 700px;
+  margin-top: 50px;
+}
+
+#doctor .window {
+  width: 500px !important;
+  height: 600px;
 }
 
 .wrapper {
   display: flex;
   justify-content: space-evenly;
   flex-grow: 1;
+}
+
+#doc-detail {
+  margin: auto 50px !important;
+  width: 500px;
+  height: 500px;
+}
+
+#doc-detail button {
+  width: 100px;
+  margin: 0;
+}
+
+#doc-detail .status {
+  padding: 8px;
+  width: 100px;
+  margin: 0;
+  background-color: #2ecc71;
+  border-radius: 32px;
+}
+
+#doc-detail__stat {
+  display: flex;
+  justify-content: space-around;
+  width: 240px;
+  margin: 0 auto;
+}
+
+.doc-img img {
+  width: 400px;
+  border-radius: 8px;
 }
 </style>
