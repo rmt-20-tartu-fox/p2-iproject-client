@@ -7,10 +7,19 @@ import BirthPage from "../views/BirthPage.vue";
 
 Vue.use(VueRouter);
 
+const noTokenBouncer = (to, from, next) => {
+  if (!localStorage.access_token) {
+    next({ name: "LoginPage" });
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: "/",
     name: "HomePage",
+    beforeEnter: noTokenBouncer,
     component: HomePage,
   },
   {

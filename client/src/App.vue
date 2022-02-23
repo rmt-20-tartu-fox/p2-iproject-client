@@ -1,11 +1,10 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
+  <div>
+    <!-- <router-link to="/">Home</router-link> |
       <router-link to="/register">Register</router-link> |
-      <router-link to="/birthPage"></router-link>
-      <router-link to="/login">Login</router-link>
-    </nav>
+      <router-link to="/birthPage"></router-link> -->
+    <!-- <router-link to="/login">Login</router-link> -->
+
     <canvas id="canvas1"></canvas>
     <router-view />
   </div>
@@ -16,6 +15,7 @@ export default {
   data() {
     return {
       frameX: 0,
+      gameFrame: 0,
     };
   },
   methods: {
@@ -32,7 +32,9 @@ export default {
       const spriteHeight = 523;
 
       let frameX = this.frameX;
-      let frameY = 0;
+      let frameY = 0; // computed
+      let gameFrame = this.gameFrame;
+      const staggerFrames = 7;
 
       ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       ctx.drawImage(
@@ -46,8 +48,12 @@ export default {
         spriteWidth,
         spriteHeight
       );
-      if (frameX < 6) this.frameX++;
-      else this.frameX = 0;
+      if (gameFrame % staggerFrames == 0) {
+        if (frameX < 6) this.frameX++;
+        else this.frameX = 0;
+      }
+      this.gameFrame++;
+
       requestAnimationFrame(this.animate);
     },
   },
@@ -59,10 +65,6 @@ export default {
 
 <style>
 #app {
-  background-image: url("./assets/backgroundImage.jpg");
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: contain, cover;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -84,12 +86,12 @@ nav a.router-link-exact-active {
 }
 
 #canvas1 {
-  border: 5px solid black;
+  border: 5px;
   position: absolute;
-  top: 50%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
 }
 </style>

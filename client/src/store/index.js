@@ -7,6 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     file: null,
+    petsData: null,
+    weatherData: [],
   },
   getters: {
     file: (state) => {
@@ -16,6 +18,12 @@ export default new Vuex.Store({
   mutations: {
     FILE_FILLER(state, payload) {
       state.file = payload.value;
+    },
+    PETS_DATA_FILLER(state, payload) {
+      state.petsData = payload.data;
+    },
+    WEATHER_DATA_FILLER(state, payload) {
+      state.weatherData = payload.data;
     },
   },
   actions: {
@@ -55,16 +63,20 @@ export default new Vuex.Store({
         },
       });
     },
-    async getWeather() {
-      navigator.geolocation.getCurrentPosition((success) => {
-        const { latitude, longitude } = success.coords;
+    getWeather(context) {
+      navigator.geolocation.getCurrentPosition(async (success) => {
+        try {
+          const { latitude, longitude } = success.coords;
 
-        const data = axios
-          .get(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${""}`
-          )
-          .then((res) => console.log(res));
-        console.log(data);
+          // bawa query params
+
+          const data = await axios.get("http://localhost:3000/weather", {
+            params: { latitude, longitude },
+          });
+          context.commit("WEATHER_DATA_FILLER", data);
+        } catch (error) {
+          console.log(error);
+        }
       });
     },
   },
