@@ -4,8 +4,14 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    diagnoseResult: [],
+  },
+  mutations: {
+    setDiagnoseResult(state, payload) {
+      state.diagnoseResult = payload;
+    },
+  },
   actions: {},
   modules: {},
 });
