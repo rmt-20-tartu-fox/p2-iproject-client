@@ -83,6 +83,9 @@ export default new Vuex.Store({
         .catch(err => {
           console.error(err);
         });
+    },
+    removeFromDeck(context, id) {
+      return localHost.delete(`/deck/${id}`, { headers: { access_token: localStorage.getItem('access_token') } });
     }
   },
   // modules: {
