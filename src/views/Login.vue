@@ -7,12 +7,12 @@
         </div>
         <div class="row justify-content-evenly p-3 mx-5">
           <div class="col col-md-4 bg-white p-4 rounded-xl">
-            <form class="justify-content-center">
+            <form @submit.prevent="sendLoginData" class="justify-content-center">
               <div class="form-group mt-2">
-                <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
+                <input v-model="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
               </div>
               <div class="form-group mt-2">
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
               </div>
               <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary mt-2">Sign In</button></div>
             </form>
@@ -26,6 +26,32 @@
 <script>
 export default {
   name: "Login",
+  data: function () {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    sendLoginData: async function () {
+      console.log({
+        email: this.email,
+        password: this.password,
+      });
+      await this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
+      });
+      if (this.loginStatus) {
+        this.$router.push({ name: "Home" });
+      }
+    },
+  },
+  computed: {
+    loginStatus: function () {
+      return this.$store.state.isLoggin;
+    },
+  },
 };
 </script>
 
