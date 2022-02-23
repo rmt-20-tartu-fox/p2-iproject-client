@@ -11,6 +11,19 @@
 import NavigationBar from "./components/NavigationBar.vue";
 export default {
   components: { NavigationBar },
+  methods: {
+    checkLogin: function () {
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        this.$store.commit("SET_LOGIN_STATUS", true);
+      } else {
+        this.$store.commit("SET_LOGIN_STATUS", false);
+      }
+    },
+  },
+  created() {
+    this.checkLogin();
+  },
 };
 </script>
 

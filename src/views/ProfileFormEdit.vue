@@ -6,7 +6,7 @@
           <h2 class="text-center fw-bold subtitle">Edit Your Profile</h2>
         </div>
         <!-- Form -->
-        <profile-form></profile-form>
+        <profile-form v-bind:pageName="pageName"></profile-form>
         <!-- Form -->
       </div>
     </div>
@@ -19,6 +19,11 @@ export default {
   name: "ProfileFormEdit",
   components: {
     ProfileForm,
+  },
+  data: function () {
+    return {
+      pageName: "EditForm",
+    };
   },
 };
 </script>
