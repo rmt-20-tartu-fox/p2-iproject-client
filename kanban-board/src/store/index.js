@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { auth, db } from "../../firebase/index";
+import { auth, db, signInWithEmailAndPassword } from "../../firebase/index";
 import router from "../router/index.js";
 import Swal from "sweetalert2";
 import {
@@ -11,6 +11,7 @@ import {
   deleteDoc,
   getDoc,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 Vue.use(Vuex);
 
@@ -47,8 +48,7 @@ export default new Vuex.Store({
         });
     },
     login(context, { email, password }) {
-      auth()
-        .signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((resp) => {
           Swal.fire({
             icon: "success",
@@ -56,11 +56,12 @@ export default new Vuex.Store({
             showConfirmButton: false,
             timer: 1500,
           });
-          localStorage.setItem("access_token", resp.user._delegate.accessToken);
+          console.log(resp);
+          localStorage.setItem("access_token", resp.user.accessToken);
           router.push("/board");
         })
         .catch((error) => {
-          alert(error.message, "ajjajaj");
+          console.log(error);
         });
     },
     getCollection(context) {
@@ -83,13 +84,13 @@ export default new Vuex.Store({
         status: "open",
       })
         .then((data) => {
-          const newData = {
-            ...payload,
-            status: "open",
-            id: data.id,
-          };
-          const newIssue = [newData, ...context.state.issue];
-          context.commit("SET_ISSUE", newIssue);
+          // const newData = {
+          //   ...payload,
+          //   status: "open",
+          //   id: data.id,
+          // };
+          // const newIssue = [newData, ...context.state.issue];
+          // context.commit("SET_ISSUE", newIssue);
           // context.dispatch("getCollection");
           Swal.fire({
             icon: "success",
@@ -127,11 +128,11 @@ export default new Vuex.Store({
     deleteIssue(context, payload) {
       deleteDoc(doc(db, "addedIssue", payload))
         .then(() => {
-          const data = context.state.issue;
-          const newData = data.filter((el) => {
-            return el.id !== payload;
-          });
-          context.commit("SET_ISSUE", newData);
+          // const data = context.state.issue;
+          // const newData = data.filter((el) => {
+          //   return el.id !== payload;
+          // });
+          // context.commit("SET_ISSUE", newData);
           Swal.fire({
             icon: "success",
             title: "Success Delete",
@@ -142,6 +143,18 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.message);
         });
+    },
+    listenDataBase(context, isUnsubcribe) {
+      const unsub = onSnapshot(collection(db, "addedIssue"), (snap) => {
+        const formated = [];
+        snap.docs.forEach((doc) => {
+          formated.push({ ...doc.data(), id: doc.id });
+        });
+        context.commit("SET_ISSUE", formated);
+      });
+      if (isUnsubcribe) {
+        unsub();
+      }
     },
   },
 });
