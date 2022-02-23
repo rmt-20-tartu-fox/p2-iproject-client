@@ -172,7 +172,8 @@ export default new Vuex.Store({
         }
       })
         .then((resp) => {
-          console.log(JSON.stringify(resp.data, null, 2))
+          // console.log(JSON.stringify(resp.data, null, 2))
+          
           context.commit('SET_MYSTRATS', resp.data)
         })
         .catch((err) => {
@@ -180,7 +181,20 @@ export default new Vuex.Store({
         })
     },
     deleteMyStrat(context, id){
-      console.log(id)
+      
+      return new Promise ((resolve, rejects) => {
+        axios.delete(`http://localhost:3000/mystrats/${+id}`, {
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        .then((resp) => {
+          resolve(resp.data.message)
+        })
+        .catch((err) => {
+          rejects(err.response)
+        })
+      })
     }
   },
   modules: {

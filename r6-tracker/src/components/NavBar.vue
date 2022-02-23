@@ -52,6 +52,7 @@ export default {
     },
     userLogout(){
       localStorage.removeItem('access_token')
+       this.$store.commit('SET_ISLOGIN', false)
       this.$router.push({name: 'LoginForm'})
     }
   }

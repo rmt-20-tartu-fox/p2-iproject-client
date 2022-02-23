@@ -35,7 +35,10 @@
 export default {
   name: 'MyStrat',
   created(){
-    this.$store.dispatch('getMyStrats')
+    if (localStorage.access_token){
+      this.$store.commit('SET_ISLOGIN', true)
+      this.$store.dispatch('getMyStrats')
+    }
   },
   computed: {
     strats(){
@@ -47,8 +50,23 @@ export default {
       this.$router.push({name: 'StratDetail', params: {id}})
     },
     deleteMyStrat(id){
-      // console.log(id)
+      
       this.$store.dispatch('deleteMyStrat', id)
+        .then((resp) => {
+          console.log(resp)
+          let strats = this.$store.state.myStrats.filter((el) => {
+            return el.id !== id
+          })
+
+          this.$store.commit('SET_MYSTRATS', strats)
+          console.log(strats)
+          // this.$store.dispatch('getMyStrats')
+          
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
     }
   }
 }
