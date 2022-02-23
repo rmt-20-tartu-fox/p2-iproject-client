@@ -18,10 +18,10 @@
             <div class="card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                 <img class="card-img" :src="'https://covers.openlibrary.org/b/id/'+book.cover_id+'.jpg'" height="350" width="100">
                 <div class="card-img-overlay d-flex align-items-end justify-content-center p-2">
-                    <div class="text-left text-light">
-                        <p class="card-text bg-dark">{{book.title}}</p>
-                        <a :href="'https://archive.org/details/'+book.availability.identifier" class="btn btn-sm btn-warning b-lg-3 px-lg-6">READ</a>
-                        <button @click="addBookmark(book.cover_id)" type="submit" class="btn btn-sm btn-warning b-lg-3 px-lg-6">ADD</button>
+                    <div class="text-left text-dark mx-md-n5">
+                        <p class="card-text bg-light rounded-3 px-2">{{book.title.substring(0, 10)}}</p>
+                        <a :href="'https://archive.org/details/'+book.availability.identifier" class="btn btn-sm btn-primary mx-3 px-lg-6">READ</a>
+                        <button @click="addBookmark(book.cover_id, book.title)" type="submit" class="btn btn-sm btn-primary mx-3 px-lg-6">ADD</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ export default {
   computed: {
     booksFilm(){
       return this.$store.state.booksFilm
-    }
+    },
   },
   created(){
     this.getBookBySubject()
@@ -48,15 +48,26 @@ export default {
       this.$store.dispatch("getBookBySubject")
     },
 
-    addBookmark(bookKey){
-      this.$store.dispatch("addBookmark", bookKey)
-        .then(res => {
-          console.log(res);
-          this.$router.push("/mybook")
-        })
-        .catch(err =>{
-          console.log(err);
-        })
+    addBookmark(bookKey, bookTitle){
+      let payload = {
+        BookId: bookKey,
+        title: bookTitle
+      }
+
+      if (!localStorage.access_token) {
+        console.log("please login");
+        this.$router.push("/login")
+      } else {
+        this.$store.dispatch("addBookmark", payload)
+          .then(res => {
+            console.log(res);
+            this.$router.push("/mybook")
+          })
+          .catch(err =>{
+            console.log(err);
+          })
+      }
+      
     }
   }
 }

@@ -3,7 +3,7 @@
    <nav id="main_nav" class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow" style="width:100%">
         <div class="container d-flex justify-content-between align-items-center">
             <router-link class="navbar-brand h1" to="/">
-                <img class="mx-3 mb-2" src="./assets/fdnslogo.png" alt="" width="40" height="45">
+                <img class="mx-2  mb-2" src="./assets/fdnslogo.png" alt="" width="35" height="40">
                 <span class="text-dark h4"><strong>FDNS</strong></span> <span class="text-primary h4">Library</span>
             </router-link>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,27 +19,37 @@
                         <li class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/galery">Galery</router-link>
                         </li>
-                        <li  v-if="showButton === false" class="nav-item">
+                        <li class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/mybook">My Books</router-link>
                         </li>
-                        <li v-if="showButton === false"  class="nav-item ml-5">
+                        <li v-if="showButton === false" class="nav-item ml-5">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/login">Sign in</router-link>
                         </li>
                         <li v-if="showButton === false" class="nav-item">
                             <router-link class="nav-link btn-outline-primary rounded-pill px-3" to="/register">Sign up</router-link>
+                        </li>
+                        <li v-if="showButton !== false" class="nav-item">
+                            <button @click="logout" class="nav-link btn-outline-primary rounded-pill px-3" type="submit">Logout</button>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <router-view />
+    <router-view @show="show"/>
+    <HFooter class="fixed-buttom"></HFooter>
   </div>
 </template>
 
 <script>
+import HFooter from 'vue-hacktiv8-footer';
+
 export default {
   name: "Navbar",
+  components: {
+    HFooter
+  },
+
   data(){
     return {
       showButton: false
@@ -47,9 +57,28 @@ export default {
   },
   created(){
     if (localStorage.access_token) {
-      this.showNavbar = true
+      this.showButton = true
+    }
+  },
+  methods: {
+    show(){
+      this.showButton = true
+    },
+
+    logout(){
+      localStorage.removeItem("access_token");
+      // this.$swal.fire({
+      //       title: 'Good Jobs!',
+      //       text: `Logout successfull!`,
+      //       icon: 'success',
+      //       confirmButtonText: 'Ok'
+      //     });
+      this.showButton = false
+      this.$router.push("/login")
     }
   }
+
+  
 }
 </script>
 
