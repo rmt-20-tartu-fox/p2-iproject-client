@@ -3,6 +3,7 @@
     <h1 id="diagnose-header" align="center">
       Please enter your information below, to determine your disease
     </h1>
+    <Spinner v-if="isLoading"></Spinner>
     <div class="card mb-3">
       <form @submit.prevent="getDiagnose">
         <div class="mb-3">
@@ -45,10 +46,12 @@ import Multiselect from "vue-multiselect";
 import symptoms from "../data/dummySymptoms";
 import api from "../apis/server";
 import Swal from "sweetalert2";
+import Spinner from "vue-simple-spinner";
 export default {
   name: "Diagnose",
   components: {
     Multiselect,
+    Spinner,
   },
   data() {
     return {
@@ -56,6 +59,7 @@ export default {
       options: symptoms,
       date: "",
       gender: "",
+      isLoading: false,
     };
   },
   computed: {
@@ -75,12 +79,14 @@ export default {
       return Name;
     },
     getDiagnose() {
+      this.isLoading = true;
       if (!this.value) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Please select a symptom",
         });
+        this.isLoading = false;
       }
       api
         .post(
@@ -108,6 +114,7 @@ export default {
           this.value = null;
           this.gender = null;
           this.date = null;
+          this.isLoading = false;
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -116,6 +123,7 @@ export default {
             title: "Oops...",
             text: err.response.data.message,
           });
+          this.isLoading = false;
         });
     },
   },
