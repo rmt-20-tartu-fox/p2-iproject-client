@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="btn-signup">
-          <button class="input-user">Sign Up</button>
+          <button class="input-user">Sign in</button>
         </div>
         <div class="container-register-link">
           <div class="title-register">

@@ -52,21 +52,24 @@
               ></DatePicker>
             </div>
             <button class="btn-add-issue">Add Issue</button>
+            <button class="btn-logout" @click="logout">Logout</button>
           </form>
         </div>
       </b-sidebar>
+      <div class="weather">
+        <div class="weather-data">
+          <h2>{{ weather.negara }}</h2>
+          <img
+            v-if="weather.weather"
+            :src="`http://openweathermap.org/img/w/${weather.weather.icon}.png`"
+          />
+          <h4 v-if="weather.weather">{{ weather.weather.main }}</h4>
+        </div>
+        <div></div>
+      </div>
     </div>
     <div class="container mt-5">
-      <div class="row">
-        <!-- <div class="col form-inline">
-          <b-form-input
-            v-model="newTask"
-            placeholder="Enter task"
-            @keyub.enter="add"
-          ></b-form-input>
-          <b-button class="ml-2" variant="primary" @click="add">Add</b-button>
-        </div> -->
-      </div>
+      <div class="row"></div>
       <div class="row mt-3">
         <div class="col-md-3">
           <div class="p-2 alert alert-secondary">
@@ -81,9 +84,21 @@
                 class="list-group-item"
                 v-for="element in arrBacklog"
                 :key="element.id"
-                @click="seeDetailById(element.id)"
+                @click.stop="seeDetailById(element.id)"
               >
-                {{ element.title }}
+                <Card :element="element"> </Card>
+                <!-- <details close>
+                  <summary>
+                    <div class="wrapper-card">
+                      {{ element.title }}
+                      <iframe :src="element.icon" />
+                    </div>
+                  </summary>
+
+                  <p>Description:</p>
+                  <p>{{ element.description }}</p>
+                  <p>{{ element.dueDate }}</p>
+                </details> -->
               </div>
             </draggable>
           </div>
@@ -103,7 +118,19 @@
                 :key="element.id"
                 @click="seeDetailById(element.id)"
               >
-                {{ element.title }}
+                <Card :element="element"> </Card>
+                <!-- <details close>
+                  <summary>
+                    <div class="wrapper-card">
+                      {{ element.title }}
+                      <iframe :src="element.icon" />
+                    </div>
+                  </summary>
+
+                  <p>Description:</p>
+                  <p>{{ element.description }}</p>
+                  <p>{{ element.dueDate }}</p>
+                </details> -->
               </div>
             </draggable>
           </div>
@@ -123,7 +150,19 @@
                 :key="element.id"
                 @click="seeDetailById(element.id)"
               >
-                {{ element.title }}
+                <Card :element="element"> </Card>
+                <!-- <details close>
+                  <summary>
+                    <div class="wrapper-card">
+                      {{ element.title }}
+                      <iframe :src="element.icon" />
+                    </div>
+                  </summary>
+
+                  <p>Description:</p>
+                  <p>{{ element.description }}</p>
+                  <p>{{ element.dueDate }}</p>
+                </details> -->
               </div>
             </draggable>
           </div>
@@ -143,8 +182,21 @@
                 :key="element.id"
                 @click="seeDetailById(element.id)"
               >
-                {{ element.title }}
+                <Card :element="element"> </Card>
+                <!-- <details close>
+                  <summary>
+                    <div class="wrapper-card">
+                      {{ element.title }}
+                      <iframe :src="element.icon" />
+                    </div>
+                  </summary>
+
+                  <p>Description:</p>
+                  <p>{{ element.description }}</p>
+                  <p>{{ element.dueDate }}</p>
+                </details> -->
                 <img
+                  class="img-delete"
                   @click="idIssue(element.id)"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuiAd0d4Bc1TkUFUy558kC2YaQbXX30klLFg&usqp=CAU"
                   alt=""
@@ -162,12 +214,14 @@
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 import draggable from "vuedraggable";
+import Card from "../components/Card.vue";
 
 export default {
   name: "app",
   components: {
     draggable,
     DatePicker,
+    Card,
   },
   data() {
     return {
@@ -182,6 +236,12 @@ export default {
     };
   },
   computed: {
+    myIcon() {
+      return this.$store.state.icon;
+    },
+    weather() {
+      return this.$store.state.dataWeather;
+    },
     addIssueData() {
       const data = this.$store.state.issue;
       const arrTemp = [];
@@ -312,10 +372,15 @@ export default {
       });
       this.arrInProgress = data;
     },
+    logout() {
+      localStorage.clear("access_token");
+      this.$router.push({ path: "/" });
+    },
   },
   created() {
-    // this.$store.dispatch("getCollection");
+    this.$store.dispatch("weather");
     this.$store.dispatch("listenDataBase");
+    this.$store.dispatch("getIcon");
   },
   beforeDestroy() {
     this.$store.dispatch("listenDataBase", true);
@@ -324,6 +389,15 @@ export default {
 </script>
 
 <style>
+.wrapper-card {
+  display: flex;
+  justify-content: space-between;
+}
+iframe {
+  height: 20px;
+  width: 20px;
+  border: none;
+}
 .kanban-column {
   min-height: 300px;
 }
@@ -331,26 +405,43 @@ export default {
   margin: 5px 0px 5px 5px;
 }
 .description {
-  width: 280px;
+  width: 100%;
   height: 300px;
 }
 .input-issue {
-  width: 280px;
+  width: 100%;
 }
 .btn-add-issue {
-  margin: 40px 0px 0px 5px;
+  margin: 40px 0px 0px 0px;
   background: darkgrey;
   color: white;
   font-weight: bold;
-  width: 200px;
-  height: 50px;
+  width: 100%;
+  height: 30px;
 }
-img {
+.img-delete {
   width: 20px;
   float: right;
   cursor: pointer;
 }
 .list-group-item {
   cursor: pointer;
+}
+.weather {
+  display: flex;
+  justify-content: center;
+}
+.weather-data {
+  padding: 30px;
+  width: fit-content;
+  border: solid 1px rgb(116, 108, 108);
+}
+.btn-logout {
+  margin: 200px 0px 0px 0px;
+  width: 100%;
+  height: 30px;
+  font-weight: bold;
+  background: darkgray;
+  color: white;
 }
 </style>
