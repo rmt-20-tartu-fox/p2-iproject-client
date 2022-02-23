@@ -1,6 +1,8 @@
 <template>
   <section id="diagnose">
-    <h1>Please enter your information below, to determine your disease</h1>
+    <h1 id="diagnose-header" align="center">
+      Please enter your information below, to determine your disease
+    </h1>
     <div class="card mb-3">
       <form @submit.prevent="getDiagnose">
         <div class="mb-3">
@@ -121,7 +123,7 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
-#diagnose h1 {
+#diagnose-header {
   text-align: center;
 }
 

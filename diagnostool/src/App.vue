@@ -23,11 +23,6 @@
           >
             <ul class="navbar-nav">
               <li class="nav-item">
-                <router-link to="/" class="nav-link active" aria-current="page"
-                  >Home</router-link
-                >
-              </li>
-              <li class="nav-item">
                 <router-link class="nav-link" to="/diagnose"
                   >Symptom Checker</router-link
                 >
