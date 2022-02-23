@@ -29,6 +29,7 @@
                 {{ currentPage }}
               </button>
               <button
+                v-if="currentPage < dataTotalBooks"
                 @click.prevent="changePage(currentPage + 1)"
                 class="relative block py-2 px-3 leading-tight border-r-0 ml-0 rounded-l bg-white"
               >
@@ -55,10 +56,11 @@ export default {
   },
   methods: {
     fetchBooks() {
-      this.$store.dispatch("fetchBooks");
+      this.$store.dispatch("fetchBooks", { page: this.currentPage });
     },
     changePage(value) {
       this.$store.commit("SET_CURRENT_PAGE", value);
+      this.fetchBooks();
     },
   },
   computed: {
@@ -67,6 +69,9 @@ export default {
     },
     currentPage() {
       return this.$store.state.currentPage;
+    },
+    dataTotalBooks() {
+      return Math.floor(this.$store.state.totalBooks / 10);
     },
   },
 };
