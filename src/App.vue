@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/form">Form</router-link>
+      <router-link to="/formhistory">Data</router-link> |
+      <router-link to="/formBalance">Add Balance</router-link>
     </div>
     <router-view />
   </div>

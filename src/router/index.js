@@ -29,13 +29,22 @@ const routes = [
       import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
   },
   {
-    path: "/form",
-    name: "Form",
+    path: "/formbalance",
+    name: "FormBalance",
     // route level code-splitting
     // this generates a separate chunk (Form.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "Form" */ "../views/Form.vue"),
+      import(/* webpackChunkName: "Form" */ "../views/FormBalance.vue"),
+  },
+  {
+    path: "/formhistory",
+    name: "FormHistory",
+    // route level code-splitting
+    // this generates a separate chunk (Form.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Form" */ "../views/FormHistory.vue"),
   },
 ];
 

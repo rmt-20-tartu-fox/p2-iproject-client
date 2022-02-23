@@ -34,12 +34,22 @@ export default new Vuex.Store({
         console.log(err.response);
       }
     },
-    submitFile(context, payload) {
+    submiHistory(context, payload) {
       axios.post('http://localhost:3000/histories/data',
         payload,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+            'access_token': localStorage.getItem("access_token")
+          }
+        }
+      )
+    },
+    submitBalance(context, payload) {
+      axios.post('http://localhost:3000/balances/data',
+        payload,
+        {
+          headers: {
             'access_token': localStorage.getItem("access_token")
           }
         }
