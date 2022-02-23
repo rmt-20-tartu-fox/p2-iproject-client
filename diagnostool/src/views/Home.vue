@@ -6,7 +6,9 @@
         Our symptom checker algorithm can detect more than 700 hundreds disease
         to serve the needs of our user
       </p>
-      <button @click="diagnoseHandler" class="btn btn-primary">Get Your Diagnosis</button>
+      <button @click="diagnoseHandler" class="btn btn-primary">
+        Get Your Diagnosis
+      </button>
     </div>
     <div id="image">
       <img src="../assets/diagnosis2.png" alt="doctor" />
@@ -16,14 +18,13 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
   name: "Home",
   methods: {
-    diagnoseHandler(){
-      this.$router.push("/diagnose")
-    }
-  }
+    diagnoseHandler() {
+      this.$router.push("/diagnose");
+    },
+  },
 };
 </script>
 <style>

@@ -3,7 +3,9 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid row justify-content-between">
-          <router-link class="navbar-brand col-2" to="/">DiagnosTool</router-link>
+          <router-link class="navbar-brand col-2" to="/"
+            >DiagnosTool</router-link
+          >
           <button
             class="navbar-toggler col-2"
             type="button"
@@ -44,9 +46,18 @@
       </nav>
     </header>
     <router-view />
+    <HFooter></HFooter>
   </div>
 </template>
 
+<script>
+import HFooter from "vue-hacktiv8-footer";
+export default {
+  components: {
+    HFooter,
+  },
+};
+</script>
 <style>
 #app {
   width: 80%;
