@@ -13,7 +13,7 @@
             ><b-form-input
               v-model="name"
               id="input-0"
-              type="email"
+              type="text"
               placeholder="Enter Name"
               required
             ></b-form-input>
@@ -29,6 +29,20 @@
               id="input-1"
               type="email"
               placeholder="Enter email"
+              required
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            v-if="page === 'Register'"
+            class="text-left"
+            id="input-group-0"
+            label="No Telp:"
+            label-for="input-0"
+            ><b-form-input
+              v-model="noTelp"
+              id="input-0"
+              type="text"
+              placeholder="Enter Number"
               required
             ></b-form-input>
           </b-form-group>
@@ -85,16 +99,18 @@ export default {
     return {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      noTelp: ""
     }
   },
   methods: {
     onClick() {
-      // let page = "login"
-      // if (this.page === "Register") {
-      //   page = 'register'
-      // }
-      this.$emit(page)
+      this.$emit("onClick", {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        noTelp: this.noTelp
+      })
     }
   }
 }

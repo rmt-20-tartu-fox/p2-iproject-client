@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Navbar />
+    <Navbar page="home" />
+    <button @click="bayar">bayar</button>
     <Products :products="products"/>
   </div>
 </template>
@@ -26,6 +27,11 @@ export default {
   methods: {
     fetchProducts() {
       this.$store.dispatch("fetchProducts")
+    },
+    bayar() {
+      this.$store.dispatch("payment")
+      .then(resp => console.log(resp))
+      .catch(err => console.log(err.response.data))
     }
   }
 };
