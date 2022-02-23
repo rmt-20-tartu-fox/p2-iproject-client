@@ -1,17 +1,17 @@
 <template>
   <div
     class="abc"
-    :class="hola ? 'windy' : 'sunny'"
+    :class="weatherData ? 'rainy' : 'sunny'"
     style="background-color: black; width: 100vw; height: 100vh"
   >
     <NavigationBar />
-    <!-- <HFooter /> -->
+    <HFooter style="position: fixed; bottom: 0; width: 100%; height: 50px" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import NavigationBar from "../components/NavigationBar.vue";
+import NavigationBar from "../components/SideAndNavigationBar.vue";
 import HFooter from "vue-hacktiv8-footer";
 
 export default {
@@ -29,7 +29,7 @@ export default {
   methods: {},
   computed: {
     weatherData() {
-      return this.$store.state.weatherData?.current?.clouds > 50;
+      return this.$store.state.weatherData?.current?.humidity > 80;
     },
   },
   async created() {
@@ -48,11 +48,11 @@ export default {
   background-size: cover;
 }
 
-.windy {
-  background-image: url("../assets/onRaining.jfif");
+.sunny {
+  background-image: url("../assets/sunny2.jpg");
 }
 
-.sunny {
-  background-image: url("../assets/backgroundImage3.jpg");
+.rainy {
+  background-image: url("../assets/rainy.jpg");
 }
 </style>

@@ -2,11 +2,11 @@
   <div
     class="bg-no-repeat bg-cover bg-center relative"
     style="
-      background-image: url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80);
+      background-image: url(https://thewallpaper.co/wp-content/uploads/2020/09/landscape-flowers-cute-desktop-images-field-nature-background-images-mac-wallpaper-sky-nature-wallpapers-1600x1000-1-1200x750.jpg);
     "
   >
     <div
-      class="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0"
+      class="absolute bg-gradient-to-b from-violet-300 to-violet-300 opacity-75 inset-0 z-0"
     ></div>
     <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
       <div

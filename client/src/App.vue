@@ -88,8 +88,8 @@ nav a.router-link-exact-active {
 #canvas1 {
   border: 5px;
   position: absolute;
-  top: 85%;
-  left: 50%;
+  top: 78%;
+  left: 30%;
   transform: translate(-50%, -50%);
   width: 300px;
   height: 300px;

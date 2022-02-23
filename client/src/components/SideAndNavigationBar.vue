@@ -3,7 +3,7 @@
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="flex flex-col drawer-content">
       <!-- Navbar -->
-      <div class="w-full navbar bg-base-300">
+      <div class="w-full navbar backdrop-filter backdrop-blur-lg opacity-60">
         <div class="flex-none">
           <label for="my-drawer-3" class="btn btn-square btn-ghost">
             <svg
@@ -25,8 +25,9 @@
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->
-            <li><a>Navbar Item 1</a></li>
-            <li><a>Navbar Item 2</a></li>
+            <button @click="logout" class="mx-11 btn btn-primary">
+              Logout
+            </button>
           </ul>
         </div>
       </div>
@@ -100,6 +101,10 @@ export default {
           timer: 1500,
         });
       }
+    },
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
     },
   },
   computed: {
