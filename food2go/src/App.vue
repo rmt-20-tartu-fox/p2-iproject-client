@@ -9,11 +9,20 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 import Navbar from "./components/navbar/templates/Navbar.vue";
 export default {
   name: "App",
   components: {
     Navbar,
+  },
+  methods: {
+    ...mapMutations(["SET_ISLOGGED"]),
+  },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.SET_ISLOGGED(true);
+    }
   },
 };
 </script>

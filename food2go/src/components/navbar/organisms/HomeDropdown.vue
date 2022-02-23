@@ -25,14 +25,14 @@
           ref="popoverDropdownRef"
         >
           <router-link
-            to="/login"
+            to="/register"
             class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           >
             <i class="fa-solid fa-pen pr-2"></i>
             Sign Up
           </router-link>
           <router-link
-            to="/register"
+            to="/login"
             class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           >
             <i class="fa-solid fa-right-to-bracket pr-2"></i>

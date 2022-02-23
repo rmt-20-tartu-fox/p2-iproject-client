@@ -1,5 +1,5 @@
 <template>
-  <div class="home h-screen w-full bg-blue-600">
+  <div class="min-h-screen w-full bg-blue-600">
     <lottie-player
       src="https://assets2.lottiefiles.com/packages/lf20_YnsM0o.json"
       background="transparent"
