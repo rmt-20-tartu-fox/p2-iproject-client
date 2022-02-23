@@ -121,7 +121,6 @@ export default new Vuex.Store({
 
     async getTokenPayment(_, payload) {
       try {
-        console.log(payload, "=================");
         const response = await smdMovies.post(
           `/transactions/${payload.id}`,
           { MovieId: payload.MovieId },
@@ -131,7 +130,6 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(response.data, "===============");
         localStorage.setItem("redirect_url", response.data.redirect_url);
       } catch (err) {
         console.log(err);
