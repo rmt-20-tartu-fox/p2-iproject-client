@@ -9,6 +9,7 @@ export default new Vuex.Store({
     file: null,
     petsData: null,
     weatherData: [],
+    animationSet: 0,
   },
   getters: {
     file: (state) => {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     WEATHER_DATA_FILLER(state, payload) {
       state.weatherData = payload.data;
+    },
+    ANIMATION_CHANGER(state, payload) {
+      state.animationSet = payload.set;
     },
   },
   actions: {
@@ -78,6 +82,11 @@ export default new Vuex.Store({
           console.log(error);
         }
       });
+    },
+    changeAnimation(context, payload) {
+      console.log(payload);
+      console.log(context);
+      context.commit("ANIMATION_CHANGER", payload);
     },
   },
   modules: {},

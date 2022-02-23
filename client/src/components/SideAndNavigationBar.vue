@@ -54,15 +54,28 @@
 
             <button class="btn">Feed</button>
           </form>
-          <div class="mt-5">
+          <!-- SVG 1 - ASK THE CRAVINGS -->
+          <div class="flex flex-row mt-5">
             <a @click.prevent="askCravings" href="#">
               <img
-                alt="Ask the cravings"
+                title="Ask the cravings"
                 src="../assets/ask-the-dog.svg"
                 width="50"
               />
             </a>
+            <a class="ml-5 mt-1" @click.prevent="roll" href="#">
+              <img title="Do rolling" src="../assets/roll.svg" width="40" />
+            </a>
           </div>
+          <!-- SVG 2 - ASK THE CRAVINGS -->
+          <ShareNetwork
+            network="twitter"
+            url="http://localhost:8080/"
+            title="Hi! This game is so cool just like the creator!"
+            hashtags="BestGameEver"
+          >
+            Share on Twitter
+          </ShareNetwork>
         </div>
       </div>
     </div>
@@ -72,7 +85,7 @@
 <script>
 import Swal from "sweetalert2";
 export default {
-  name: "NavigationBar",
+  name: "SideAndNavigationBar",
   data() {
     return {
       image: "",
@@ -125,6 +138,10 @@ export default {
         showConfirmButton: false,
         timer: 1500,
       });
+    },
+    roll() {
+      const payload = { set: 6 };
+      this.$store.dispatch("changeAnimation", payload);
     },
   },
   computed: {

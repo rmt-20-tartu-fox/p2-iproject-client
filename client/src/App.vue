@@ -32,7 +32,7 @@ export default {
       const spriteHeight = 523;
 
       let frameX = this.frameX;
-      let frameY = 0; // computed
+      let frameY = this.animationSet; // computed
       let gameFrame = this.gameFrame;
       const staggerFrames = 7;
 
@@ -59,6 +59,11 @@ export default {
   },
   mounted() {
     this.animate();
+  },
+  computed: {
+    animationSet() {
+      return this.$store.state.animationSet;
+    },
   },
 };
 </script>

@@ -4,6 +4,9 @@ import HomePage from "../views/HomePage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
 import BirthPage from "../views/BirthPage.vue";
+import VueSocialSharing from "vue-social-sharing";
+
+Vue.use(VueSocialSharing);
 
 Vue.use(VueRouter);
 
