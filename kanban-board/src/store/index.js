@@ -9,16 +9,23 @@ import {
   getDocs,
   doc,
   deleteDoc,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     issue: [],
+    datailIssue: {},
   },
   mutations: {
     SET_ISSUE(state, payload) {
       state.issue = payload;
+    },
+    SET_DETAIL_ISSUE(state, payload) {
+      console.log(payload, "indiadkakjdnkasjd");
+      state.datailIssue = payload;
     },
   },
   actions: {
@@ -76,7 +83,14 @@ export default new Vuex.Store({
         status: "open",
       })
         .then((data) => {
-          console.log(data);
+          const newData = {
+            ...payload,
+            status: "open",
+            id: data.id,
+          };
+          const newIssue = [newData, ...context.state.issue];
+          context.commit("SET_ISSUE", newIssue);
+          // context.dispatch("getCollection");
           Swal.fire({
             icon: "success",
             title: "SUCCESS ADD ISSUE",
@@ -88,9 +102,46 @@ export default new Vuex.Store({
           console.log(err.message);
         });
     },
+    getCollectionByid(context, payload) {
+      const docRef = doc(db, "addedIssue", payload);
+      getDoc(docRef)
+        .then((data) => {
+          const formated = {
+            id: data.id,
+            title: data.data().title,
+            description: data.data().description,
+            dueDate: data.data().dueDate,
+          };
+          context.commit("SET_DETAIL_ISSUE", formated);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    },
+    updateIssue(context, payload) {
+      const ref = doc(db, "addedIssue", payload.id);
+      updateDoc(ref, payload.data).then((data) => {
+        console.log(data);
+      });
+    },
     deleteIssue(context, payload) {
-      console.log(payload, "askdnksn");
-      deleteDoc(doc(db, "addedIssue", payload));
+      deleteDoc(doc(db, "addedIssue", payload))
+        .then(() => {
+          const data = context.state.issue;
+          const newData = data.filter((el) => {
+            return el.id !== payload;
+          });
+          context.commit("SET_ISSUE", newData);
+          Swal.fire({
+            icon: "success",
+            title: "Success Delete",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
   },
 });

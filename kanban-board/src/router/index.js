@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import KanbanBoard from "../views/KanbanBoard.vue";
+import DetailIssue from "../views/DetailIssue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     meta: {
       authRequired: true,
     },
+  },
+  {
+    path: "/detail",
+    name: "DetailIssue",
+    component: DetailIssue,
   },
   {
     path: "/about",
