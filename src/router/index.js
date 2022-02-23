@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Cart from "../views/Cart.vue";
+import MyBook from "../views/MyBook.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     name: "Cart",
     component: Cart,
   },
+  {
+    path: "/mybook",
+    name: "MyBook",
+    component: MyBook,
+  },
 ];
 
 const router = new VueRouter({
@@ -44,6 +50,20 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach()
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem("access_token")) {
+    if (to.name == "Login" || to.name == "Register") {
+      next({ name: `Home` });
+    } else {
+      next();
+    }
+  } else {
+    if (to.name == `MyBook`) {
+      next({ name: `Login` });
+    } else {
+      next();
+    }
+  }
+});
 
 export default router;

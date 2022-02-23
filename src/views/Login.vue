@@ -27,6 +27,12 @@
           value="Submit"
           class="bg-blue-400 w-3/4 rounded p-2 mt-5 mb-5"
         />
+        <GoogleLogin
+          :params="params"
+          :renderParams="renderParams"
+          :onSuccess="onSuccess"
+          :onFailure="onFailure"
+        ></GoogleLogin>
         <!-- <router-link to="/register" class="mb-2">Sign up</router-link>
         <router-link to="/" class="mt-2">Back to home</router-link> -->
       </form>
@@ -35,6 +41,7 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
 export default {
   name: `Login`,
   data() {
@@ -43,7 +50,19 @@ export default {
         email: "",
         password: "",
       },
+      params: {
+        client_id:
+          "168102640418-dno5l95cu5h7gvqi2indvtn8fvf6acs6.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
     };
+  },
+  components: {
+    GoogleLogin,
   },
   methods: {
     async login() {
@@ -51,6 +70,15 @@ export default {
       if (this.isLogin) {
         this.$router.push({ name: `Home` });
       }
+    },
+    async onSuccess(googleUser) {
+      await this.$store.dispatch("onSuccess", googleUser);
+      if (this.isLogin) {
+        this.$router.push({ name: "Home" });
+      }
+    },
+    onFailure() {
+      console.log("<<<<<<");
     },
   },
   created() {

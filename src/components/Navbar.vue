@@ -10,7 +10,9 @@
     <div class="flex items-center">
       <ul>
         <li class="inline ml-10" @click.prevent="homePage">Home</li>
-        <li class="inline ml-10">My Book</li>
+        <li class="inline ml-10" v-if="isLogin" @click.prevent="myBookPage">
+          My Book
+        </li>
       </ul>
     </div>
     <div class="flex items-center">
@@ -28,6 +30,8 @@
         <li
           class="inline ml-8 mr-5 cursor-point"
           @click.prevent="logout"
+          :params="params"
+          :logoutButton="true"
           v-if="isLogin"
         >
           Logout
@@ -40,11 +44,21 @@
 <script>
 export default {
   name: `Navbar`,
+  data() {
+    return {
+      params: {
+        client_id:
+          "168102640418-dno5l95cu5h7gvqi2indvtn8fvf6acs6.apps.googleusercontent.com",
+      },
+    };
+  },
   methods: {
     logout() {
       localStorage.clear();
       this.$store.commit("SET_IS_LOGIN", false);
-      this.$router.push({ name: `Home` });
+      if (this.$route.name !== "Home") {
+        this.$router.push({ name: `Home` });
+      }
     },
     registerPage() {
       this.$router.push({ name: `Register` });
@@ -54,6 +68,9 @@ export default {
     },
     homePage() {
       this.$router.push({ name: `Home` });
+    },
+    myBookPage() {
+      this.$router.push({ name: `MyBook` });
     },
   },
   computed: {
