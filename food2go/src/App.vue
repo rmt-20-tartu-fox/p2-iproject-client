@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div
+      class="w-full min-h-screen bg-gradient-to-b from-red-200 to-transparent via-transparent"
+    >
+      <Navbar></Navbar>
     </div>
-    <router-view />
   </div>
 </template>
+<script>
+import Navbar from "./components/navbar/templates/Navbar.vue";
+export default {
+  name: "App",
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -17,7 +26,7 @@
   color: #2c3e50;
 }
 
-#nav {
+/* #nav {
   padding: 30px;
 }
 
@@ -28,5 +37,5 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
