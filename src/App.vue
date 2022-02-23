@@ -1,12 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+    </div> -->
+    <div class="flex w-full min-h-screen font-sans bg-gray-800">
+      <side-nav-bar></side-nav-bar>
+      <main class="flex flex-col flex-1 gap-6 p-4">
+        <header-comp></header-comp>
+        <hr class="border-gray-700" />
+        <!-- <StatsCard />
+      <OrderReport /> -->
+        <router-view />
+      </main>
+      <aside class="flex flex-col gap-y-6 pt-6 pr-6 w-96">
+        <!-- <MostOrdered />
+      <MostTypeOfOrder /> -->
+      </aside>
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+import HeaderComp from "./components/HeaderComp.vue";
+import SideNavBar from "./components/SideNavbar.vue";
+export default {
+  components: { SideNavBar, HeaderComp },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("SET_IS_LOGIN", true);
+    }
+  },
+};
+</script>
 
 <style>
 #app {
@@ -17,7 +42,7 @@
   color: #2c3e50;
 }
 
-#nav {
+/* #nav {
   padding: 30px;
 }
 
@@ -28,5 +53,5 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
