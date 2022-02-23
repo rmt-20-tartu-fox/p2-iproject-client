@@ -7,7 +7,7 @@
       <div class="header">
         <h6>Log in</h6>
       </div>
-      <form @submit.prevent="login">
+      <form @submit.prevent="clickLogin">
         <div class="data-user">
           <div class="field-input">
             <label>Email</label>
@@ -37,29 +37,28 @@
         <div class="btn-signup">
           <button class="input-user">Sign Up</button>
         </div>
+        <div class="container-register-link">
+          <div class="title-register">
+            <h5>Don't have an account?</h5>
+          </div>
+          <div>
+            <router-link to="/register">Register here</router-link>
+          </div>
+        </div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
 export default {
   name: "login",
   methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then((resp) => {
-          console.log(resp.data);
-          this.$router.push("/board");
-        });
-      (err) => {
-        console.log(err.message);
-      };
+    clickLogin() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
   data() {
@@ -75,7 +74,6 @@ export default {
 .register {
   display: flex;
   justify-content: center;
-  /* border: 1px solid black; */
 }
 .header {
   text-align: center;
@@ -84,7 +82,7 @@ export default {
   font-weight: bold;
 }
 .input-user {
-  width: 500px;
+  width: 100%;
   height: 40px;
 }
 .field-input {
@@ -92,5 +90,13 @@ export default {
 }
 .btn-signup {
   margin-top: 50px;
+}
+.container-register-link {
+  display: flex;
+  align-items: center;
+  margin: 30px 0px 0px 0px;
+}
+.title-register {
+  padding-right: 10px;
 }
 </style>

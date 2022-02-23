@@ -7,8 +7,8 @@
       <div class="header">
         <h6>Create A New Account</h6>
       </div>
-      <form @submit.prevent="register">
-        <div class="data-user">
+      <form @submit.prevent="clickRegister">
+        <!-- <div class="data-user">
           <div class="field-input">
             <label>Username</label>
           </div>
@@ -20,7 +20,7 @@
               v-model="username"
             />
           </div>
-        </div>
+        </div> -->
         <div class="data-user">
           <div class="field-input">
             <label>Email</label>
@@ -50,28 +50,27 @@
         <div class="btn-signup">
           <button class="input-user">Sign Up</button>
         </div>
+        <div class="container-backhome-link">
+          <div class="title-register">
+            <h5>already have an account</h5>
+          </div>
+          <div>
+            <router-link to="/">Back To Login</router-link>
+          </div>
+        </div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
 export default {
   methods: {
-    register() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          alert("Successfully registered! Please login.");
-          this.$router.push("/");
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+    clickRegister() {
+      this.$store.dispatch("register", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
   data() {
@@ -106,5 +105,13 @@ export default {
 }
 .btn-signup {
   margin-top: 50px;
+}
+.title-register {
+  padding-right: 10px;
+}
+.container-backhome-link {
+  display: flex;
+  align-items: center;
+  margin: 30px 0px 0px 0px;
 }
 </style>
