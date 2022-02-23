@@ -3,9 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import KanbanBoard from "../views/KanbanBoard.vue";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -44,18 +42,12 @@ const router = new VueRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.authRequired)) {
-    if (firebase.auth().currentUser) {
-      next();
-    } else {
-      alert("You must be logged in to see this page");
-      next({
-        path: "/",
-      });
-    }
-  } else {
-    next();
-  }
+  if (to.path === "/board" && !localStorage.access_token) next({ path: "/" });
+  else next();
+
+  if ((to.path === "/" || to.path === "/register") && localStorage.access_token)
+    next({ path: "/board" });
+  else next();
 });
 
 export default router;
