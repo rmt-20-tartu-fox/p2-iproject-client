@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <div v-if="useMask == true" class="flex">
-      <div v-for="product in products" :key="product.id" class="max-w-sm rounded mx-4 mt-4 overflow-hidden shadow-lg">
-        <img class="w-full" src="https://d1sag4ddilekf6.azureedge.net/compressed/items/6-CYLWVCBKAA33C2-CYLWVCBKGE6WGN/photo/menueditor_item_c21ac25fa7534072a2bb98dd967cb1fb_1584856720011716077.jpg" alt="Sunset in the mountains">
+    <button @click.prevent="checkOut()"> checkout</button>
+    <div class="flex">
+      <div v-for="product in products" :key="product.id"  class="max-w-sm rounded mx-4 mt-4 overflow-hidden shadow-lg">
+        <img @click="addToCart(product.id, product.price)" class="w-full" src="https://d1sag4ddilekf6.azureedge.net/compressed/items/6-CYLWVCBKAA33C2-CYLWVCBKGE6WGN/photo/menueditor_item_c21ac25fa7534072a2bb98dd967cb1fb_1584856720011716077.jpg" alt="Sunset in the mountains">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{{product.name}}</div>
           <div class="font-bold text-xl mb-2">{{product.price}}</div>
@@ -25,6 +26,13 @@ export default {
     return {
       videoEl: null,
       useMask: true,
+      payButton: null,
+      cart: {
+        UserId: 4,
+        products: [],
+        CustomerId: null,
+        total: 0
+      }
     }
   },
   computed: {
@@ -37,14 +45,15 @@ export default {
     this.$store.dispatch('getBackground')
   },
   mounted() {
-    this.videoEl = document.getElementById('videoEl')
-    Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-        faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-        faceapi.nets.faceExpressionNet.loadFromUri('/models')
-    ])
-    .then(this.startCamera(this.videoEl));
+    // this.videoEl = document.getElementById('videoEl')
+    // this.payButton = document.getElementById('pay-button')
+    // Promise.all([
+    //     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+    //     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+    //     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+    //     faceapi.nets.faceExpressionNet.loadFromUri('/models')
+    // ])
+    // .then(this.startCamera(this.videoEl));
   },
   methods: {
     async startCamera(video){
@@ -75,7 +84,21 @@ export default {
             this.useMask = true
           }
       }, 2000);
-    }
+    },
+    addToCart(id, price) {
+      this.cart.products.push(id)
+      this.cart.total += price
+    },
+    checkOut() {
+      this.createCart()
+      this.$router.push({
+        name: "Cart",
+        params: this.cart
+      })
+    },
+    createCart() {
+      this.$store.dispatch('getTransactionToken', this.cart)
+    },
   }
 }
 </script>
