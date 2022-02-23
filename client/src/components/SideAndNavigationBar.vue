@@ -35,9 +35,10 @@
     </div>
     <div class="drawer-side">
       <label for="my-drawer-3" class="drawer-overlay"></label>
-      <div class="p-4 overflow-y-auto menu w-80 bg-base-100">
+      <div class="p-4 overflow-y-auto menu w-80 bg-base-300">
         <div>
-          <div class="mt-50 badge">Hunger</div>
+          <p class="mb-5 text-3xl font-bold">{{ petName.name }}</p>
+          <div class="badge badge-outline">Hunger</div>
           <progress
             :value="hunger"
             class="progress progress-primary w-56"
@@ -48,11 +49,20 @@
             @submit.prevent="submit"
             enctype="multipart/form-data"
           >
-            <label class="btn" for="file-upload"> Upload food </label>
+            <label class="btn" for="file-upload"> Send </label>
             <input @change="upload" id="file-upload" type="file" />
 
             <button class="btn">Feed</button>
           </form>
+          <div class="mt-5">
+            <a @click.prevent="askCravings" href="#">
+              <img
+                alt="Ask the cravings"
+                src="../assets/ask-the-dog.svg"
+                width="50"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -106,10 +116,23 @@ export default {
       localStorage.clear();
       this.$router.push("/login");
     },
+    askCravings() {
+      Swal.fire({
+        imageUrl:
+          "https://e7.pngegg.com/pngimages/475/296/png-clipart-steak-drawing-fish-meat-food-tuna-steak-white-text.png",
+        imageWidth: 500,
+        imageHeight: 300,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
   },
   computed: {
     hunger() {
       return this.$store.state.petsData?.hunger;
+    },
+    petName() {
+      return this.$store.state.petsData;
     },
   },
 };
