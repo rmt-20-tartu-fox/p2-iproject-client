@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/formhistory">Data</router-link> |
+      <router-link to="/formcashflow">Data</router-link> |
+      <router-link to="/getcashflow"></router-link> |
       <router-link to="/formBalance">Add Balance</router-link>
     </div>
     <router-view />
@@ -20,6 +21,18 @@ export default {
     isLoggedIn() {
       return this.$store.state.isLoggedIn;
     },
+    rateUsd() {
+      return this.$store.state.rateUsd;
+    },
+    rateEur() {
+      return this.$store.state.rateEur;
+    },
+    rateBtc() {
+      return this.$store.state.rateBtc;
+    },
+    rateEth() {
+      return this.$store.state.rateEth;
+    },
   },
   methods: {
     checkLog() {
@@ -27,9 +40,16 @@ export default {
         this.$store.commit("SET_ISLOGGEDIN", true);
       }
     },
+    async checkAll() {
+      await this.$store.dispatch("getUsd");
+      await this.$store.dispatch("getEur");
+      await this.$store.dispatch("getBtc");
+      await this.$store.dispatch("getEth");
+    },
   },
   created() {
     this.checkLog();
+    this.checkAll();
   },
 };
 </script>

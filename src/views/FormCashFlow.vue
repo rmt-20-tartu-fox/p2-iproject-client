@@ -108,7 +108,7 @@ export default {
       formData.append("image", this.form.image);
       formData.append("BalanceId", this.form.balance);
       formData.append("value", this.form.value);
-      this.$store.dispatch("submiHistory", formData);
+      this.$store.dispatch("submitHistory", formData);
     },
     previewFiles(event) {
       this.form.image = event.target.files[0];

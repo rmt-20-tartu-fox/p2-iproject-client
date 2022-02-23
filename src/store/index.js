@@ -8,7 +8,14 @@ export default new Vuex.Store({
   state: {
     isLoggedIn: false,
     histories: [],
-    balances: []
+    balances: [],
+    rateUsd: "",
+    rateEur: "",
+    rateBtc: "",
+    rateEth: "",
+    balanceTotal: "",
+    spending: "",
+    income: "",
   },
   mutations: {
     SET_ISLOGGEDIN(state, payload) {
@@ -19,6 +26,27 @@ export default new Vuex.Store({
     },
     SET_BALANCE(state, payload) {
       state.balances = payload
+    },
+    SET_BALANCETOTAL(state, payload) {
+      state.balanceTotal = payload
+    },
+    SET_SPENDING(state, payload) {
+      state.spending = payload
+    },
+    SET_INCOME(state, payload) {
+      state.income = payload
+    },
+    SET_USD(state, payload) {
+      state.rateUsd = payload
+    },
+    SET_EUR(state, payload) {
+      state.rateEur = payload
+    },
+    SET_BTC(state, payload) {
+      state.rateBtc = payload
+    },
+    SET_ETH(state, payload) {
+      state.rateEth = payload
     },
   },
   actions: {
@@ -34,8 +62,8 @@ export default new Vuex.Store({
         console.log(err.response);
       }
     },
-    submiHistory(context, payload) {
-      axios.post('http://localhost:3000/histories/data',
+    async submitHistory(context, payload) {
+      await axios.post('http://localhost:3000/histories/data',
         payload,
         {
           headers: {
@@ -45,8 +73,8 @@ export default new Vuex.Store({
         }
       )
     },
-    submitBalance(context, payload) {
-      axios.post('http://localhost:3000/balances/data',
+    async submitBalance(context, payload) {
+      await axios.post('http://localhost:3000/balances/data',
         payload,
         {
           headers: {
@@ -55,8 +83,48 @@ export default new Vuex.Store({
         }
       )
     },
-    addBalance(context, payload) {
-      axios.post('http://localhost:3000/histories/data',
+    async getUsd(context) {
+      const res = await axios.get('http://localhost:3000/additionals/usd',
+        {
+          headers: {
+            'access_token': localStorage.getItem("access_token")
+          }
+        }
+      )
+      context.commit("SET_USD", Math.ceil(res.data))
+    },
+    async getEur(context) {
+      const res = await axios.get('http://localhost:3000/additionals/eur',
+        {
+          headers: {
+            'access_token': localStorage.getItem("access_token")
+          }
+        }
+      )
+      context.commit("SET_EUR", Math.ceil(res.data))
+    },
+    async getBtc(context) {
+      const res = await axios.get('http://localhost:3000/additionals/btc',
+        {
+          headers: {
+            'access_token': localStorage.getItem("access_token")
+          }
+        }
+      )
+      context.commit("SET_BTC", Math.ceil(res.data))
+    },
+    async getEth(context) {
+      const res = await axios.get('http://localhost:3000/additionals/eth',
+        {
+          headers: {
+            'access_token': localStorage.getItem("access_token")
+          }
+        }
+      )
+      context.commit("SET_ETH", Math.ceil(res.data))
+    },
+    async addBalance(context, payload) {
+      await axios.post('http://localhost:3000/histories/data',
         payload,
         {
           headers: {
@@ -69,7 +137,6 @@ export default new Vuex.Store({
     ,
     async fetchHistory(context) {
       try {
-
         const res = await axios.get("http://localhost:3000/histories/data", {
           headers: {
             access_token: localStorage.getItem("access_token")
