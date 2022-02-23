@@ -54,6 +54,20 @@ const routes = [
   {
     path: "/cart",
     name: "Cart",
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.access_token) {
+        swal.fire({
+          icon: "info",
+          title: "You should login first"
+        })
+        router.push({
+          name: "Login"
+        })
+        return false
+      } else {
+        next()
+      }
+    },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Cart.vue"),
   }

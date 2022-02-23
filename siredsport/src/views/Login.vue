@@ -32,6 +32,8 @@ export default {
         password
       })
       .then(resp => {
+        console.log('halo');
+        console.log('masuk');
         localStorage.access_token = resp.data.access_token
         localStorage.name = resp.data.access_token
         localStorage.role = resp.data.role

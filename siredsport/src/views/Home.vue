@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <Navbar page="home" />
-    <button @click="bayar">bayar</button>
+    <b-button-group class="text-right">
+      <b-button variant="light" class="mx-1">Sepatu</b-button>
+      <b-button variant="light" class="mx-1">Jersey</b-button>
+    </b-button-group>
     <Products :products="products"/>
   </div>
 </template>
@@ -30,8 +33,21 @@ export default {
     },
     bayar() {
       this.$store.dispatch("payment")
-      .then(resp => console.log(resp))
-      .catch(err => console.log(err.response.data))
+      .then(resp => {
+        console.log(resp.data, "token payment")
+        window.snap.pay(resp.data.paymentToken);
+      })
+      .catch(err => console.log(err, "error payment"))
+      // .then(resp => {
+      //   // For example trigger on button clicked, or any time you need
+      //   var payButton = document.getElementById('pay-button');
+      //   payButton.addEventListener('click', function () {
+      //     // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+      //     window.Veritrans.pay('TRANSACTION_TOKEN_HERE');
+      //     // customer will be redirected after completing payment pop-up
+      //   });
+      // })
+      // .catch(err => console.log(err.response.data))
     }
   }
 };

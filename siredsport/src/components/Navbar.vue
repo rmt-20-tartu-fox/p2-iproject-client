@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-  <b-navbar toggleable="lg" type="light mt-3">
-    <b-navbar-brand href="/" style="font-weight: bold; font-size: 30px;" class="mx-5 text-secondary">siredsport</b-navbar-brand>
+  <b-navbar toggleable="lg" type="light mt-1">
+    <b-navbar-brand href="/" style="font-weight: bold; font-size: 30px;" class="mx-5 text-light">siredsport</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -13,22 +13,22 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto mx-5">
         <b-nav-item class="">
-          <router-link to="/Cart">
-            <b-icon icon="cart2" aria-hidden="true"></b-icon> Cart
+          <router-link to="/Cart" class="text-light">
+            <b-icon icon="cart2" variant="light" aria-hidden="true"></b-icon> Cart
           </router-link>
         </b-nav-item>
-        <b-nav-item href="#" class="mx-4"><b-icon icon="card-checklist" aria-hidden="true"></b-icon> Order</b-nav-item>
-        <b-nav-item href="#" class="">
+        <b-nav-item href="#" class="mx-4 text-light"><b-icon icon="card-checklist" aria-hidden="true"></b-icon> Order</b-nav-item>
+        <b-nav-item href="#">
           <router-link to="/login" v-if="!isLogin">
-            <button class="btn btn-outline-success">Login</button>
+            <button class="btn btn-outline-light">Login</button>
           </router-link>
         </b-nav-item>
           <b-nav-item href="#" class="">
             <router-link to="/register" v-if="!isLogin">
-              <button class="btn btn-outline-success">Register</button>
+              <button class="btn btn-outline-light">Register</button>
             </router-link>
           </b-nav-item>
-        <b-nav-item v-if="isLogin" href="#" class="mx-4"><b-icon icon="arrow-left-square" aria-hidden="true" @click="handleLogout"></b-icon> Logout</b-nav-item>
+        <b-nav-item v-if="isLogin" href="#" class="mx-4"><b-icon icon="arrow-left-square" aria-hidden="true"></b-icon> Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import swal from "sweetalert2"
 export default {
   name: "Navbar",
   props: ["page"],
@@ -47,25 +48,25 @@ export default {
         return false
       }
     },
-    handleLogout() {
-      localStorage.clear()
-      const Toast = swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", swal.stopTimer);
-          toast.addEventListener("mouseleave", swal.resumeTimer);
-        },
-      });
+    // handleLogout() {
+    //   localStorage.clear()
+    //   const Toast = swal.mixin({
+    //     toast: true,
+    //     position: "top-end",
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     didOpen: (toast) => {
+    //       toast.addEventListener("mouseenter", swal.stopTimer);
+    //       toast.addEventListener("mouseleave", swal.resumeTimer);
+    //     },
+    //   });
 
-      Toast.fire({
-        icon: "success",
-        title: "Logout",
-      });
-    }
+    //   Toast.fire({
+    //     icon: "success",
+    //     title: "Logout",
+    //   });
+    // }
   }
 }
 </script>
