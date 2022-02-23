@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="btn-add">
       <b-button v-b-toggle.sidebar-footer>Add Issue</b-button>
       <b-sidebar
         id="sidebar-footer"
@@ -58,14 +58,14 @@
     </div>
     <div class="container mt-5">
       <div class="row">
-        <div class="col form-inline">
+        <!-- <div class="col form-inline">
           <b-form-input
             v-model="newTask"
             placeholder="Enter task"
             @keyub.enter="add"
           ></b-form-input>
           <b-button class="ml-2" variant="primary" @click="add">Add</b-button>
-        </div>
+        </div> -->
       </div>
       <div class="row mt-3">
         <div class="col-md-3">
@@ -75,11 +75,13 @@
               class="list-group kanban-column"
               :list="arrBacklog"
               group="task"
+              @change="handleIssueOpen"
             >
               <div
                 class="list-group-item"
                 v-for="element in arrBacklog"
                 :key="element.id"
+                @click="seeDetailById(element.id)"
               >
                 {{ element.title }}
               </div>
@@ -93,11 +95,13 @@
               class="list-group kanban-column"
               :list="arrInProgress"
               group="task"
+              @change="handleIssueInProgres"
             >
               <div
                 class="list-group-item"
                 v-for="element in arrInProgress"
                 :key="element.id"
+                @click="seeDetailById(element.id)"
               >
                 {{ element.title }}
               </div>
@@ -111,11 +115,13 @@
               class="list-group kanban-column"
               :list="arrTested"
               group="task"
+              @change="handleIssueTested"
             >
               <div
                 class="list-group-item"
                 v-for="element in arrTested"
                 :key="element.id"
+                @click="seeDetailById(element.id)"
               >
                 {{ element.title }}
               </div>
@@ -129,11 +135,13 @@
               class="list-group kanban-column"
               :list="arrDone"
               group="task"
+              @change="handleIssueDone"
             >
               <div
                 class="list-group-item"
                 v-for="element in arrDone"
                 :key="element.id"
+                @click="seeDetailById(element.id)"
               >
                 {{ element.title }}
                 <img
@@ -184,17 +192,99 @@ export default {
       }
       return arrTemp;
     },
+    issueInProgress() {
+      const data = this.$store.state.issue;
+      const arrTemp = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].status === "progres") {
+          arrTemp.push(data[i]);
+        }
+      }
+      return arrTemp;
+    },
+    issueDone() {
+      const data = this.$store.state.issue;
+      const arrTemp = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].status === "done") {
+          arrTemp.push(data[i]);
+        }
+      }
+      return arrTemp;
+    },
+    issueTested() {
+      const data = this.$store.state.issue;
+      const arrTemp = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].status === "tested") {
+          arrTemp.push(data[i]);
+        }
+      }
+      return arrTemp;
+    },
   },
+
   watch: {
+    issueDone: function (newVal) {
+      this.arrDone = newVal;
+    },
     addIssueData: function (newVal) {
       this.arrBacklog = newVal;
     },
+    issueInProgress: function (newVal) {
+      this.arrInProgress = newVal;
+    },
+    issueTested: function (newVal) {
+      this.arrTested = newVal;
+    },
   },
   methods: {
-    add() {
-      if (this.newTask) {
-        this.arrBacklog.push({ name: this.newTask });
-        this.newTask = "";
+    handleIssueDone(e) {
+      if (e.added) {
+        const data = e.added.element;
+        const payload = {
+          id: data.id,
+          data: {
+            status: "done",
+          },
+        };
+        this.$store.dispatch("updateIssue", payload);
+      }
+    },
+    handleIssueInProgres(e) {
+      if (e.added) {
+        const data = e.added.element;
+        const payload = {
+          id: data.id,
+          data: {
+            status: "progres",
+          },
+        };
+        this.$store.dispatch("updateIssue", payload);
+      }
+    },
+    handleIssueTested(e) {
+      if (e.added) {
+        const data = e.added.element;
+        const payload = {
+          id: data.id,
+          data: {
+            status: "tested",
+          },
+        };
+        this.$store.dispatch("updateIssue", payload);
+      }
+    },
+    handleIssueOpen(e) {
+      if (e.added) {
+        const data = e.added.element;
+        const payload = {
+          id: data.id,
+          data: {
+            status: "open",
+          },
+        };
+        this.$store.dispatch("updateIssue", payload);
       }
     },
 
@@ -210,6 +300,18 @@ export default {
     },
     idIssue(id) {
       this.$store.dispatch("deleteIssue", id);
+    },
+    seeDetailById(id) {
+      this.$store.dispatch("getCollectionByid", id);
+    },
+
+    editStatus() {
+      const data = this.arrInProgress;
+      data.array.forEach((el) => {
+        el.status = "progres";
+      });
+      console.log(data, "ksdkshdksh");
+      this.arrInProgress = data;
     },
   },
   created() {
@@ -243,6 +345,9 @@ export default {
 img {
   width: 20px;
   float: right;
+  cursor: pointer;
+}
+.list-group-item {
   cursor: pointer;
 }
 </style>
