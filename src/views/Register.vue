@@ -44,7 +44,7 @@ export default {
         dateOfBirth: this.dateOfBirth,
       });
       if (this.registration) {
-        this.$router.push({ name: "Login" });
+        this.$router.push({ name: "ProfileFormCreate" });
       }
     },
   },

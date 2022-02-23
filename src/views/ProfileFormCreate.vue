@@ -6,7 +6,7 @@
           <h2 class="text-center fw-bold subtitle">Complete Your Profile</h2>
         </div>
         <!-- Form -->
-        <profile-form></profile-form>
+        <profile-form v-on:submitHandler="createProfile" v-bind:pageName="pageName" v-bind:data="data"></profile-form>
         <!-- Form -->
       </div>
     </div>
@@ -19,6 +19,31 @@ export default {
   name: "ProfileFormEdit",
   components: {
     ProfileForm,
+  },
+  data: function () {
+    return {
+      pageName: "CreateForm",
+      data: {
+        name: "",
+        education: "",
+        job: "",
+        description: "",
+        sex: "",
+      },
+    };
+  },
+  methods: {
+    createProfile: async function (value) {
+      await this.$store.dispatch("createProfile", value);
+      if (this.completed) {
+        this.$router.push({ name: "Login" });
+      }
+    },
+  },
+  computed: {
+    completed: function () {
+      return this.$store.state.isRegistered;
+    },
   },
 };
 </script>

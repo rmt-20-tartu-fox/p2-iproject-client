@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     isLoggin: false,
     isRegistered: false,
+    isDone: false,
   },
   mutations: {
     SET_LOGIN_STATUS: function (state, payload) {
@@ -15,6 +16,10 @@ export default new Vuex.Store({
     },
     SET_REGISTRATION_STATUS: function (state, payload) {
       state.isRegistered = payload;
+    },
+    SET_PROFILE_STATUS: function (state, payload) {
+      state.isDone = payload;
+      console.log(payload);
     },
   },
   actions: {
@@ -26,6 +31,7 @@ export default new Vuex.Store({
         });
         if (user.status === 200) {
           localStorage.setItem("access_token", user.data.access_token);
+          localStorage.setItem("user_id", user.data.id);
           context.commit("SET_LOGIN_STATUS", true);
           // Swal.fire("Welcome!", "", "success");
         }
@@ -51,6 +57,36 @@ export default new Vuex.Store({
         // Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },
+    createProfile: async function (context, payload) {
+      try {
+        console.log("masuk");
+        const id = localStorage.getItem("user_id");
+        const profile = await datingApi.post(
+          `users/${id}/profiles`,
+          {
+            name: payload.nama,
+            education: payload.education,
+            job: payload.job,
+            description: payload.description,
+            sex: payload.sex,
+          },
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
+        console.log(profile.status);
+        if (profile.status === 201) {
+          console.log("masuk");
+          context.commit("SET_PROFILE_STATUS", true);
+          console.log(context.isDone);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
+
   modules: {},
 });

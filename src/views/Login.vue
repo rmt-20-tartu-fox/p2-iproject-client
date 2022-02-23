@@ -39,7 +39,7 @@ export default {
         password: this.password,
       });
       if (this.loginStatus) {
-        this.$router.push({ name: "ProfileFormCreate" });
+        this.$router.push({ name: "Home" });
       }
     },
   },

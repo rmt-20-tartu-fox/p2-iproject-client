@@ -48,4 +48,19 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("access_token");
+  if ((to.name === "Home" || to.name === "MyProfile" || to.name === "ProfileFormEdit" || to.name === "ProfileFormCreate" || to.name === "Chat") && !token) {
+    next({
+      name: "Login",
+    });
+  } else if (token && (to.name === "Register" || to.name === "Login")) {
+    next({
+      name: "Home",
+    });
+  } else {
+    next();
+  }
+});
+
 export default router;
