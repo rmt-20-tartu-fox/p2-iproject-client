@@ -64,9 +64,7 @@ export default new Vuex.Store({
     },
 
     addBookmark(context, payload){
-     return serverApi.post("/bookmarks", {
-        BookId: payload
-      }, {
+     return serverApi.post("/bookmarks", payload, {
         headers: {
           access_token: localStorage.access_token
         }
@@ -86,7 +84,7 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err.response.data.message);
       })
-    }
+    },
   },
   modules: {},
 });

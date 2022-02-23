@@ -7,7 +7,8 @@
               alt="Sample image">
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form @submit.prevent="checkLogin">
+            <h2 class="d-flex justify-content-center mb-4">Login</h2>
+            <form @submit.prevent="checkLogin(); show()">
               <div class="form-outline mb-4">
                 <input v-model="email" type="email" class="form-control form-control-lg"
                   placeholder="Enter a valid email address" />
@@ -20,11 +21,11 @@
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button type="submit" class="btn btn-primary btn-lg"
                   style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                    class="link-danger">Register</a></p>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <router-link to="/register"
+                    class="link-danger">Register</router-link></p>
               </div>
 
-              <div class="divider d-flex justify-content-center my-5">
+              <div class="divider d-flex justify-content-center">
                 <p class="text-center fw-bold mx-3 mb-0">OR</p>
               </div>
 
@@ -77,6 +78,10 @@ export default {
   },
 
   methods: {
+    show(){
+      this.$emit('show')
+    },
+
     checkLogin(){
       const payload = {
         email: this.email,
