@@ -66,12 +66,13 @@
           <td
             class="flex flex-row items-center justify-around px-6 py-4 whitespace-nowrap text-base text-gray-700"
           >
-            <button
+            <a
+              @click.prevent="getTokenPayment(order.id, order.MovieId)"
               type="button"
               class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
             >
               Pay
-            </button>
+            </a>
           </td>
         </tr>
       </tbody>
@@ -82,6 +83,11 @@
 <script>
 export default {
   name: "Transaction",
+  data() {
+    return {
+      url: localStorage.getItem("redirect_url"),
+    };
+  },
   computed: {
     orders() {
       return this.$store.state.orders;
@@ -90,6 +96,14 @@ export default {
   methods: {
     async fetchDataOrder() {
       await this.$store.dispatch("fetchDataOrder");
+    },
+
+    async getTokenPayment(id1, id2) {
+      await this.$store.dispatch("getTokenPayment", {
+        id: id1,
+        MovieId: id2,
+      });
+      this.$router.push({ name: "Payment" });
     },
   },
   created() {

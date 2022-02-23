@@ -102,10 +102,9 @@ export default new Vuex.Store({
 
     async addTransaction(_, payload) {
       try {
-        const response = await smdMovies.post(
-          `/${payload}`,
+        await smdMovies.post(
+          `/movies/${payload.MovieId}`,
           {
-            MovieId: payload.MovieId,
             PriceId: payload.PriceId,
           },
           {
@@ -114,7 +113,26 @@ export default new Vuex.Store({
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data, "=========");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async getTokenPayment(_, payload) {
+      try {
+        console.log(payload, "=================");
+        const response = await smdMovies.post(
+          `/transactions/${payload.id}`,
+          { MovieId: payload.MovieId },
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
+        console.log(response.data, "===============");
+        localStorage.setItem("redirect_url", response.data.redirect_url);
       } catch (err) {
         console.log(err);
       }

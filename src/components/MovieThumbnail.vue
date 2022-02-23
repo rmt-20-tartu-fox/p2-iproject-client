@@ -27,7 +27,7 @@ export default {
   methods: {
     async fetchDataMovieDetail(id) {
       await this.$store.dispatch("fetchDataMovieDetail", id);
-      this.$router.push(`/${id}`);
+      this.$router.push(`/movies/${id}`);
     },
   },
 };

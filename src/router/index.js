@@ -5,6 +5,7 @@ import Transaction from "../views/Transaction.vue";
 import Detail from "../views/MovieDetail.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Payment from "../views/PaymentConfirm.vue";
 
 Vue.use(VueRouter);
 
@@ -30,9 +31,14 @@ const routes = [
     component: Transaction,
   },
   {
-    path: "/:id",
+    path: "/movies/:id",
     name: "Detail",
     component: Detail,
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    component: Payment,
   },
   // {
   //   path: '/about',

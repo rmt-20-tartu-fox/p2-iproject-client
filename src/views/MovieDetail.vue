@@ -52,12 +52,14 @@
               <div class="flex flex-row gap-4 py-4">
                 <button
                   type="button"
+                  @click.prevent="button3days(movieDetail.id)"
                   class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
                 >
                   Rent 3-days
                 </button>
                 <button
                   type="button"
+                  @click.prevent="button1week(movieDetail.id)"
                   class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
                 >
                   Rent 1-week
@@ -74,13 +76,6 @@
 <script>
 export default {
   name: "MovieDetail",
-  data() {
-    return {
-      price: {
-        id: null,
-      },
-    };
-  },
   computed: {
     movieDetail() {
       return this.$store.state.movieDetail;
@@ -92,6 +87,22 @@ export default {
   methods: {
     async fetchDataMovieDetail() {
       await this.$store.dispatch("fetchDataMovieDetail", this.$route.params.id);
+    },
+
+    button3days(id) {
+      this.$store.dispatch("addTransaction", {
+        MovieId: id,
+        PriceId: this.prices[0].id,
+      });
+      this.$router.push({ name: "Transaction" });
+    },
+
+    button1week(id) {
+      this.$store.dispatch("addTransaction", {
+        MovieId: id,
+        PriceId: this.prices[1].id,
+      });
+      this.$router.push({ name: "Transaction" });
     },
 
     fetchDataPrice() {

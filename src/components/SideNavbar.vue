@@ -23,6 +23,7 @@
     </div>
     <div class="py-4 pl-6 pr-10 rounded-xl hover:bg-gray-800">
       <button
+        @click.prevent="transactionHistory"
         class="p-2 rounded-xl bg-cyan-800 focus:bg-cyan-700 hover:bg-cyan-600 flex"
       >
         <svg
@@ -66,6 +67,9 @@ export default {
   methods: {
     rootHomeHanlder() {
       this.$router.push("/");
+    },
+    transactionHistory() {
+      this.$router.push("/transaction");
     },
   },
 };
