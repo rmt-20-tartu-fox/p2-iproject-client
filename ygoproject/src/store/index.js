@@ -11,7 +11,8 @@ export default new Vuex.Store({
     rows: null,
     perPage: 12,
     currentPage: 1,
-    nextOffset: ''
+    nextOffset: '',
+    myDeck: []
 
   },
   mutations: {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setCurrentpage(state, currentPage) {
       state.currentPage = currentPage;
+    },
+    setMyDeck(state, myDeck) {
+      state.myDeck = myDeck;
     },
   },
   actions: {
@@ -63,6 +67,18 @@ export default new Vuex.Store({
           console.log(resp.data);
           context.commit('setCards', resp.data.data);
           context.commit('setRows', resp.data.meta.total_rows);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    addToMyDeck(context, id) {
+      return localHost.post(`/deck/${id}`, null, { headers: { access_token: localStorage.getItem('access_token') } });
+    },
+    fetchMyDeck(context) {
+      return localHost.get('/deck', { headers: { access_token: localStorage.getItem('access_token') } })
+        .then(resp => {
+          context.commit('setMyDeck', resp.data);
         })
         .catch(err => {
           console.error(err);

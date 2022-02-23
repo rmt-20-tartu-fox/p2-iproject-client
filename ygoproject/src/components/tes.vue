@@ -17,6 +17,14 @@
             <p class="overflow-auto">
               {{ card.desc }}
             </p>
+            <hr />
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click.prevent="addToMyDeck(card.id)"
+            >
+              Add to Deck
+            </button>
           </div>
         </div>
       </div>
@@ -25,9 +33,22 @@
 </template>
 
 <script>
+  import swal from "sweetalert2";
   export default {
     name: "CardHome",
     props: ["card"],
+    methods: {
+      addToMyDeck(id) {
+        this.$store
+          .dispatch("addToMyDeck", id)
+          .then(() => {
+            swal.fire("succes add card to deck");
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      },
+    },
   };
 </script>
 

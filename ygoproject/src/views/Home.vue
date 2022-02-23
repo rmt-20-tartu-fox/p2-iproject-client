@@ -85,6 +85,9 @@
     },
     created() {
       this.fetchCards();
+      if (localStorage.access_token) {
+        this.$store.commit("setIsLogin", true);
+      }
     },
     watch: {
       currentPage: function (val) {

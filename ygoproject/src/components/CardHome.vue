@@ -1,16 +1,10 @@
 <template>
-  <div class="col-3 mt-2 d-flex justify-content-around">
+  <div class="col-2 mt-2 d-flex justify-content-around">
     <div class="card" style="width: 13rem">
-      <img
-        class="card-img-top"
-        :src="card.card_images[0].image_url"
-        alt="Card image cap"
-      />
-      <!-- <div class="card-body">
-        <p class="card-text">
-          {{ card.name }}
-        </p>
-      </div> -->
+      <img class="card-img-top" :src="card.CardImageUrl" alt="Card image cap" />
+      <div class="card-body">
+        <button type="button" class="button btn-danger">Remove</button>
+      </div>
     </div>
   </div>
 </template>
