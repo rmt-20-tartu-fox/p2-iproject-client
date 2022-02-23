@@ -72,6 +72,10 @@ export default {
     return {
       email: "",
       password: "",
+      data: {
+        mealType: "breakfast",
+        recipeName: "",
+      },
     };
   },
   methods: {

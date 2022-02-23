@@ -19,13 +19,15 @@
         </div>
       </div>
     </section>
+    <HFooter style="position: fixed; bottom: 0; width: 100%" />
   </div>
 </template>
 
 <script>
+import HFooter from "vue-hacktiv8-footer";
 import detailsComponent from "../components/detailsComponent.vue";
 export default {
-  components: { detailsComponent },
+  components: { detailsComponent, HFooter },
   name: "recipeDetails",
   computed: {
     recipeDetails() {

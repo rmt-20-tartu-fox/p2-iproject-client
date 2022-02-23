@@ -21,14 +21,16 @@
         </div>
       </div>
     </section>
+    <HFooter style="position: fixed; bottom: 0; width: 100%" />
   </div>
 </template>
 
 <script>
+import HFooter from "vue-hacktiv8-footer";
 import wishlistCardComponent from "../components/wishlistCardComponent.vue";
 export default {
   name: "wishListView",
-  components: { wishlistCardComponent },
+  components: { wishlistCardComponent, HFooter },
   computed: {
     wishlists() {
       return this.$store.state.wishlists;

@@ -44,6 +44,7 @@
         </div>
       </div>
     </section>
+    <HFooter style="position: fixed; bottom: 0; width: 100%" />
   </div>
 </template>
 
@@ -51,6 +52,7 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import cardComponent from "../components/CardComponent.vue";
+import HFooter from "vue-hacktiv8-footer";
 // import NavBarComponent from "../components/NavBarComponent.vue";
 export default {
   data() {
@@ -60,12 +62,9 @@ export default {
     };
   },
   name: "HomeView",
-  // components: {
-  //   HelloWorld,
-  // },
   components: {
     cardComponent,
-    // NavBarComponent,
+    HFooter,
   },
 
   computed: {

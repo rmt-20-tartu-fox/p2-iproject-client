@@ -13,6 +13,22 @@
 import NavBarComponent from "./components/NavBarComponent.vue";
 export default {
   components: { NavBarComponent },
+  data() {
+    return {
+      data: {
+        mealType: "breakfast",
+        recipeName: "",
+      },
+    };
+  },
+  computed: {
+    setRecipes() {
+      return this.$store.state.setRecipes;
+    },
+  },
+  created() {
+    this.$store.dispatch("fetchRecipes", this.data);
+  },
 };
 </script>
 

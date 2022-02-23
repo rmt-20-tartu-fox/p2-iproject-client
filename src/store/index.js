@@ -13,6 +13,11 @@ export default new Vuex.Store({
     mealType: "",
     isLogin: false,
     wishlists: [],
+    // recipeGenerator: {
+    //   mealType: "breakfast",
+    //   recipeName: "",
+    // },
+    bmi: 0,
   },
   getters: {},
   mutations: {
@@ -33,6 +38,12 @@ export default new Vuex.Store({
     setWishlist(state, payload) {
       // console.log(payload, "><><><><><><><><><><><><");
       state.wishlists = payload;
+    },
+    setBMI(state, payload) {
+      state.bmi = payload;
+    },
+    clearBMI(state) {
+      state.bmi = 0;
     },
   },
   actions: {
@@ -69,6 +80,7 @@ export default new Vuex.Store({
           localStorage.setItem("access_token", resp.data.access_token);
           localStorage.setItem("username", resp.data.email);
           context.commit("setLogin", true);
+          // context.dispatch("fetchRecipes", this.recipeGenerator);
           router.push("/");
           Swal.fire({
             icon: "success",
@@ -87,7 +99,6 @@ export default new Vuex.Store({
         });
     },
     register(context, data) {
-      // const BASE_URL = "http://localhost:3000";
       axios
         .post(BASE_URL + "/register", data)
         .then((resp) => {
@@ -166,6 +177,18 @@ export default new Vuex.Store({
           } else {
             Swal.fire("Oops!", error, "error");
           }
+          console.log(err);
+        });
+    },
+    getBMI(context, data) {
+      console.log(data);
+      axios
+        .get(BASE_URL + `/bmi?weight=${data.weight}&height=${data.height}`)
+        .then((resp) => {
+          console.log(resp);
+          context.commit("setBMI", resp.data);
+        })
+        .catch((err) => {
           console.log(err);
         });
     },

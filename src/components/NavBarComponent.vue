@@ -2,7 +2,7 @@
   <div>
     <b-navbar style="margin: 0%">
       <b-navbar-brand
-        style="color: black; font-family: Arial, Helvetica, sans-serif"
+        style="color: white; font-family: Arial, Helvetica, sans-serif"
         >NICE REECIPE</b-navbar-brand
       >
 
@@ -11,13 +11,18 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="#"
-            ><router-link to="/" style="color: black"
+            ><router-link to="/" style="color: white"
               >Home</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"
-            ><router-link to="/wishlist" style="color: black"
+            ><router-link to="/wishlist" style="color: white"
               >Wish List</router-link
+            ></b-nav-item
+          >
+          <b-nav-item href="#"
+            ><router-link to="/bmi" style="color: white"
+              >BMI</router-link
             ></b-nav-item
           >
         </b-navbar-nav>
@@ -27,14 +32,15 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content>
-              <em>User</em>
+              <em style="color: white">User</em>
             </template>
             <b-dropdown-item href="#" v-if="$store.state.isLogin === false"
-              ><router-link to="/login" style="color: black"
+              ><router-link to="/login" style="color: white"
                 >Login/Register</router-link
               ></b-dropdown-item
             >
             <b-dropdown-item
+              style="color: white"
               href="#"
               @click.prevent="logout"
               v-if="$store.state.isLogin === true"

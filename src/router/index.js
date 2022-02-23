@@ -5,6 +5,7 @@ import NewLoginView from "../views/newLoginView.vue";
 import RecipeDetailsView from "../views/RecipeDetailsView.vue";
 import wishListView from "../views/wishListView.vue";
 import registerView from "../views/registerView.vue";
+import BMICalculatorView from "../views/BMICalculatorView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -33,6 +34,11 @@ const routes = [
     name: "registerView",
     component: registerView,
   },
+  {
+    path: "/bmi",
+    name: "BMICalculatorView",
+    component: BMICalculatorView,
+  },
 
   // {
   //   path: "/about",
@@ -54,6 +60,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.path === "/wishlist" && !localStorage.access_token)
     next({ path: "/login" });
+  else next();
+  if (to.path === "/" && !localStorage.access_token) next({ path: "/login" });
   else next();
 
   if (to.path === "/login" && localStorage.access_token) next({ path: "/" });
