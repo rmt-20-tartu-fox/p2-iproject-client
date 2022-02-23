@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import localHost from '../../APIs/axios';
 import axios from 'axios';
+import Happi from '../../APIs/happiQr.js';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,7 +13,8 @@ export default new Vuex.Store({
     perPage: 12,
     currentPage: 1,
     nextOffset: '',
-    myDeck: []
+    myDeck: [],
+    qrCode: '',
 
   },
   mutations: {
@@ -30,6 +32,9 @@ export default new Vuex.Store({
     },
     setMyDeck(state, myDeck) {
       state.myDeck = myDeck;
+    },
+    setQrCode(state, qrCode) {
+      state.qrCode = qrCode;
     },
   },
   actions: {
@@ -79,6 +84,14 @@ export default new Vuex.Store({
       return localHost.get('/deck', { headers: { access_token: localStorage.getItem('access_token') } })
         .then(resp => {
           context.commit('setMyDeck', resp.data);
+          return Happi.get("v1/qrcode", {
+            params: {
+              data: `http://localhost:8080/deck`,
+            },
+          });
+        })
+        .then(resp => {
+          context.commit("setQrCode", resp.data.qrcode);
         })
         .catch(err => {
           console.error(err);

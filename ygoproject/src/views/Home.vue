@@ -43,14 +43,18 @@
       :per-page="perPage"
       align="fill"
     ></b-pagination>
+    <div>
+      <HFooter></HFooter>
+    </div>
   </div>
 </template>
 
 <script>
   import CardHome from "../components/tes";
-
+  import HFooter from "vue-hacktiv8-footer";
   export default {
     name: "Home",
+
     data() {
       return {
         name: "",
@@ -59,7 +63,8 @@
         currentPage: 1,
       };
     },
-    components: { CardHome },
+
+    components: { CardHome, HFooter },
     computed: {
       cards() {
         return this.$store.state.cards;
