@@ -9,6 +9,8 @@ export default new Vuex.Store({
     isLogin: false,
     movies: [],
     movieDetail: {},
+    orders: [],
+    prices: [],
   },
   mutations: {
     SET_IS_LOGIN(state, payload) {
@@ -19,6 +21,12 @@ export default new Vuex.Store({
     },
     SET_MOVIE_DETAIL(state, payload) {
       state.movieDetail = payload;
+    },
+    SET_ORDER_DETAIL(state, payload) {
+      state.orders = payload;
+    },
+    SET_PRICE(state, payload) {
+      state.prices = payload;
     },
   },
   actions: {
@@ -50,7 +58,7 @@ export default new Vuex.Store({
 
     async fetchDataMovies(context) {
       try {
-        const response = await smdMovies.get("/");
+        const response = await smdMovies.get("/movies");
         context.commit("SET_MOVIES", response.data.results);
       } catch (err) {
         console.log(err);
@@ -59,16 +67,54 @@ export default new Vuex.Store({
 
     async fetchDataMovieDetail(context, payload) {
       try {
-        const response = await smdMovies.get(`/${payload}`, {
+        const response = await smdMovies.get(`/movies/${payload}`, {
           headers: {
             access_token: localStorage.getItem("access_token"),
           },
         });
         context.commit("SET_MOVIE_DETAIL", response.data);
-        console.log(
-          "🚀 ~ file: index.js ~ line 68 ~ fetchDataMovieDetail ~ response.data",
-          response.data
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async fetchDataOrder(context) {
+      try {
+        const response = await smdMovies.get("/transactions", {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        context.commit("SET_ORDER_DETAIL", response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async fetchDataPrice(context) {
+      try {
+        const response = await smdMovies.get("/prices");
+        context.commit("SET_PRICE", response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async addTransaction(_, payload) {
+      try {
+        const response = await smdMovies.post(
+          `/${payload}`,
+          {
+            MovieId: payload.MovieId,
+            PriceId: payload.PriceId,
+          },
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
         );
+        console.log(response.data);
       } catch (err) {
         console.log(err);
       }

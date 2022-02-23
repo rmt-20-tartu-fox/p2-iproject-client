@@ -25,14 +25,14 @@ const routes = [
     component: Register,
   },
   {
-    path: "/:id",
-    name: "Detail",
-    component: Detail,
-  },
-  {
     path: "/transaction",
     name: "Transaction",
     component: Transaction,
+  },
+  {
+    path: "/:id",
+    name: "Detail",
+    component: Detail,
   },
   // {
   //   path: '/about',

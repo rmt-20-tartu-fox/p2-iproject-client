@@ -28,10 +28,6 @@ export default {
     async fetchDataMovieDetail(id) {
       await this.$store.dispatch("fetchDataMovieDetail", id);
       this.$router.push(`/${id}`);
-      console.log(
-        "🚀 ~ file: MovieThumbnail.vue ~ line 31 ~ fetchDataMovieDetail ~ id",
-        id
-      );
     },
   },
 };

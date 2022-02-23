@@ -23,7 +23,7 @@
             </div>
           </div>
           <div
-            class="w-full md:w-1/2 px-10 bg-gray-400 border-cyan-700 border-2 rounded-lg shadow-2xl"
+            class="w-full md:w-1/2 px-10 bg-gray-400 border-cyan-700 border-2 rounded-lg shadow-2xl py-6"
           >
             <div class="mb-5">
               <h1 class="font-bold uppercase text-2xl mb-5">
@@ -48,9 +48,21 @@
                   <span>{{ movieDetail.vote_average }}</span>
                 </div>
               </div>
-              <!-- <div>
-                <img height="180" width="180" :src="qrCode" alt="" />
-              </div> -->
+              <br class="border-2" />
+              <div class="flex flex-row gap-4 py-4">
+                <button
+                  type="button"
+                  class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
+                >
+                  Rent 3-days
+                </button>
+                <button
+                  type="button"
+                  class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
+                >
+                  Rent 1-week
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -62,10 +74,33 @@
 <script>
 export default {
   name: "MovieDetail",
+  data() {
+    return {
+      price: {
+        id: null,
+      },
+    };
+  },
   computed: {
     movieDetail() {
       return this.$store.state.movieDetail;
     },
+    prices() {
+      return this.$store.state.prices;
+    },
+  },
+  methods: {
+    async fetchDataMovieDetail() {
+      await this.$store.dispatch("fetchDataMovieDetail", this.$route.params.id);
+    },
+
+    fetchDataPrice() {
+      this.$store.dispatch("fetchDataPrice");
+    },
+  },
+  created() {
+    this.fetchDataMovieDetail();
+    this.fetchDataPrice();
   },
 };
 </script>
