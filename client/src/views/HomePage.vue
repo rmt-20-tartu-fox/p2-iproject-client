@@ -12,8 +12,7 @@
 <script>
 // @ is an alias to /src
 import NavigationBar from "../components/NavigationBar.vue";
-
-// import HFooter from "vue-hacktiv8-footer";
+import HFooter from "vue-hacktiv8-footer";
 
 export default {
   name: "HomePage",
@@ -25,7 +24,7 @@ export default {
   },
   components: {
     NavigationBar,
-    // HFooter,
+    HFooter,
   },
   methods: {},
   computed: {
