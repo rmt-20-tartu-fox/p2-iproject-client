@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLogin: localStorage.access_token ? localStorage.access_token : null,
     diagnoseResult: [],
     nearby: [],
     chats: [
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
+    setIsLogin(state, payload) {
+      state.isLogin = payload;
+    },
     setDiagnoseResult(state, payload) {
       state.diagnoseResult = payload;
     },
