@@ -1,5 +1,5 @@
 <template>
-  <figure class="image-block col">
+  <figure class="image-block col-md-4">
     <h1>{{ city.name }}</h1>
     <img :src="city.imgUrl" alt="" />
     <figcaption>

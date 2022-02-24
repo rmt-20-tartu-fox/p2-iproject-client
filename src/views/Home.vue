@@ -42,12 +42,11 @@
         style="background-color: black; height: max-content; width: 100%"
       >
         <!-- card -->
-        <div class="pt-3">
+        <div class="p-5 row">
           <city-card
             v-for="city in fetchCity"
             :key="city.id"
             :city="city"
-            class="d-flex flex-row"
           >
           </city-card>
         </div>
