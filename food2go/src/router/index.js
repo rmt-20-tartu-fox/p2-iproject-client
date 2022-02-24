@@ -34,6 +34,18 @@ const routes = [
     },
     component: () => import("../views/Login.vue"),
   },
+  {
+    path: "/restaurants/add",
+    name: "AddRestaurant",
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("userRole") != "Owner") {
+        next("/");
+      } else {
+        next();
+      }
+    },
+    component: () => import("../views/AddRestaurant.vue"),
+  },
 ];
 
 const router = new VueRouter({

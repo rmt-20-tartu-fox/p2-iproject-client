@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import Navbar from "./components/navbar/templates/Navbar.vue";
 export default {
   name: "App",
@@ -17,11 +17,19 @@ export default {
     Navbar,
   },
   methods: {
-    ...mapMutations(["SET_ISLOGGED"]),
+    ...mapMutations(["SET_ISLOGGED", "SET_CURRENTUSER"]),
+    ...mapActions(["fetchLocations"])
   },
   created() {
+    this.fetchLocations();
     if (localStorage.getItem("access_token")) {
       this.SET_ISLOGGED(true);
+      this.SET_CURRENTUSER({
+        role: localStorage.getItem("userRole"),
+        email: localStorage.getItem("userEmail"),
+        imgUrl: localStorage.getItem("userImage"),
+      })
+
     }
   },
 };
