@@ -13,11 +13,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="res in result" v-bind:key="res.Issue.ID">
+          <tr v-for="res in result" v-bind:key="res.Issue.ID" :res="res">
             <td>{{ res.Issue.ID }}</td>
             <td>{{ res.Issue.Name }}</td>
             <td>{{ res.Issue.Accuracy }}% (percent)</td>
-            <td>{{ res.Issue.Icd }}</td>
+            <td>
+              <span
+                class="badge badge-pill badge-info mx-1"
+                v-for="c in res.Issue.Icd.split(';')"
+                v-bind:key="c"
+                >{{ c }}</span
+              >
+            </td>
             <td>{{ res.Specialisation.map((el) => el.Name).join(", ") }}</td>
           </tr>
         </tbody>
