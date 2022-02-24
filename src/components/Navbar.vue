@@ -68,6 +68,7 @@ export default {
     },
     homePage() {
       this.$router.push({ name: `Home` });
+      this.$store.commit("SET_PAGE", "Home");
     },
     myBookPage() {
       this.$router.push({ name: `MyBook` });

@@ -94,6 +94,7 @@ export default {
                   ctx.$router.push({ name: `Home` });
                 }
               });
+
             ctx.$store.dispatch("sendEmail", {
               title: ctx.dataBook.title,
               link: ctx.dataBook.link,

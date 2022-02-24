@@ -77,6 +77,9 @@ export default {
   },
   created() {
     this.fetchBooks();
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("SET_IS_LOGIN", true);
+    }
   },
   methods: {
     fetchBooks() {

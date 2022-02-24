@@ -34,6 +34,11 @@ export default {
       this.$router.push(`/cart/${this.book.id}`);
     },
   },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("SET_IS_LOGIN", true);
+    }
+  },
   computed: {
     dataPage() {
       return this.$store.state.page;
