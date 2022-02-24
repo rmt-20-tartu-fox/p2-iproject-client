@@ -31,7 +31,6 @@ export default {
       url: localStorage.getItem("redirect_url"),
     };
   },
-  methods: {},
 };
 </script>
 

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import smdMovies from "../apis/api_url";
+import Swal from "sweetalert";
 
 Vue.use(Vuex);
 
@@ -37,8 +38,12 @@ export default new Vuex.Store({
           email: payload.email,
           password: payload.password,
         });
+        Swal("Success! Registered!", {
+          icon: "success",
+        });
       } catch (err) {
-        console.log(err);
+        let errorMessage = err.response.data.message;
+        Swal("Oops!", errorMessage.join("\n"), "error");
       }
     },
 
@@ -51,8 +56,16 @@ export default new Vuex.Store({
 
         localStorage.setItem("access_token", response.data.access_token);
         context.commit("SET_IS_LOGIN", true);
+        Swal("Success! Login!", {
+          icon: "success",
+        });
       } catch (err) {
-        console.log(err);
+        let errorMessage = err.response.data.message;
+        if (!Array.isArray(errorMessage)) {
+          Swal("Oops!", errorMessage, "error");
+        } else {
+          Swal("Oops!", errorMessage.join("\n"), "error");
+        }
       }
     },
 
@@ -130,7 +143,20 @@ export default new Vuex.Store({
             },
           }
         );
+
         localStorage.setItem("redirect_url", response.data.redirect_url);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async editPayment(_, payload) {
+      try {
+        await smdMovies.patch(`/payment/${payload.id}`, null, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
       } catch (err) {
         console.log(err);
       }

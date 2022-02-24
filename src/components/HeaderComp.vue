@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert";
 export default {
   name: "Header",
   data() {
@@ -49,8 +50,8 @@ export default {
     logOutButton() {
       localStorage.clear();
       this.$store.commit("SET_IS_LOGIN", false);
-      this.$router.push({
-        name: "Home",
+      Swal("Success! Logout!", {
+        icon: "success",
       });
     },
   },

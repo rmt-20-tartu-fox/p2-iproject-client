@@ -66,13 +66,15 @@
           <td
             class="flex flex-row items-center justify-around px-6 py-4 whitespace-nowrap text-base text-gray-700"
           >
-            <a
-              @click.prevent="getTokenPayment(order.id, order.MovieId)"
+            <button
+              @click.prevent="
+                getTokenPayment(order.id, order.MovieId), editPayment(order.id)
+              "
               type="button"
               class="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide bg-cyan-600 hover:bg-orange-600 hover:text-black transition duration-200"
             >
               Pay
-            </a>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -103,7 +105,13 @@ export default {
         id: id1,
         MovieId: id2,
       });
-      this.$router.push({ name: "Payment" });
+      this.$router.push({ name: "Payment", params: { id: id1 } });
+    },
+
+    async editPayment(id1) {
+      await this.$store.dispatch("editPayment", {
+        id: id1,
+      });
     },
   },
   created() {

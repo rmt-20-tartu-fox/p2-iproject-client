@@ -13,18 +13,16 @@
       <OrderReport /> -->
         <router-view />
       </main>
-      <aside class="flex flex-col gap-y-6 pt-6 pr-6 w-96">
-        <!-- <MostOrdered />
-      <MostTypeOfOrder /> -->
-      </aside>
+      <HFooter></HFooter>
     </div>
   </div>
 </template>
 <script>
 import HeaderComp from "./components/HeaderComp.vue";
 import SideNavBar from "./components/SideNavbar.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
-  components: { SideNavBar, HeaderComp },
+  components: { SideNavBar, HeaderComp, HFooter },
   created() {
     if (localStorage.getItem("access_token")) {
       this.$store.commit("SET_IS_LOGIN", true);
