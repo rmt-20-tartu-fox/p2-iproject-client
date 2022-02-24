@@ -8,7 +8,7 @@
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <h2 class="d-flex justify-content-center mb-4">Register</h2>
-            <form >
+            <form @submit.prevent="postRegister">
               <div class="form-outline mb-4">
                 <input v-model="email" type="email" class="form-control form-control-lg"
                   placeholder="Email address" />
@@ -21,8 +21,8 @@
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button type="submit" class="btn btn-primary btn-lg"
                   style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
-                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <router-link to="/login"
-                    class="link-danger">Login</router-link></p>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <router-link to="/login"
+                    class="link-primary">Login</router-link></p>
               </div>
             </form>
           </div>
@@ -33,7 +33,43 @@
 
 <script>
 export default {
-  name: "Register"
+  name: "Register",
+  data(){
+    return {
+      email: "",
+      password: ""
+    }
+  },
+
+  methods: {
+    postRegister(){
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch("handleRegister", payload)
+        .then(res => {
+          localStorage.access_token = res.data.access_token
+          this.$swal.fire({
+            title: 'Good!',
+            text: `${res.data.message}`,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+          this.email = ""
+          this.password = ""
+          this.$router.push("/login")
+        })
+        .catch(err => {
+          this.$swal.fire({
+            title: 'Oops!',
+            text: `${err.response.data.message[0]}`,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        })
+    }
+  }
 }
 </script>
 

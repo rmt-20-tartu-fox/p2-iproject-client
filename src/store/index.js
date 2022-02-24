@@ -34,8 +34,16 @@ export default new Vuex.Store({
       return serverApi.post("/login", payload)
     },
 
+    handleRegister(context, payload){
+      return serverApi.post("/register", payload)
+    },
+
     loginGoogle(context, payload){
       return serverApi.post("/login-google", {token: payload})
+    },
+
+    handleLoginFb(context, payload){
+      return serverApi.post("/login-fb", {facebookToken: payload})
     },
 
     getBookBySubject(context){
@@ -85,6 +93,12 @@ export default new Vuex.Store({
         console.log(err.response.data.message);
       })
     },
+
+    deleteBookmark(context, bookmarkId){
+      return serverApi.delete(`/bookmarks/${bookmarkId}`, {
+        headers: {access_token: localStorage.access_token}
+      })
+    }
   },
   modules: {},
 });

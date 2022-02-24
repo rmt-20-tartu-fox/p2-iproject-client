@@ -1,11 +1,12 @@
 <template>
   <section class="container pt-5">
-    <div class="row mt-5">
-      <form @submit.prevent="setTitle(); getBookByTitle()" class="col">
-        <input v-model="title" class="form-control mr-sm-2" type="search" placeholder="Search">
+    <div class="row mt-5 pt-4">
+      <h2 class="col-sm-7 mx-5"><b>Book List</b></h2>
+      <form @submit.prevent="setTitle(); getBookByTitle()" class="col d-flex align-item-end">
+        <input v-model="title" class="form-control mr-2" type="search" placeholder="Search">
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>  
       </form>
-      <div>
+      <div class="col-sm-1 d-flex">
         <button @click="startRecognition" class="btn btn-primary" type="submit"><i class="fas fa-microphone"></i></button>
       </div>
     </div>
@@ -16,8 +17,8 @@
                 <img class="card-img" :src="'https://covers.openlibrary.org/b/id/'+book.cover_i+'.jpg'" height="350" width="100">
                 <div class="card-img-overlay d-flex align-items-end justify-content-center p-2">
                     <div class="text-left text-dark mx-md-n5">
-                        <p class="card-text bg-light rounded-3 px-2">{{book.title.substring(0, 10)}}</p>
-                        <button @click="addBookmark(book.cover_id, book.title)" class="btn btn-sm btn-primary b-lg-3 px-lg-6">ADD</button>
+                        <p class="card-text bg-light rounded-3 px-2">{{book.title.substring(0, 10)}}...</p>
+                        <button @click="addBookmark(book.cover_i, book.title)" class="btn btn-sm btn-primary b-lg-3 px-lg-6">ADD</button>
                     </div>
                 </div>
             </div>
@@ -74,16 +75,31 @@ export default {
       }
 
       if (!localStorage.access_token) {
-        console.log("please login");
+        this.$swal.fire({
+          title: 'Oops!',
+          text: `Please login!`,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
         this.$router.push("/login")
       } else {
         this.$store.dispatch("addBookmark", payload)
           .then(res => {
-            console.log(res);
+            this.$swal.fire({
+              title: 'Good!',
+              text: `${res.data.message}`,
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
             this.$router.push("/mybook")
           })
           .catch(err =>{
-            console.log(err);
+            this.$swal.fire({
+              title: 'Oops!',
+              text: `${err.response.data.message}`,
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            });
           })
       }
       
@@ -128,10 +144,6 @@ export default {
         }
         this.title = '';
       });
-      this.recognition.onresult = function(event) {
-        var color = event.results[0][0].transcript;
-        console.log(color);
-      }
     },
 
     mounted() {
