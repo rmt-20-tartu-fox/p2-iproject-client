@@ -1,15 +1,15 @@
 <template>
   <div class="d-flex col-lg-7 pt-4 ps-lg-2 pt-lg-0 justify-content-center">
     <div class="card h-100">
-      <img src="https://2.bp.blogspot.com/-JGq6A3evzp0/Vt-DFzQptRI/AAAAAAAABbg/CYQa935YxtA/s1600/anggun-c-sasmi1.jpg" class="card-img-top" alt="Palangkaraya 2015 Fire" />
+      <img :src="thisUser.Profile.photos" class="card-img-top" />
       <div class="card-body">
-        <h5 class="card-title">Nama, Age</h5>
-        <p class="card-text">Short desc</p>
+        <h5 class="card-title">{{ thisUser.Profile.name }}, {{ thisUser.age }}</h5>
+        <p class="card-text">{{ thisDistance }} km away</p>
       </div>
       <div class="card-footer d-flex justify-content-around">
-        <a href="" class="btn btn-warning">Pass</a>
+        <a @click.prevent="nextPage" href="" class="btn btn-warning">Pass</a>
         <a href="" class="btn btn-warning">Detail</a>
-        <a href="" class="btn btn-warning">Like</a>
+        <a @click.prevent="nextPage" href="" class="btn btn-warning">Like</a>
       </div>
     </div>
   </div>
@@ -18,6 +18,20 @@
 <script>
 export default {
   name: "HomeCard",
+  props: ["user", "distance"],
+  computed: {
+    thisUser: function () {
+      return this.user;
+    },
+    thisDistance: function () {
+      return this.distance.distance;
+    },
+  },
+  methods: {
+    nextPage: function () {
+      this.$emit("nextPage");
+    },
+  },
 };
 </script>
 

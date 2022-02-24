@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import datingApi from "../apis/datingapp";
+import Swal from "sweetalert2";
 
 Vue.use(Vuex);
 
@@ -9,6 +10,8 @@ export default new Vuex.Store({
     isLoggin: false,
     isRegistered: false,
     isDone: false,
+    usersData: {},
+    currentPage: 1,
   },
   mutations: {
     SET_LOGIN_STATUS: function (state, payload) {
@@ -19,7 +22,12 @@ export default new Vuex.Store({
     },
     SET_PROFILE_STATUS: function (state, payload) {
       state.isDone = payload;
-      console.log(payload);
+    },
+    SET_USERS: function (state, payload) {
+      state.usersData = payload;
+    },
+    SET_PAGE_NUMBERS: function (state, payload) {
+      state.currentPage = payload;
     },
   },
   actions: {
@@ -33,11 +41,10 @@ export default new Vuex.Store({
           localStorage.setItem("access_token", user.data.access_token);
           localStorage.setItem("user_id", user.data.id);
           context.commit("SET_LOGIN_STATUS", true);
-          // Swal.fire("Welcome!", "", "success");
+          Swal.fire("Welcome!", "", "success");
         }
       } catch (error) {
-        console.log(error);
-        // Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },
 
@@ -50,11 +57,10 @@ export default new Vuex.Store({
         });
         if (newUser.status === 201) {
           context.commit("SET_REGISTRATION_STATUS", true);
-          // Swal.fire("Sign up successful", "Please sign in", "success");
+          Swal.fire("Sign up successful", "Please sign in", "success");
         }
       } catch (error) {
-        console.log(error);
-        // Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },
     createProfile: async function (context, payload) {
@@ -78,12 +84,37 @@ export default new Vuex.Store({
         );
         console.log(profile.status);
         if (profile.status === 201) {
-          console.log("masuk");
           context.commit("SET_PROFILE_STATUS", true);
-          console.log(context.isDone);
         }
       } catch (error) {
-        console.log(error);
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+      }
+    },
+    fetchAllUsers: async function (context, query) {
+      try {
+        console.log("masuk lagiii", context.state.currentPage);
+        let url = `users?page=${context.state.currentPage}`;
+        // { maxAge, sex, maxDistance, page }
+        if (query.sex) {
+          url += `&sex=${query.sex}`;
+        }
+        if (query.maxAge) {
+          url += `&maxAge=${query.maxAge}`;
+        }
+        if (query.maxDistance) {
+          url += `&maxAge=${query.maxDist}`;
+        }
+        console.log(url);
+        const data = await datingApi.get(url, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        console.log(data.data);
+        context.commit("SET_USERS", data.data);
+      } catch (error) {
+        // console.log(error);
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-evenly p-3 mx-5">
     <div class="col col-md-5 bg-white p-4 rounded-xl">
-      <form @submit.prevent="submitHandler" class="justify-content-center">
+      <form @submit.prevent="submitHandler" class="justify-content-center" enctype="multipart/form-data">
         <div class="form-group mt-2">
           <input v-model="data.nama" type="text" class="form-control" placeholder="Name" />
         </div>
@@ -20,6 +20,12 @@
             <option value="male">male</option>
             <option value="female">female</option>
           </select>
+        </div>
+        <div class="input-group mb-3 mt-3">
+          <div class="custom-file">
+            <input name="profilePhoto" type="file" class="custom-file-input" id="inputGroupFile01" />
+            <label class="custom-file-label" for="inputGroupFile01">Choose photo</label>
+          </div>
         </div>
         <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary mt-3">Submit</button></div>
       </form>
