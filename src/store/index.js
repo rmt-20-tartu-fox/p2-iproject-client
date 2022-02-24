@@ -12,6 +12,8 @@ export default new Vuex.Store({
     isDone: false,
     usersData: {},
     currentPage: 1,
+    user: {},
+    matches: [],
   },
   mutations: {
     SET_LOGIN_STATUS: function (state, payload) {
@@ -28,6 +30,12 @@ export default new Vuex.Store({
     },
     SET_PAGE_NUMBERS: function (state, payload) {
       state.currentPage = payload;
+    },
+    SET_USER: function (state, payload) {
+      state.user = payload;
+    },
+    SET_MATCHES: function (state, payload) {
+      state.matches = payload;
     },
   },
   actions: {
@@ -65,7 +73,6 @@ export default new Vuex.Store({
     },
     createProfile: async function (context, payload) {
       try {
-        console.log("masuk");
         const id = localStorage.getItem("user_id");
         const profile = await datingApi.post(
           `users/${id}/profiles`,
@@ -114,7 +121,7 @@ export default new Vuex.Store({
         Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },
-    smashOrPass: async (context, payload) => {
+    smashOrPass: async (_, payload) => {
       try {
         await datingApi.post(
           `/${payload.id}/likes`,
@@ -127,6 +134,33 @@ export default new Vuex.Store({
             },
           }
         );
+      } catch (error) {
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+      }
+    },
+
+    viewMyProfile: async (context) => {
+      try {
+        const id = localStorage.getItem("user_id");
+        const myProfile = await datingApi.get(`/${id}/profiles`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        context.commit("SET_USER", myProfile.data);
+      } catch (error) {
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+      }
+    },
+
+    viewMatches: async (context) => {
+      try {
+        const matches = await datingApi.get(`/matches`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        context.commit("SET_MATCHES", matches.data);
       } catch (error) {
         Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
