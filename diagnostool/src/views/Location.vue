@@ -4,7 +4,7 @@
       To view nearby hospitals, please enter your current location
     </h1>
     <Spinner v-if="isLoading"></Spinner>
-    <div class="card mb-4">
+    <div class="card mb-4 form-search">
       <form @submit.prevent="getNearby">
         <div class="mb-3">
           <label class="form-label">Current Location</label>
@@ -85,6 +85,11 @@ export default {
   flex-direction: column;
   flex-grow: 1;
 }
+
+.form-search {
+  width: 560px;
+}
+
 #maps h1 {
   text-align: center;
 }

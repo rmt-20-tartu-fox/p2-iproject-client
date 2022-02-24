@@ -6,22 +6,25 @@
     <Spinner v-if="isLoading"></Spinner>
     <div class="card mb-3">
       <form @submit.prevent="getDiagnose">
-        <div class="mb-3">
-          <label class="form-label">Gender</label>
-          <select
-            v-model="gender"
-            class="form-select"
-            aria-label="Default select example"
-          >
-            <option selected disabled>Select gender...</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
+        <div class="row">
+          <div class="mb-3 col">
+            <label class="form-label">Gender</label>
+            <select
+              v-model="gender"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected disabled>Select gender...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="mb-3 col">
+            <label class="form-label">Date of Birth</label>
+            <input v-model="date" type="date" class="form-control" />
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Date of Birth</label>
-          <input v-model="date" type="date" class="form-control" />
-        </div>
+
         <div class="mb-3">
           <label class="typo__label">Select symptoms (searchable)</label>
           <multiselect

@@ -35,7 +35,7 @@
               </li>
               <li id="chat" class="nav-item">
                 <router-link class="nav-link" to="/chat"
-                  >Live Chat   <i class="fa-solid fa-angle-right"></i
+                  >Live Chat <i class="fa-solid fa-angle-right"></i
                 ></router-link>
               </li>
             </ul>
@@ -89,7 +89,8 @@ body {
 }
 
 body h1,
-body p {
+body p,
+body label {
   text-align: left;
 }
 
