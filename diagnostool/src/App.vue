@@ -44,7 +44,7 @@
       </nav>
     </header>
     <router-view />
-    <HFooter></HFooter>
+    <HFooter id="footer"></HFooter>
   </div>
 </template>
  
@@ -101,6 +101,12 @@ body label {
 nav {
   text-align: center !important;
   margin: 0 auto !important;
+  border-radius: 10px 10px 0 0;
+}
+
+#footer {
+  border-radius: 0 0 10px 10px;
+  background-color: #051367 !important;
 }
 
 .navbar a {

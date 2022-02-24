@@ -1,8 +1,8 @@
 <template>
   <section id="result" class="mb-3">
     <h1>Based on your data, you might have these disease:</h1>
-    <div class="card">
-      <table class="table">
+    <div class="wrapper">
+      <table class="table table-sm table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -54,5 +54,10 @@ export default {
 }
 #result > h1 {
   text-align: center;
+}
+
+.wrapper {
+  width: 85%;
+  margin: 0 auto;
 }
 </style>
