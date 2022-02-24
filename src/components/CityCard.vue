@@ -11,7 +11,7 @@
         egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
         leo.
       </p>
-      <button @click="getHotel">More Info</button>
+      <button @click="getHotel">Search Destination</button>
     </figcaption>
   </figure>
 </template>

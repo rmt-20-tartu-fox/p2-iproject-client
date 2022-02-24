@@ -1,25 +1,66 @@
 <template>
   <div id="app">
-    <div class="navbar-menu flex-row">
+    <div class="navbar-menu flex-row" v-if="$route.path !== '/login'">
       <nav class="navMenu">
         <a href="#"><router-link to="/">home</router-link></a>
-        <a href="#"> bookmark </a>
-        <a href="#"> login </a>
-        <a href="#"> logout </a>
+        <a href="#" v-if="$store.state.isLogin == true"
+          ><router-link to="/bookmark">bookmark</router-link>
+        </a>
+        <a href="#" v-if="$store.state.isLogin == false">
+          <router-link to="/login">login</router-link>
+        </a>
+        <a href="#" v-if="$store.state.isLogin == true" @click.prevent="logout"
+          ><router-link to="/">logout</router-link>
+        </a>
         <!-- <div class="dot"></div> -->
+       
       </nav>
     </div>
     <router-view />
+    <HFooter class="hfooter"></HFooter>
   </div>
 </template>
 
+<script>
+import HFooter from "vue-hacktiv8-footer";
+export default {
+  components: {
+    HFooter,
+  },
+  created() {
+    if (localStorage.access_token) {
+      this.$store.commit("SET_LOGIN", true);
+    } else {
+      this.$store.commit("SET_LOGIN", false);
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      sessionStorage.clear();
+      this.$store.commit("SET_LOGIN", false);
+    },
+  },
+};
+</script>
+
 <style>
+.hfooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 1000;
+}
+
 #app {
+  position: relative;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-bottom: 90px;
 }
 
 #nav {

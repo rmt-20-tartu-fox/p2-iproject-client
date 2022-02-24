@@ -55,16 +55,12 @@
         <!-- end card -->
       </div>
       <!-- chatbox -->
-      <div id="chatApp">
+      <div id="chatApp" v-if="this.$store.state.isLogin == true">
         <div class="chatBox" id="chatBox">
           <div class="card">
             <header class="card-header header-title">
               <p class="card-header-title">
-                <i class="fa fa-circle is-online"></i
-                ><img
-                  src="https://k0.okccdn.com/php/load_okc_image.php/images/32x0/971x939/0/10846088441021659030.webp?v=2"
-                  style="width: 30px"
-                />&nbsp; <b>Username nanti</b>
+                <i class="fa fa-circle is-online"></i><b>{{ setNameChat }}</b>
               </p>
               <a class="card-header-icon">
                 <span class="icon">
@@ -162,6 +158,9 @@ export default {
     fetchCity() {
       return this.$store.state.citiesForSearch;
     },
+    setNameChat() {
+      return localStorage.name;
+    },
   },
   methods: {
     carousel() {
@@ -195,7 +194,7 @@ p {
 .cropped {
   object-fit: cover;
   object-position: 50% 40%;
-  height: 80vh;
+  height: 82vh;
 }
 
 /* CHATBOX */
@@ -210,7 +209,6 @@ p {
 }
 .allUsersList .image img {
   border-radius: 16px;
-
 }
 .usersChatList {
   position: fixed;
@@ -234,7 +232,7 @@ p {
 }
 .chatBox {
   position: fixed;
-  bottom: 2%;
+  bottom: 15%;
   right: 0;
   width: 300px;
   margin: 40px;

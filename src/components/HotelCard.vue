@@ -16,6 +16,7 @@
             border-radius: 10px;
           "
         />
+        
       </div>
       <div style="flex: 0.4; flex-direction: column" class="d-flex">
         <div class="d-flex">
@@ -50,7 +51,7 @@
               <p>Hotel Bintang: {{ hotel.class }}</p>
             </div>
             <div class="container text-center">
-              <button class="btn btn-primary"> Book Mark</button>
+              <button class="btn btn-primary" @click.prevent="seeDetail"> See Detail </button>
             </div>
           </div>
         </div>
@@ -61,10 +62,19 @@
 <script>
 export default {
   name: "HotelCard",
-  props: ['hotel', 'i']
+  props: ['hotel', 'i'],
+  methods: {
+    seeDetail() {
+      sessionStorage.setItem('hotel_id', this.hotel.hotel_id)
+      this.$store.dispatch('getRoom').then(resp => {
+        this.$store.commit('SET_ROOMHOTEL', resp.data[0])
+        this.$router.push('/room')
+      }).catch(err => console.log(err.response.message))
+    }
+  }
 }
 </script>
 
 <style>
-  
+
 </style>
