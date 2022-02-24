@@ -72,7 +72,7 @@ export default new Vuex.Store({
     },
     async confirmEmailUser(context, payload){
       try {
-        await axios.post('http://localhost:3000/send', {
+        await axios.post('https://gestura-app.herokuapp.com/send', {
           email: payload.email,
           name: payload.name
         }, {
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     }, 
     async getTokenPayment(context, payload){
       try {
-        const response = await axios.post('http://localhost:3000/payment', {
+        const response = await axios.post('https://gestura-app.herokuapp.com/payment', {
           price: payload.price,
           itemName: payload.itemName,
           name: payload.name,
