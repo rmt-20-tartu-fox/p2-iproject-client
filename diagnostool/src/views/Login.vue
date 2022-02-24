@@ -1,6 +1,6 @@
 <template>
-  <section class="sign-in card my-3">
-    <div>
+  <section class="sign-in my-3">
+    <div id="login" class="card my-auto mx-auto">
       <h1>Sign In</h1>
       <h6 class="mb-3">Sign In to access your account</h6>
       <form v-on:submit.prevent="login">
@@ -73,5 +73,11 @@ export default {
 .sign-in {
   display: flex;
   flex-grow: 1;
+}
+
+#login {
+  max-height: 380px;
+  width: 420px;
+  text-align: center;
 }
 </style>
