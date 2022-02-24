@@ -3,7 +3,8 @@ import Vuex from "vuex";
 import axios from "axios";
 import router from "../router";
 import Swal from "sweetalert2";
-const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://nicerecipe2.herokuapp.com";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -103,6 +104,11 @@ export default new Vuex.Store({
         .post(BASE_URL + "/register", data)
         .then((resp) => {
           router.push("/login");
+          Swal.fire(
+            "Success!",
+            "welcome email has been send, please kindly check your email",
+            "success"
+          );
           console.log(resp);
         })
         .catch((err) => {

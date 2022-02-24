@@ -21,10 +21,10 @@
                 <div class="row">
                   <input
                     type="text"
-                    name="username"
-                    id="username"
+                    name="email"
+                    id="email"
                     class="form__input"
-                    placeholder="Username"
+                    placeholder="Email"
                     v-model="email"
                   />
                 </div>

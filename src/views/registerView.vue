@@ -14,17 +14,17 @@
         <div class="col-md-8 col-xs-12 col-sm-12 login_form">
           <div class="container-fluid">
             <div class="col" style="margin-top: 5%; color: black">
-              <h2>Log In</h2>
+              <h2>Register</h2>
             </div>
             <div class="col">
               <form control="" class="form-group" @submit.prevent="register">
                 <div class="row">
                   <input
                     type="text"
-                    name="username"
-                    id="username"
+                    name="email"
+                    id="email"
                     class="form__input"
-                    placeholder="Username"
+                    placeholder="Email"
                     v-model="registerBox.email"
                   />
                 </div>
@@ -44,7 +44,7 @@
                     type="submit"
                     class="form-control btn btn-primary rounded submit px-3"
                   >
-                    Login
+                    Register
                   </button>
                 </div>
               </form>
