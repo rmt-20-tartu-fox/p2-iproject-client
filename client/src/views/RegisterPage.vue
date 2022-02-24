@@ -100,6 +100,9 @@ export default {
       this.$router.push("/login");
     },
   },
+  created() {
+    console.log(URL);
+  },
 };
 </script>
 

@@ -45,6 +45,7 @@
               class="mt-15 progress progress-primary w-56"
               max="100"
             ></progress>
+            {{ hunger }}
             <form
               class="flex gap-2"
               @submit.prevent="submit"
@@ -56,8 +57,8 @@
               <button class="btn">Feed</button>
             </form>
           </div>
-          <!-- SVG 1 - ASK THE CRAVINGS -->
           <div class="flex flex-row mt-5">
+            <!-- SVG 1 - ASK THE CRAVINGS -->
             <a @click.prevent="askCravings" href="#">
               <img
                 title="Ask the cravings"
@@ -65,12 +66,15 @@
                 width="50"
               />
             </a>
+            <!-- SVG 1 - ASK THE CRAVINGS -->
             <a class="ml-3 mt-1" @click.prevent="roll" href="#">
               <img title="Do rolling" src="../assets/roll.svg" width="40" />
             </a>
+            <!-- SVG 1 - ASK THE CRAVINGS -->
             <a class="ml-5 mt-1" @click.prevent="stand" href="#">
               <img title="Stand" src="../assets/stand.svg" width="40" />
             </a>
+            <!-- SVG 1 - ASK THE CRAVINGS -->
             <a class="ml-3 mt-1" @click.prevent="bite" href="#">
               <img title="Bite" src="../assets/bite.svg" width="40" />
             </a>

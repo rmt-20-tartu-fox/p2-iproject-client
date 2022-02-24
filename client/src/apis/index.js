@@ -1,2 +1,4 @@
-export const PRODUCTION_URL = "https://pibuyo.herokuapp.com";
-export const DEVELOPMENT_URL = "https://localhost:3000";
+// const URL = "https://pibuyo.herokuapp.com";
+const URL = "http://localhost:3000";
+
+export default URL;

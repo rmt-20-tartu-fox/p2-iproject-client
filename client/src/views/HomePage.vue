@@ -33,6 +33,7 @@ export default {
     },
   },
   async created() {
+    console.log(666, process.env.VUE_APP_SECRET_KEY);
     const data = await this.$store.dispatch("checkPet");
     this.$store.commit("PETS_DATA_FILLER", data);
     await this.$store.dispatch("getWeather");

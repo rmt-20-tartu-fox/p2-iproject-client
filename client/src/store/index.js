@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import PRODUCTION_URL from "../apis";
+import URL from "../apis";
 
 Vue.use(Vuex);
 
@@ -33,20 +33,20 @@ export default new Vuex.Store({
   },
   actions: {
     upload(context, payload) {
-      return axios.post(PRODUCTION_URL + "/upload", payload, {
+      return axios.post(URL + "/upload", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
       });
     },
     login(context, payload) {
-      return axios.post(PRODUCTION_URL + "/login", payload);
+      return axios.post(URL + "/login", payload);
     },
     register(context, payload) {
-      return axios.post(PRODUCTION_URL + "/register", payload);
+      return axios.post(URL + "/register", payload);
     },
     checkPet() {
-      return axios.get(PRODUCTION_URL + "/pet", {
+      return axios.get(URL + "/pet", {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -54,7 +54,7 @@ export default new Vuex.Store({
     },
     createPet(context, payload) {
       console.log(payload);
-      return axios.post(PRODUCTION_URL + "/pet", payload, {
+      return axios.post(URL + "/pet", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -62,7 +62,7 @@ export default new Vuex.Store({
     },
     feedPet(context, payload) {
       console.log(payload);
-      return axios.patch(PRODUCTION_URL + "/pet", payload, {
+      return axios.patch(URL + "/pet", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -75,7 +75,7 @@ export default new Vuex.Store({
 
           // bawa query params
 
-          const data = await axios.get(PRODUCTION_URL + "/weather", {
+          const data = await axios.get(URL + "/weather", {
             params: { latitude, longitude },
           });
           context.commit("WEATHER_DATA_FILLER", data);
