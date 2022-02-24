@@ -10,27 +10,29 @@
           <div class="row justify-content-evenly p-3 mx-5">
             <div class="col-lg-3">
               <div class="bg-white p-3 rounded-lg">
-                <form>
+                <form @click.prevent="fetchUsers">
                   <div class="form-group pt-2">
-                    <input type="Number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Max Age" min="18" />
+                    <input v-model="maxAge" type="Number" class="form-control" placeholder="Max Age" min="18" />
                   </div>
                   <div class="form-group pt-2">
-                    <input type="number" class="form-control" placeholder="Max Distance" min="5" />
+                    <input v-model="maxDist" type="number" class="form-control" placeholder="Max Distance" min="5" />
                   </div>
                   <div class="form-group pt-2">
-                    <select class="form-control">
-                      <option>Sex</option>
+                    <select v-model="sexInput" class="form-control">
+                      <option value="male" selected disabled>filter sex</option>
+                      <option value="male">male</option>
+                      <option value="female">female</option>
                     </select>
                   </div>
                   <button type="submit" class="btn btn-primary mt-2">Filter</button>
                 </form>
               </div>
               <!-- Profile -->
-              <profile></profile>
+              <profile v-bind:user="user"></profile>
               <!-- Profile -->
             </div>
             <!-- Card -->
-            <profile-card></profile-card>
+            <profile-card v-bind:user="user" v-bind:distance="distance" v-on:nextPage="nextPage"></profile-card>
             <!-- Card -->
           </div>
         </div>
@@ -48,9 +50,48 @@ import Profile from "../components/Profile.vue";
 
 export default {
   name: "Home",
+  data: function () {
+    return {
+      sexInput: "",
+      maxAge: null,
+      maxDist: null,
+    };
+  },
   components: {
     ProfileCard,
     Profile,
+  },
+  methods: {
+    fetchUsers: function () {
+      this.$store.dispatch("fetchAllUsers", {
+        sex: this.sexInput,
+        maxAge: this.maxAge,
+        maxDist: this.maxDist,
+      });
+    },
+    nextPage: async function () {
+      // console.log(this.currentPage, this.$store.state.currentPage);
+      const next = this.currentPage + 1;
+      await this.$store.commit("SET_PAGE_NUMBERS", next);
+      this.fetchUsers();
+    },
+  },
+  created() {
+    this.fetchUsers();
+  },
+  computed: {
+    user: function () {
+      return this.$store.state.usersData.rows;
+    },
+    totalPages: function () {
+      return this.$store.state.usersData.count;
+    },
+    distance: function () {
+      return this.$store.state.usersData.dist;
+    },
+    currentPage: function () {
+      return this.$store.state.currentPage;
+    },
   },
 };
 </script>
