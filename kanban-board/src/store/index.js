@@ -161,7 +161,7 @@ export default new Vuex.Store({
     weather(context) {
       axios
         .get(
-          "http://api.openweathermap.org/data/2.5/weather?lat=-5.0&lon=120.0&appid=da70b468d4446f0b823148298fd3f2d8"
+          "https://api.openweathermap.org/data/2.5/weather?lat=-5.0&lon=120.0&appid=da70b468d4446f0b823148298fd3f2d8"
         )
         .then((data) => {
           const result = {
