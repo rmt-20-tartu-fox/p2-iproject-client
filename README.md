@@ -21,3 +21,14 @@ There are hidden routes in this app, intented to be used by registered doctor, a
   password: 12345
 }
 ```
+
+Packages/libraries used in this app:
+- [axios](https://github.com/axios/axios)
+- [basic-vue-chat](https://github.com/jmaczan/basic-vue-chat)
+- [moment-js](https://momentjs.com/) **deprecated**
+- [socket-io](https://www.npmjs.com/package/vue-socket.io-extended)
+- [sweetalert2](https://sweetalert2.github.io/)
+- [vue-hacktiv8-footer](https://www.npmjs.com/package/vue-hacktiv8-footer)
+- [vue-simple-spinner](https://github.com/dzwillia/vue-simple-spinner/)
+- [vue-multiselect](https://vue-multiselect.js.org/)
+- [boostrap-vue](https://bootstrap-vue.org/docs)
