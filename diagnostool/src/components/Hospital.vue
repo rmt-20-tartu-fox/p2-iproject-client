@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <div id="map">
-      <div id="detail">
-        <h3>{{ near.properties.name }}</h3>
-        <h6>City: {{ near.properties.city }}</h6>
-        <h6>Address: {{ near.properties.address_line2 }}</h6>
-      </div>
-      <div class="mapouter">
-        <div class="gmap_canvas">
-          <iframe
-            width="400"
-            height="250"
-            id="gmap_canvas"
-            :src="url"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-          ></iframe
-          ><a href="https://123movies-to.org"></a><br /><a
-            href="https://www.embedgooglemap.net"
-            >google maps iframe code</a
-          >
-        </div>
+  <div id="map">
+    <div id="detail">
+      <h3>{{ near.properties.name }}</h3>
+      <h6>City: {{ near.properties.city }}</h6>
+      <h6>Address: {{ near.properties.address_line2 }}</h6>
+    </div>
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe
+          width="400"
+          height="250"
+          id="gmap_canvas"
+          :src="url"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+        ></iframe
+        ><a href="https://123movies-to.org"></a><br /><a
+          href="https://www.embedgooglemap.net"
+          >google maps iframe code</a
+        >
       </div>
     </div>
   </div>

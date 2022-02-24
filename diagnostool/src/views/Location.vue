@@ -1,25 +1,27 @@
 <template>
-  <section id="maps">
-    <h1 class="mt-4 mb-2">
-      To view nearby hospitals, please enter your current location
-    </h1>
-    <Spinner v-if="isLoading"></Spinner>
-    <div class="card mb-4 form-search">
-      <form @submit.prevent="getNearby">
-        <div class="mb-3">
-          <label class="form-label">Current Location</label>
-          <input v-model="location" type="text" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label"
-            >Radius from current location (meters)</label
-          >
-          <input v-model="radius" type="number" class="form-control" />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    <router-view></router-view>
+  <section id="location">
+    <section id="maps">
+      <h2 class="mt-4 mb-2">
+        To view nearby hospitals, please enter your current location
+      </h2>
+      <Spinner v-if="isLoading"></Spinner>
+      <div class="card mb-4 form-search">
+        <form @submit.prevent="getNearby">
+          <div class="mb-3">
+            <label class="form-label">Current Location</label>
+            <input v-model="location" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"
+              >Radius from current location (meters)</label
+            >
+            <input v-model="radius" type="number" class="form-control" />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </section>
+    <nearby id="nearby-result"></nearby>
   </section>
 </template>
 
@@ -27,10 +29,12 @@
 import Swal from "sweetalert2";
 import api from "../apis/server";
 import Spinner from "vue-simple-spinner";
+import Nearby from "../views/NearbyPlace.vue";
 export default {
   name: "Location",
   components: {
     Spinner,
+    Nearby,
   },
   data: function () {
     return {
@@ -63,9 +67,6 @@ export default {
               this.isLoading = false;
             } else {
               this.$store.commit("setNearby", resp.data.features);
-              this.$router.push({ name: "Nearby" }).catch(() => {
-                console.log("done");
-              });
               this.isLoading = false;
             }
           }
@@ -80,17 +81,21 @@ export default {
 </script>
 
 <style>
+#location {
+  display: flex;
+  flex-grow: 1;
+}
 #maps {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  background-color: #dff6ff;
+}
+
+#maps > h2 {
+  text-align: center !important;
 }
 
 .form-search {
   width: 560px;
-}
-
-#maps h1 {
-  text-align: center;
 }
 </style>

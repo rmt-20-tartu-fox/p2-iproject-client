@@ -1,8 +1,8 @@
 <template>
   <section id="nearby-result">
-    <h1 class="mb-2">
+    <h2 class="mt-4 mb-2">
       Based on your location, this is list of hospitals nearby your location
-    </h1>
+    </h2>
     <b-card
       class="mb-2 p-1"
       v-for="near in nearby"
@@ -14,6 +14,7 @@
     </b-card>
     <div class="overflow-auto">
       <b-pagination
+        v-if="nearby.length != 0"
         id="page"
         v-model="currentPage"
         :total-rows="rows"
@@ -57,6 +58,16 @@ export default {
 #nearby-result {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  text-align: center !important;
+}
+
+#nearby-result > h2 {
+  text-align: center !important;
+  padding: 4px;
+}
+
+#my-card {
+  margin: 12px auto;
+  width: 700px;
 }
 </style>
