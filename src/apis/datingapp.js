@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const dating = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://ridhasidi-wolfy.herokuapp.com/",
 });
 
 export default dating;
