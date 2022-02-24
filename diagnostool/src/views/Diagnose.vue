@@ -13,6 +13,7 @@
               v-model="gender"
               class="form-select"
               aria-label="Default select example"
+              required
             >
               <option selected disabled>Select gender...</option>
               <option value="male">Male</option>
@@ -21,7 +22,7 @@
           </div>
           <div class="mb-3 col">
             <label class="form-label">Date of Birth</label>
-            <input v-model="date" type="date" class="form-control" />
+            <input required v-model="date" type="date" class="form-control" />
           </div>
         </div>
 
