@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../api/axios'
 import router from '../router/index'
+import Swal from "sweetalert2";
 
 Vue.use(Vuex)
 
@@ -71,10 +72,15 @@ export default new Vuex.Store({
       axios.post('/register', payload)
         .then(resp => {
           context.dispatch('nodeMailer', resp.data)
+          Swal.fire("Success!", `Succer register`, "success");
           router.push('/login')
         })
         .catch(err => {
-          console.log(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message,
+          })
         })
     },
     login(context, payload) {
@@ -82,10 +88,15 @@ export default new Vuex.Store({
         .then(resp => {
           localStorage.setItem('access_token', resp.data.access_token)
           context.commit('setIsLoggedIn', true)
+          Swal.fire("Success!", "Login to HactivNime", "success");
           router.push('/')
         })
         .catch(err => {
-          console.log(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message,
+          })
         })
     },
     getMangas(context) {
@@ -152,6 +163,13 @@ export default new Vuex.Store({
         }
       })
         .then(() => { 
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Add to My Favorite",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           router.push('/myfavorite')
         })
         .catch(err => {
@@ -165,6 +183,13 @@ export default new Vuex.Store({
         }
       })
         .then(() => { 
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Add to My Favorite",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           router.push('/myfavorite')
         })
         .catch(err => {
@@ -205,6 +230,13 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Remove Product From Your Wishlist",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           context.dispatch('getFavoriteManga')
           context.dispatch('getFavoriteAnime')
         })
@@ -220,12 +252,44 @@ export default new Vuex.Store({
       })
       .then(resp => {
         window.snap.pay(resp.data.token, {
-          onSuccess: function (result) {
-            console.log(result);
+          onSuccess: () => {
+            /* You may add your own implementation here */
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "payment success!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           },
-          onClose: function () {
-            alert("you closed the popup without finishing the payment");
+          onPending: () => {
+            /* You may add your own implementation here */
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "wating your payment!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           },
+          onError: () => {
+            /* You may add your own implementation here */
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "payment failed!",
+            })
+          },
+          onClose: () => {
+            /* You may add your own implementation here */
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "you closed the popup without finishing the payment",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         });
       })
       .catch(err => {

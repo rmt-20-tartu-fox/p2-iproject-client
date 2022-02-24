@@ -14,7 +14,7 @@
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Product image-->
-              <img
+              <img v-if="manga.images"
                 class="card-img-top"
                 style="object-fit: cover; height: 500px"
                 :src="manga.images.jpg.large_image_url"
@@ -33,7 +33,7 @@
                     >, Volume: <strong style="color:red">{{ manga.volumes }}</strong>, Rating: <strong style="color:red">{{ manga.scored }}</strong>,
                     Rank: <strong style="color:red">{{ manga.rank }}</strong>, Popularity: <strong style="color:red">{{ manga.popularity }}</strong>
                   </p>
-                  <h4 class="m-0">Authors: {{ manga.authors[0].name }}</h4>
+                  <h4 v-if="manga.authors" class="m-0">Authors: {{ manga.authors[0].name }}</h4>
                 </div>
               </div>
               <!-- Product actions-->
@@ -44,7 +44,7 @@
                   >
                 </div>
                 <div class="text-center p-2" v-if="$store.state.isLoggedIn == true">
-                  <a @click.prevent="payButton(manga.title)" class="btn btn-sm btn-primary mt-auto" href="#"
+                  <a @click.prevent="payButton" class="btn btn-sm btn-primary mt-auto" href="#"
                     >Order this manga</a
                   >
                 </div>
@@ -71,7 +71,6 @@ export default {
     return {
       baseUrl: window.location.origin,
       identifier: this.$route.path,
-      title: this.$page.title,
       category_id: "manga",
     };
   },
