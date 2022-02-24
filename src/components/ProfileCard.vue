@@ -7,9 +7,9 @@
         <p class="card-text">{{ thisDistance }} km away</p>
       </div>
       <div class="card-footer d-flex justify-content-around">
-        <a @click.prevent="nextPage" href="" class="btn btn-warning">Pass</a>
+        <a @click.prevent="nextPage('pass')" href="" class="btn btn-warning">Pass</a>
         <a href="" class="btn btn-warning">Detail</a>
-        <a @click.prevent="nextPage" href="" class="btn btn-warning">Like</a>
+        <a @click.prevent="nextPage('like')" href="" class="btn btn-warning">Like</a>
       </div>
     </div>
   </div>
@@ -28,8 +28,8 @@ export default {
     },
   },
   methods: {
-    nextPage: function () {
-      this.$emit("nextPage");
+    nextPage: function (val) {
+      this.$emit("nextPage", { id: this.thisUser.id, resp: val });
     },
   },
 };
