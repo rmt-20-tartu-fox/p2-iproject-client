@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const origin = "http://localhost:3000/";
+const origin = "http://localhost:3000";
 
 const mainApi = axios.create({
   baseURL: origin,

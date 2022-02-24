@@ -22,6 +22,7 @@
           Restaurant List
         </router-link>
         <router-link
+          v-if="currentUser.role == 'Owner'"
           to="/restaurants/add"
           class="text-lg text-slate-900 hover:text-red-600"
           style="font-family: 'Encode Sans', sans-serif; font-weight: 700"
@@ -29,6 +30,7 @@
           Add Restaurant
         </router-link>
         <router-link
+          v-if="currentUser.role == 'Customer'"
           to="/wishlists"
           class="text-lg text-slate-900 hover:text-red-600"
           style="font-family: 'Encode Sans', sans-serif; font-weight: 700"
@@ -38,18 +40,25 @@
       </div>
 
       <div class="w-1/6 h-full flex justify-center items-center">
-        <HomeDropdown></HomeDropdown>
+        <HomeDropdown v-if="!isLogged"></HomeDropdown>
+        <ProfileDropdown v-if="isLogged"></ProfileDropdown>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import HomeDropdown from "../organisms/HomeDropdown.vue";
+import ProfileDropdown from "../organisms/ProfileDropdown.vue";
 export default {
   name: "Navbar",
   components: {
     HomeDropdown,
+    ProfileDropdown,
+  },
+  computed: {
+    ...mapState(["isLogged", "currentUser"]),
   },
 };
 </script>

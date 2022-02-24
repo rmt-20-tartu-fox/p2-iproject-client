@@ -6,19 +6,20 @@
       :options="options"
       style="width: 100%; height: 100vh"
     >
-      <!-- <gmap-marker
-      v-for="(loc, index) in locationMarkers"
-      :key="index"
-      :position="loc.position"
-      :clickable="true"
-      :draggable="false"
-      @click="center = loc.position"
-    ></gmap-marker> -->
+      <gmap-marker
+        v-for="(loc, index) in locationMarkers"
+        :key="index"
+        :position="loc.position"
+        :clickable="true"
+        :draggable="false"
+        @click="center = loc.position"
+      ></gmap-marker>
     </gmap-map>
   </div>
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   name: "Maps",
   data() {
@@ -36,6 +37,8 @@ export default {
     this.geolocate();
   },
   methods: {
+    ...mapActions(["addLocationMarker", "initMarker", "fetchLocations"]),
+    ...mapMutations(["SET_CENTER"]),
     geolocate: function () {
       navigator.geolocation.getCurrentPosition((position) => {
         this.center = {
@@ -44,6 +47,13 @@ export default {
         };
       });
     },
+    initialMarker(loc) {
+      // console.log(loc, 'Di Viewss')
+      this.initMarker(loc);
+    },
+  },
+  computed: {
+    ...mapState(["center", "locationMarkers", "locPlaces", "existingPlace"]),
   },
 };
 </script>
