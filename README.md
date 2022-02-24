@@ -5,7 +5,7 @@ Individual Project - Client
 
 ### Project description
 
-> Disclaimer: This app is not intented as a main source to detect disease, API used in this app has flawed and is not complete. This app use basic symptom checker feature from [api-medic](https://apimedic.com/). In real world cases, you need complex feature to diagnose a disease. Also, seek medical assistance if you not feeling well. The creator of this app is not a doctor, so he don't really know how to diagnose a disease.
+> Disclaimer: This app is not intented as a main source to detect disease, API used in this app has flawed and is not complete. This app use basic symptom checker feature from [api-medic](https://apimedic.com/). In real world cases, you need complex feature to diagnose a disease. Also, seek medical assistance if you are not feeling well. The creator of this app is not a doctor, so he don't really know how to diagnose a disease.
 
 This project is called DiagnostTool, it has these features:
 1. Diagnose disease based on symptoms
