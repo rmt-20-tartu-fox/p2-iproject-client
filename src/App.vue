@@ -4,13 +4,18 @@
     <navigation-bar></navigation-bar>
 
     <router-view />
+    <HFooter></HFooter>
   </div>
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
-  components: { NavigationBar },
+  components: {
+    NavigationBar,
+    HFooter,
+  },
   methods: {
     checkLogin: function () {
       const token = localStorage.getItem("access_token");
