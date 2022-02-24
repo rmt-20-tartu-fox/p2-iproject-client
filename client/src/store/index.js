@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import PRODUCTION_URL from "../apis";
 
 Vue.use(Vuex);
 
@@ -32,20 +33,20 @@ export default new Vuex.Store({
   },
   actions: {
     upload(context, payload) {
-      return axios.post("http://localhost:3000/upload", payload, {
+      return axios.post(PRODUCTION_URL + "/upload", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
       });
     },
     login(context, payload) {
-      return axios.post("http://localhost:3000/login", payload);
+      return axios.post(PRODUCTION_URL + "/login", payload);
     },
     register(context, payload) {
-      return axios.post("http://localhost:3000/register", payload);
+      return axios.post(PRODUCTION_URL + "/register", payload);
     },
     checkPet() {
-      return axios.get("http://localhost:3000/pet", {
+      return axios.get(PRODUCTION_URL + "/pet", {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -53,7 +54,7 @@ export default new Vuex.Store({
     },
     createPet(context, payload) {
       console.log(payload);
-      return axios.post("http://localhost:3000/pet", payload, {
+      return axios.post(PRODUCTION_URL + "/pet", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -61,7 +62,7 @@ export default new Vuex.Store({
     },
     feedPet(context, payload) {
       console.log(payload);
-      return axios.patch("http://localhost:3000/pet", payload, {
+      return axios.patch(PRODUCTION_URL + "/pet", payload, {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -74,7 +75,7 @@ export default new Vuex.Store({
 
           // bawa query params
 
-          const data = await axios.get("http://localhost:3000/weather", {
+          const data = await axios.get(PRODUCTION_URL + "/weather", {
             params: { latitude, longitude },
           });
           context.commit("WEATHER_DATA_FILLER", data);
@@ -84,8 +85,6 @@ export default new Vuex.Store({
       });
     },
     changeAnimation(context, payload) {
-      console.log(payload);
-      console.log(context);
       context.commit("ANIMATION_CHANGER", payload);
     },
   },
