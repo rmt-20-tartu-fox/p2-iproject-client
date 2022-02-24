@@ -9,13 +9,13 @@
       >
         <h2 class="text-lg mb-4">Sign Up</h2>
 
-        <label for="" class="mb-4">Name</label>
+        <!-- <label for="" class="mb-4">Name</label>
         <input
           type="text"
           v-model="user.name"
           placeholder="Full name"
           class="mb-4 w-3/4 rounded border-gray-400 border p-1"
-        />
+        /> -->
 
         <label for="" class="mb-4">Email</label>
         <input

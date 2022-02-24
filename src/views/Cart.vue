@@ -94,6 +94,10 @@ export default {
                   ctx.$router.push({ name: `Home` });
                 }
               });
+            ctx.$store.dispatch("sendEmail", {
+              title: ctx.dataBook.title,
+              link: ctx.dataBook.link,
+            });
           },
           onPending: function (result) {
             ctx.$store
@@ -124,6 +128,7 @@ export default {
           onClose: function () {
             /* You may add your own implementation here */
             // alert("you closed the popup without finishing the payment");
+            console.log("You closed the popup without finishing the payment");
           },
         });
       }

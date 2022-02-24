@@ -183,6 +183,26 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+
+    async sendEmail(context, payload) {
+      try {
+        await url.post(
+          "/customers/send-emails",
+          {
+            link: payload.link,
+            title: payload.title,
+          },
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+        // console.log(context);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   modules: {},
 });
