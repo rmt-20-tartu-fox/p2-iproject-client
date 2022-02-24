@@ -8,7 +8,11 @@ export default new Vuex.Store({
   state: {
     products: [],
     productById: {},
-    carts: []
+    carts: [],
+    allCities: [],
+    allProvinces: [],
+    preview: {},
+    order: []
   },
   mutations: {
     SET_PRODUCTS(state ,payload) {
@@ -19,14 +23,29 @@ export default new Vuex.Store({
     },
     SET_CART(state, payload) {
       state.carts = payload
+    },
+    SET_ALL_CITIES(state, payload) {
+      state.allCities = payload
+    },
+    SET_ALL_PROVINCES(state, payload) {
+      state.allProvinces = payload
+    },
+    SET_PREVIEW_CHECKOUT(state, payload) {
+      state.preview = payload
+    },
+    SET_ORDER(state, payload) {
+      state.order = payload
     }
   },
   actions: {
-    fetchProducts(context) {
+    fetchProducts(context, payload) {
+    console.log("🚀 ~ file: index.js ~ line 30 ~ fetchProducts ~ payload", payload)
+      
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: "/customer/products"
+          url: "/customer/products",
+          data: payload
         })
         .then(resp => {
           resp.data.forEach(el => {
@@ -42,17 +61,19 @@ export default new Vuex.Store({
         })
       })
     },
-    fetchProductById(context) {
+    fetchProductById(context, id) {
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
           url: "/customer/products"
         })
         .then(resp => {
-          resp.data.price = resp.data.price.toLocaleString("id-ID", {style:"currency", currency:"IDR"});
-          context.commit("SET_PRODUCTBYID", resp.data)
+          let product = resp.data.filter(el => el.id === +id)
+          product[0].price = product[0].price.toLocaleString("id-ID", {style:"currency", currency:"IDR"});
+          
+          context.commit("SET_PRODUCTBYID", product[0])
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err, "by id"))
       })
     },
     login(context, payload) {
@@ -247,6 +268,109 @@ export default new Vuex.Store({
           })
         })
       })
-    }
+    },
+    checkoutPreview(context, destination) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: `/customer/carts/preview`,
+          headers: {
+            token: localStorage.access_token,
+            destination
+          },
+        })
+        .then(resp => {
+          console.log(resp);
+          resp.data.total = resp.data.total.toLocaleString("id-ID", {style:"currency", currency:"IDR"});
+          context.commit("SET_PREVIEW_CHECKOUT", resp.data)
+        })
+        .catch(err => {
+          console.log(err);
+          swal.fire({
+            icon: 'error',
+            timer: 5000,
+            title: err.response.data.message
+          })
+        })
+      })
+    },
+    fetchCity(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: "/customer/carts/city",
+          headers: {
+            token: localStorage.access_token,
+            province: payload
+          }
+        })
+        .then(resp => {
+          context.commit("SET_ALL_CITIES", resp.data.rajaongkir.results)
+        })
+        .catch(err => {
+          swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            timer: 5000
+          })
+        })
+      })
+    },
+    fetchProvince(context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: "/customer/carts/province",
+          headers: {
+            token: localStorage.access_token
+          }
+        })
+        .then(resp => {
+          context.commit("SET_ALL_PROVINCES", resp.data.rajaongkir.results)
+        })
+        .catch(err => {
+          console.log(err, "client");
+          swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            timer: 5000
+          })
+        })
+      })
+    },
+    fetchHistories(context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "GET",
+          url: "/customer/histories",
+          headers: {
+            token: localStorage.access_token
+          }
+        })
+        .then(resp => {
+          context.commit("SET_ORDER", resp.data)
+        })
+        .catch(err => {
+          swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            timer: 5000
+          })
+        })
+      })
+    },
+    oAuth2(context, token) {
+      return new Promise((resolve, reject) => {
+        axios({
+            method: 'post',
+            url: '/customer/login-google-account',
+            data: {
+              token
+            }
+          })
+          .then(resp => resolve(resp))
+          .catch(err => reject(err))
+      })
+    },
   }
 });

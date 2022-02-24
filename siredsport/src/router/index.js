@@ -52,6 +52,32 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Detail.vue"),
   },
   {
+    path: "/order",
+    name: "Order",
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.access_token) {
+        swal.fire({
+          icon: "info",
+          title: "You should login first"
+        })
+        router.push({
+          name: "Login"
+        })
+        return false
+      } else {
+        next()
+      }
+    },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Order.vue"),
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Checkout.vue"),
+  },
+  {
     path: "/cart",
     name: "Cart",
     beforeEnter: (to, from, next) => {

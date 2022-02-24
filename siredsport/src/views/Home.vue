@@ -1,10 +1,6 @@
 <template>
   <div class="home">
     <Navbar page="home" />
-    <b-button-group class="text-right">
-      <b-button variant="light" class="mx-1">Sepatu</b-button>
-      <b-button variant="light" class="mx-1">Jersey</b-button>
-    </b-button-group>
     <Products :products="products"/>
   </div>
 </template>

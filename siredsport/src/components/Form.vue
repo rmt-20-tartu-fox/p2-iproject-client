@@ -79,12 +79,12 @@
             <br />
             or Sign in with Google Account <br />
           </p>
-          <!-- <GoogleLogin
+          <GoogleLogin
             class="d-flex justify-content-center"
             :params="params"
             :renderParams="renderParams"
             :onSuccess="onSuccess"
-          ></GoogleLogin> -->
+          ></GoogleLogin>
         </b-form>
       </b-card>
     </div>
@@ -92,15 +92,30 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
+import Swal from "sweetalert2"
 export default {
   props: [ "page" ],
   name: "Form",
+  components: {
+    GoogleLogin
+  },
   data() {
     return {
       name: "",
       email: "",
       password: "",
-      noTelp: ""
+      noTelp: "",
+      params: {
+        client_id:
+          "730600242847-6adjtmksme5k71gnlrotkm1opoi3vpe1.apps.googleusercontent.com",
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
     }
   },
   methods: {
@@ -111,7 +126,29 @@ export default {
         name: this.name,
         noTelp: this.noTelp
       })
-    }
+    },
+    onSuccess(googleUser) {
+      const id_token = googleUser.getAuthResponse().id_token;
+      console.log("🚀 ~ file: Form.vue ~ line 131 ~ onSuccess ~ id_token", id_token)
+      this.$store
+        .dispatch("oAuth2", id_token)
+        .then(({ data }) => {
+          localStorage.setItem("access_token", data.accessToken);
+          localStorage.setItem("name", data.name);
+          localStorage.setItem("role", data.role);
+          localStorage.setItem("oAuth2", true);
+          this.$router.push({
+            name: "Home",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: err.response.data.message,
+          });
+        });
+    },
   }
 }
 </script>

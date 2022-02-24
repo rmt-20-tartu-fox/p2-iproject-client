@@ -1,10 +1,94 @@
 <template>
   <div>
     <div>
-      <div v-if="!products.length" style="margin-top: 100px;">
-        <b-icon class="mt-5" icon="three-dots" animation="cylon" font-scale="4"></b-icon>
+      <!-- skleton loading-->
+      <div class="row d-flex justify-content-center container-fluid" v-if="!products.length" >
+        <div class="col-3">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+                <div class="col-3">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+                <div class="col-3">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
+        <div class="col-3 my-1">
+          <b-card>
+            <b-skeleton animation="fade" width="85%"></b-skeleton>
+            <b-skeleton animation="fade" width="55%"></b-skeleton>
+            <b-skeleton animation="fade" width="70%"></b-skeleton>
+          </b-card>
+        </div>
       </div>
-      <div class="row d-flex justify-content-center mt-5 container-fluid" v-if="products" >
+      <div class="row d-flex justify-content-center mt-5 container-fluid" v-if="products.length" >
         <b-col sm="auto" v-for="product in products" :key="product.id">
           <Card :product="product" />
         </b-col>
