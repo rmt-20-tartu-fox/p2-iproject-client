@@ -32,3 +32,12 @@ Packages/libraries used in this app:
 - [vue-simple-spinner](https://github.com/dzwillia/vue-simple-spinner/)
 - [vue-multiselect](https://vue-multiselect.js.org/)
 - [boostrap-vue](https://bootstrap-vue.org/docs)
+
+To install necessary packages, simply runs `npm install` on terminal
+
+This app use server from this repository: https://github.com/Jubel13/p2-iproject-server
+
+To preview this app, go to this link:
+[DiagnosTool](https://individual-project-hacktiv8.web.app/)
+
+Link 2: https://individual-project-hacktiv8.firebaseapp.com/
