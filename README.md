@@ -14,7 +14,7 @@ This project is called DiagnosTool, it has these features:
 
 This is client side, using `vue js` and `vue cli` as front-end framework
 
-There are hidden routes in this app, intented to be used by registered doctor, add `/doctor` to chat as a doctor. You may need to login first, so you may be directed to route `/login`. Use this login detail: 
+There are hidden routes in this app, intented to be used by registered doctor, add `/doctor` to main route, to chat as a doctor. You may need to login first, so you may be directed to route `/login`. Use this login detail: 
 ```
 {
   email: dokter@mail.com
