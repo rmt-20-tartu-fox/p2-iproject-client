@@ -3,12 +3,12 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-3 align-self-center">
-          <h2 class="text-center fw-bold subtitle">Home</h2>
+          <h2 class="text-center fw-bold subtitle">Profile and Matches</h2>
         </div>
         <div class="row justify-content-evenly p-3 mx-5">
           <div class="col-lg-3">
             <!-- Profile -->
-            <profile></profile>
+            <profile v-bind:user="userData"></profile>
             <!-- Profile -->
           </div>
           <!-- Card -->
@@ -31,6 +31,26 @@ export default {
   name: "MyProfile",
   components: {
     Profile,
+  },
+  methods: {
+    getUserData: function () {
+      this.$store.dispatch("viewMyProfile");
+    },
+    getMatches: function () {
+      this.$store.dispatch("viewMatches");
+    },
+  },
+  computed: {
+    userData: function () {
+      return this.$store.state.userData;
+    },
+    matches: function () {
+      return this.$store.state.matches;
+    },
+  },
+  created() {
+    this.getUserData();
+    this.getMatches();
   },
 };
 </script>
