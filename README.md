@@ -41,3 +41,5 @@ To preview this app, go to this link:
 [DiagnosTool](https://individual-project-hacktiv8.web.app/)
 
 Link 2: https://individual-project-hacktiv8.firebaseapp.com/
+
+[^1]: If this app stopped working on diagnose feature, you need to wait for a month, because [api-medic](https://apimedic.com/) limits API calls, 100 calls / moth for free user. Or, you can change code in the project server [server](https://github.com/Jubel13/p2-iproject-server) to use dummy data from api-medic.
