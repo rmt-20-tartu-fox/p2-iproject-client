@@ -16,6 +16,7 @@
         <div class="mg">
           <button>Submit</button>
         </div>
+        <router-link to="/">Back To Login</router-link>
       </form>
     </div>
   </div>

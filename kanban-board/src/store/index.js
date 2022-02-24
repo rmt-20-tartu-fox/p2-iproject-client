@@ -76,15 +76,33 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.log(error);
+          Swal.fire({
+            icon: "error",
+            title: "Invalid email or password",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
     resetEmail(context, payload) {
       sendPasswordResetEmail(auth, payload.email)
         .then((data) => {
           console.log(data);
+          Swal.fire({
+            icon: "success",
+            title: "The reset password link has been sent to your email",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          router.push("/");
         })
         .catch((error) => {
-          console.log(error);
+          Swal.fire({
+            icon: "error",
+            title: "Your email has not been registered",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
     getCollection(context) {
