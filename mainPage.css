@@ -1,0 +1,115 @@
+body {
+  background-color: rgb(51, 51, 51);
+  color: white;
+  min-height: 98vh;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* ---------- NAVBAR --------- */
+
+nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10vh;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+nav .logo {
+  width: 40%;
+  /* background-color: blue; */
+  font-size: 30px;
+}
+nav .directory-nav {
+  width: 30%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 25px;
+}
+
+nav .profile-nav {
+  width: 30%;
+  /* background-color: green; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 25px;
+}
+
+.profile-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#profile-pict {
+  width: 150px;
+  border-radius: 50%;
+}
+
+/* ---------- CONTENT MEME --------- */
+
+main {
+  display: flex;
+  flex-direction: row;
+  min-height: 89vh;
+}
+
+.memes .sidebar {
+  /* background-color: aqua; */
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memes .content-meme {
+  width: 85%;
+  /* background-color: black; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.meme-card {
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 30%;
+  height: 60vh;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- CONTENT JOKES --------- */
+
+.jokes-card {
+  background-color: red;
+  width: 70%;
+  height: 50vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
