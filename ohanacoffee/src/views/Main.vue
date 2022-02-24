@@ -1,79 +1,74 @@
 <template>
-  <div class="home">
-    <div class="grid grid-cols-5">
-      <div>
-        <img width="100" src="../assets/banner.png" alt="">
+  <div v-if="useMask == true" class="home">
+    <div class="grid grid-cols-3">
+      <div class="px-4 py-4 col-span-2">
+        <h1 class="text-6xl font-semi-bold">Welcome,</h1>
+        <h1 class="mt-4 text-2xl text-slate-400">Click on menu images to add it into cart,</h1>
       </div>
-      <div class="flex col-span-3">
-        <label class="my-auto mx-4" for="search">Search:</label>
-        <input class="w-full border-2 h-10 my-auto" type="text">
-      </div>
-      <div class=" mx-4 my-auto text-right">
-        <button @click.prevent="checkOut()"><i class="fa-solid fa-cart-shopping fa-2xl"></i></button>
+      <div class="flex justify-end mx-4 my-auto text-right">
+        <p class="px-1 py-1 rounded-full bg-black text-white">{{totalItem}}</p><button @click.prevent="checkOut()"><i class="fa-solid fa-cart-shopping fa-2xl"></i></button>
       </div>
     </div>
-
-    <div class="flex px-10">
-      <div v-for="product in products" :key="product.id" class="max-w-sm rounded mx-4 mt-4 overflow-hidden shadow-lg hover:shadow-indigo-500/40 hover:shadow-xl">
-        <img @click="addToCart(product.id, product.price)" class="w-full" src="https://d1sag4ddilekf6.azureedge.net/compressed/items/6-CYLWVCBKAA33C2-CYLWVCBKGE6WGN/photo/menueditor_item_c21ac25fa7534072a2bb98dd967cb1fb_1584856720011716077.jpg" alt="Sunset in the mountains">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">{{product.name}}</div>
-          <div class="grid grid-cols-2">
-            <div class="font-bold text-xl mb-2">{{product.price}}</div>
-            <div v-if="cart.products[product.id]" class="font-bold text-xl mb-2">x {{cart.products[product.id].qty}}</div>
-            <button v-if="cart.products[product.id]" @click.prevent="decreaseQty(product.id)"><i class="fa-solid fa-circle-minus"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <video style="visibility: hidden" @playing="startDetect" id="videoEl" width="800" height="600" autoplay muted></video>
+    <CardComp v-bind:products="products" v-bind:cart="cart"></CardComp>
+    <video @playing="startDetect" id="videoEl" width="800" height="600" autoplay muted></video>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import * as faceapi from "face-api.js";
+import CardComp from '../components/Card.vue'
 
 export default {
   name: 'MainPage',
   components: {
+    CardComp
   },
   data() {
     return {
       videoEl: null,
       useMask: true,
-      payButton: null,
-      cart: {
-        UserId: 4,
-        products: {},
-        CustomerId: null,
-        total: 0
-      },
-      arrayProducts: []
+      payButton: null
     }
   },
   computed: {
     products() {
       return this.$store.state.products
+    },
+    categories() {
+      return this.$store.state.categories
+    },
+    cart() {
+      return this.$store.state.cart
+    },
+    totalItem() {
+      const data = this.$store.state.arrayProducts
+      if(data.length == 0) {
+        return 0
+      } else {
+        let total = 0
+        data.forEach(e => {
+          total += e.qty
+        });
+        return total
+      }
     }
   },
   created() {
+    this.$store.dispatch('fetchCategories')
     this.$store.dispatch('fetchProducts')
     this.$store.dispatch('getBackground')
-    this.$store.state.products.forEach(e => {
-      this.selected[e.id] = {qty: 5}
-    });
   },
   mounted() {
-    // this.videoEl = document.getElementById('videoEl')
-    // this.payButton = document.getElementById('pay-button')
-    // Promise.all([
-    //     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-    //     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-    //     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    //     faceapi.nets.faceExpressionNet.loadFromUri('/models')
-    // ])
-    // .then(this.startCamera(this.videoEl));
+    this.videoEl = document.getElementById('videoEl')
+    this.payButton = document.getElementById('pay-button')
+    Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/models')
+    ])
+    .then(this.startCamera(this.videoEl));
   },
   methods: {
     async startCamera(video){
@@ -91,10 +86,10 @@ export default {
               this.videoEl,
               new faceapi.TinyFaceDetectorOptions()
           )
-          .withFaceLandmarks()
           .withFaceDescriptor()
           if(detection) {
-            if(detection.detection.score > 0.7) {
+            console.log(detection.detection.score);
+            if(detection.detection.score > 0.8) {
               this.useMask = false
             } else {
               this.useMask = true
@@ -102,44 +97,16 @@ export default {
           } else {
             this.useMask = true
           }
-      }, 2000);
-    },
-    addToCart(id, price) {
-      if(this.cart.products[id]) {
-        const quantity = this.cart.products[id].qty + 1
-        this.cart.products[id] = {id, price, qty: quantity}
-      } else {
-        this.cart.products[id] = {id, price, qty: 1}
-      }
-      let convertProductToArray = Object.values(this.cart.products)
-      this.arrayProducts = convertProductToArray
-      this.$store.dispatch('fetchProducts')
-      console.log(this.cart.products);
+      }, 3000);
     },
     checkOut() {
-      this.createCart()
-      this.clearCart()
-      this.$router.push({
-        name: 'Cart',
-        params: {products: this.arrayProducts, cart: this.cart}
-      })
+      this.$store.dispatch('checkOut')
     },
     createCart() {
-      this.$store.dispatch('getTransactionToken', this.cart)
+      this.$store.dispatch('getTransactionToken')
     },
     clearCart() {
-      this.cart.UserId = null
-      this.cart.products = [],
-      this.cart.CustomerId = null,
-      this.cart.total = 0
-    },
-    decreaseQty(id) {
-      if(this.cart.products[id].qty < 1) {
-        this.cart.products[id] = null
-      } else {
-        this.cart.products[id].qty--
-      }
-      this.$store.dispatch('fetchProducts')
+      this.$store.dispatch('clearCart')
     }
   }
 }

@@ -1,28 +1,23 @@
 <template>
-  <div>
-    <div v-for="item in products" :key="item.id">
-      <div class="max-w-sm w-full lg:max-w-full lg:flex">
-        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
-        </div>
-        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-          <div class="mb-8">
-            <p class="text-sm text-gray-600 flex items-center">
-              <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-              </svg>
-              Members only
-            </p>
-            <div class="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
-            <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
-          </div>
-          <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink">
-            <div class="text-sm">
-              <p class="text-gray-900 leading-none">Jonathan Reinink</p>
-              <p class="text-gray-600">Aug 18</p>
-            </div>
-          </div>
-        </div>
+  <div v-bind:style="{ backgroundImage: 'url(' + background + ')' }" class="h-screen flex flex-col justify-center">
+    <h1 class="mx-auto text-6xl text-white drop-shadow-2xl">Confirm Checkout</h1>
+    <div class="mx-auto mt-5 px-30 py-30 w-4/5 rounded-xl bg-white border-solid shadow-2xl border-1">
+      <table class="mt-10 mx-2 table-auto w-full">
+        <tr class="bg-slate-400">
+          <th>Id</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+        </tr>
+        <tr class="h-20 text-center" v-for="item in products" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td><button></button>{{item.qty}}</td>
+        </tr>
+      </table>
+      <div class="flex flex-col text-right px-4 py-6">
+        <button @click.prevent="pay()" class="bg-blue-800 px-2 py-4 rounded text-white">Proceed to Payment</button>
       </div>
     </div>
   </div>
@@ -30,6 +25,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import router from '../router'
 export default {
   name: "CartPage",
   data() {
@@ -38,11 +34,22 @@ export default {
       cart: this.$route.params.cart
     }
   },
+  computed: {
+    background() {
+      console.log(this.$store.state.background);
+      return this.$store.state.background
+    }
+  },
+  created() {
+    this.$store.dispatch('getBackground')
+  },
   methods: {
     pay() {
       window.snap.pay(this.$store.state.transaction_token, {
         onSuccess: function(){
-          /* You may add your own implementation here */
+          router.push({
+            name: 'Main'
+          })
           Swal.fire({
             icon: 'success',
             title: 'Payment',
@@ -50,7 +57,9 @@ export default {
           })
         },
         onPending: function(){
-          /* You may add your own implementation here */
+          router.push({
+            name: 'Main'
+          })
           Swal.fire({
             icon: 'warning',
             title: 'Payment',
@@ -58,15 +67,16 @@ export default {
           })
         },
         onError: function(){
-          /* You may add your own implementation here */
           Swal.fire({
             icon: 'error',
             title: 'Payment',
             text: 'Payment Failed',
           })
+          router.push({
+            name: 'Main'
+          })
         },
         onClose: function(){
-          /* You may add your own implementation here */
           Swal.fire({
             title: 'Payment',
             text: "Do you really want to cancel payment?",
@@ -83,6 +93,9 @@ export default {
                 'success'
               )
             }
+          })
+          router.push({
+            name: 'Main'
           })
         }
       });
