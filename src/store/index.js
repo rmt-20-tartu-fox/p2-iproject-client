@@ -92,7 +92,6 @@ export default new Vuex.Store({
     },
     fetchAllUsers: async function (context, query) {
       try {
-        console.log("masuk lagiii", context.state.currentPage);
         let url = `users?page=${context.state.currentPage}`;
         // { maxAge, sex, maxDistance, page }
         if (query.sex) {
@@ -110,10 +109,25 @@ export default new Vuex.Store({
             access_token: localStorage.getItem("access_token"),
           },
         });
-        console.log(data.data);
         context.commit("SET_USERS", data.data);
       } catch (error) {
-        // console.log(error);
+        Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
+      }
+    },
+    smashOrPass: async (context, payload) => {
+      try {
+        await datingApi.post(
+          `/${payload.id}/likes`,
+          {
+            status: payload.resp,
+          },
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
+      } catch (error) {
         Swal.fire(`Error ${error.response.status}`, `${error.response.data.message}`, "error");
       }
     },

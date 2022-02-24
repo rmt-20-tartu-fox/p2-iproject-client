@@ -69,10 +69,13 @@ export default {
         maxDist: this.maxDist,
       });
     },
-    nextPage: async function () {
-      // console.log(this.currentPage, this.$store.state.currentPage);
+    response: function (params) {
+      this.$store.dispatch("smashOrPass", params);
+    },
+    nextPage: async function (params) {
       const next = this.currentPage + 1;
       await this.$store.commit("SET_PAGE_NUMBERS", next);
+      this.response(params);
       this.fetchUsers();
     },
   },
