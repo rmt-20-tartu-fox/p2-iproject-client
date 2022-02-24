@@ -5,6 +5,7 @@ import {
   db,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "../../firebase/index";
 import router from "../router/index.js";
 import Swal from "sweetalert2";
@@ -72,6 +73,15 @@ export default new Vuex.Store({
           localStorage.setItem("access_token", resp.user.accessToken);
           localStorage.setItem("email", resp.user.email);
           router.push("/board");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    resetEmail(context, payload) {
+      sendPasswordResetEmail(auth, payload.email)
+        .then((data) => {
+          console.log(data);
         })
         .catch((error) => {
           console.log(error);

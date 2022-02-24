@@ -45,6 +45,9 @@
             <router-link to="/register">Register here</router-link>
           </div>
         </div>
+        <div>
+          <router-link to="/forgot-password">Forgot Password?</router-link>
+        </div>
       </form>
     </div>
   </div>

@@ -4,6 +4,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import KanbanBoard from "../views/KanbanBoard.vue";
 import DetailIssue from "../views/DetailIssue";
+import ForgetPassword from "../views/ForgetPassword";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/detail",
     name: "DetailIssue",
     component: DetailIssue,
+  },
+  {
+    path: "/forgot-password",
+    name: "ForgetPassword",
+    component: ForgetPassword,
   },
   {
     path: "/about",

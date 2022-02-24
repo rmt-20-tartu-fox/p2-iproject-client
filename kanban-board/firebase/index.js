@@ -3,6 +3,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
@@ -29,4 +30,5 @@ export {
   signInWithEmailAndPassword,
   database,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 };
