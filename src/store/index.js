@@ -57,7 +57,7 @@ export default new Vuex.Store({
   actions: {
     async loginHandler(context, payload) {
       try {
-        const res = await axios.post("http://localhost:3000/users/login", payload)
+        const res = await axios.post("https://walletapp-jnthn.herokuapp.com/users/login", payload)
         if (res.status === 200) {
           context.commit("SET_ISLOGGEDIN", true)
           localStorage.setItem("access_token", res.data.access_token)
@@ -74,7 +74,7 @@ export default new Vuex.Store({
     },
     async registerHandler(context, payload) {
       try {
-        await axios.post("http://localhost:3000/users/register", payload)
+        await axios.post("https://walletapp-jnthn.herokuapp.com/users/register", payload)
 
       } catch (err) {
         if (!Array.isArray(err.response.data.message)) {
@@ -85,7 +85,7 @@ export default new Vuex.Store({
       }
     },
     async submitHistory(context, payload) {
-      await axios.post('http://localhost:3000/histories/data',
+      await axios.post('https://walletapp-jnthn.herokuapp.com/histories/data',
         payload,
         {
           headers: {
@@ -97,7 +97,7 @@ export default new Vuex.Store({
     },
     async submitBalance(context, payload) {
       try {
-        await axios.post('http://localhost:3000/balances/data',
+        await axios.post('https://walletapp-jnthn.herokuapp.com/balances/data',
           payload,
           {
             headers: {
@@ -115,7 +115,7 @@ export default new Vuex.Store({
     },
     async getUsd(context) {
       try {
-        const res = await axios.get('http://localhost:3000/additionals/usd',
+        const res = await axios.get('https://walletapp-jnthn.herokuapp.com/additionals/usd',
           {
             headers: {
               'access_token': localStorage.getItem("access_token")
@@ -136,7 +136,7 @@ export default new Vuex.Store({
 
     async getBtc(context) {
       try {
-        const res = await axios.get('http://localhost:3000/additionals/btc',
+        const res = await axios.get('https://walletapp-jnthn.herokuapp.com/additionals/btc',
           {
             headers: {
               'access_token': localStorage.getItem("access_token")
@@ -157,7 +157,7 @@ export default new Vuex.Store({
     async getHistoryByBalanceId(context, payload) {
       try {
         const { BalanceId } = payload
-        const res = await axios.get(`http://localhost:3000/histories/balance/${BalanceId}`,
+        const res = await axios.get(`https://walletapp-jnthn.herokuapp.com/histories/balance/${BalanceId}`,
           {
             headers: {
               'access_token': localStorage.getItem("access_token")
@@ -178,7 +178,7 @@ export default new Vuex.Store({
 
     async addBalance(context, payload) {
       try {
-        await axios.post('http://localhost:3000/histories/data',
+        await axios.post('https://walletapp-jnthn.herokuapp.com/histories/data',
           payload,
           {
             headers: {
@@ -198,7 +198,7 @@ export default new Vuex.Store({
     },
     async fetchHistory(context) {
       try {
-        const res = await axios.get("http://localhost:3000/histories/data", {
+        const res = await axios.get("https://walletapp-jnthn.herokuapp.com/histories/data", {
           headers: {
             access_token: localStorage.getItem("access_token")
           }
@@ -215,7 +215,7 @@ export default new Vuex.Store({
     async fetchBalance(context) {
       try {
 
-        const res = await axios.get("http://localhost:3000/balances/data", {
+        const res = await axios.get("https://walletapp-jnthn.herokuapp.com/balances/data", {
           headers: {
             access_token: localStorage.getItem("access_token")
           }
