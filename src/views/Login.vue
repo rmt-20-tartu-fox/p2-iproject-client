@@ -33,8 +33,6 @@
           :onSuccess="onSuccess"
           :onFailure="onFailure"
         ></GoogleLogin>
-        <!-- <router-link to="/register" class="mb-2">Sign up</router-link>
-        <router-link to="/" class="mt-2">Back to home</router-link> -->
       </form>
     </div>
   </div>
