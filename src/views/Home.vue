@@ -44,9 +44,7 @@
         <div class="col-xl-4 col-lg-6">
           <div class="card l-bg-orange">
             <div class="card-statistic-3 p-4">
-              <div class="card-icon card-icon-large">
-                <i class="fa-brands fa-btc"></i>
-              </div>
+              <div class="card-icon card-icon-large"></div>
               <div class="mb-4">
                 <h5 class="card-title mb-0">Spending in IDR</h5>
               </div>
@@ -63,9 +61,7 @@
         <div class="col-xl-3 col-lg-6">
           <div class="card l-bg-cherry">
             <div class="card-statistic-3 p-4">
-              <div class="card-icon card-icon-large">
-                <i class="fa-brands fa-btc"></i>
-              </div>
+              <div class="card-icon card-icon-large"></div>
               <div class="mb-4">
                 <h5 class="card-title mb-0">Etherium Rate in IDR</h5>
               </div>
@@ -121,7 +117,7 @@
           <div class="card l-bg-green-dark">
             <div class="card-statistic-3 p-4">
               <div class="card-icon card-icon-large">
-                <i class="fas fa-ticket-alt"></i>
+                <i class="fa-duotone fa-percent"></i>
               </div>
               <div class="mb-4">
                 <h5 class="card-title mb-0">Bitcoin Rate in IDR</h5>

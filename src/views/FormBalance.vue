@@ -60,8 +60,9 @@ export default {
     },
   },
   methods: {
-    submitBalance() {
-      this.$store.dispatch("submitBalance", this.form);
+    async submitBalance() {
+      await this.$store.dispatch("submitBalance", this.form);
+      this.$router.push("/");
     },
   },
   created() {},

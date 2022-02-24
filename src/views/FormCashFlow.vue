@@ -153,9 +153,7 @@
       <div class="col-xl-3 col-lg-6" v-if="type === `BTC`">
         <div class="card l-bg-green-dark">
           <div class="card-statistic-3 p-4">
-            <div class="card-icon card-icon-large">
-              <i class="fas fa-ticket-alt"></i>
-            </div>
+            <div class="card-icon card-icon-large"></div>
             <div class="mb-4">
               <h5 class="card-title mb-0">Bitcoin Rate in IDR</h5>
             </div>
@@ -202,12 +200,13 @@ export default {
       let temp = this.balances.find((e) => e.id === this.form.balance);
       this.$store.commit("SET_TYPE", temp.type);
     },
-    submiHistory() {
+    async submiHistory() {
       let formData = new FormData();
       formData.append("image", this.form.image);
       formData.append("BalanceId", this.form.balance);
       formData.append("value", this.form.value);
-      this.$store.dispatch("submitHistory", formData);
+      await this.$store.dispatch("submitHistory", formData);
+      this.$router.push("/");
     },
     previewFiles(event) {
       this.form.image = event.target.files[0];

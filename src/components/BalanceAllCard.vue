@@ -60,9 +60,7 @@ export default {
   methods: {
     async checkAll() {
       await this.$store.dispatch("getUsd");
-      await this.$store.dispatch("getEur");
       await this.$store.dispatch("getBtc");
-      await this.$store.dispatch("getEth");
     },
     async updateData1() {
       let temp = [];

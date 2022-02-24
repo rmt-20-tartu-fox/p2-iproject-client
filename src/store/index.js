@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios"
+import swal from 'sweetalert';
 
 Vue.use(Vuex);
 
@@ -60,10 +61,27 @@ export default new Vuex.Store({
         if (res.status === 200) {
           context.commit("SET_ISLOGGEDIN", true)
           localStorage.setItem("access_token", res.data.access_token)
+          swal('Login Successful')
         }
 
       } catch (err) {
-        console.log(err.response);
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
+        }
+      }
+    },
+    async registerHandler(context, payload) {
+      try {
+        await axios.post("http://localhost:3000/users/register", payload)
+
+      } catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
+        }
       }
     },
     async submitHistory(context, payload) {
@@ -78,67 +96,106 @@ export default new Vuex.Store({
       )
     },
     async submitBalance(context, payload) {
-      await axios.post('http://localhost:3000/balances/data',
-        payload,
-        {
-          headers: {
-            'access_token': localStorage.getItem("access_token")
+      try {
+        await axios.post('http://localhost:3000/balances/data',
+          payload,
+          {
+            headers: {
+              'access_token': localStorage.getItem("access_token")
+            }
           }
+        )
+      } catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
         }
-      )
+      }
     },
     async getUsd(context) {
-      const res = await axios.get('http://localhost:3000/additionals/usd',
-        {
-          headers: {
-            'access_token': localStorage.getItem("access_token")
+      try {
+        const res = await axios.get('http://localhost:3000/additionals/usd',
+          {
+            headers: {
+              'access_token': localStorage.getItem("access_token")
+            }
           }
+        )
+        context.commit("SET_USD", Math.ceil(res.data.USD))
+        context.commit("SET_EUR", Math.ceil(res.data.EUR))
+      }
+      catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
         }
-      )
-      context.commit("SET_USD", Math.ceil(res.data))
+      }
     },
-    async getEur(context) {
-      const res = await axios.get('http://localhost:3000/additionals/eur',
-        {
-          headers: {
-            'access_token': localStorage.getItem("access_token")
-          }
-        }
-      )
-      context.commit("SET_EUR", Math.ceil(res.data))
-    },
+
     async getBtc(context) {
-      const res = await axios.get('http://localhost:3000/additionals/btc',
-        {
-          headers: {
-            'access_token': localStorage.getItem("access_token")
+      try {
+        const res = await axios.get('http://localhost:3000/additionals/btc',
+          {
+            headers: {
+              'access_token': localStorage.getItem("access_token")
+            }
           }
+        )
+        context.commit("SET_BTC", Math.ceil(res.data.BTC))
+        context.commit("SET_ETH", Math.ceil(res.data.ETH))
+      }
+      catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
         }
-      )
-      context.commit("SET_BTC", Math.ceil(res.data))
+      }
     },
-    async getEth(context) {
-      const res = await axios.get('http://localhost:3000/additionals/eth',
-        {
-          headers: {
-            'access_token': localStorage.getItem("access_token")
+    async getHistoryByBalanceId(context, payload) {
+      try {
+        const { BalanceId } = payload
+        const res = await axios.get(`http://localhost:3000/histories/balance/${BalanceId}`,
+          {
+            headers: {
+              'access_token': localStorage.getItem("access_token")
+            }
           }
+        )
+        context.commit("SET_BTC", Math.ceil(res.data.BTC))
+        context.commit("SET_ETH", Math.ceil(res.data.ETH))
+      }
+      catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
         }
-      )
-      context.commit("SET_ETH", Math.ceil(res.data))
+      }
     },
+
     async addBalance(context, payload) {
-      await axios.post('http://localhost:3000/histories/data',
-        payload,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'access_token': localStorage.getItem("access_token")
+      try {
+        await axios.post('http://localhost:3000/histories/data',
+          payload,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'access_token': localStorage.getItem("access_token")
+            }
           }
+        )
+      }
+      catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
         }
-      )
-    }
-    ,
+      }
+    },
     async fetchHistory(context) {
       try {
         const res = await axios.get("http://localhost:3000/histories/data", {
@@ -148,7 +205,11 @@ export default new Vuex.Store({
         })
         context.commit("SET_HISTORY", res.data)
       } catch (err) {
-        console.log(err);
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
+        }
       }
     },
     async fetchBalance(context) {
@@ -161,7 +222,24 @@ export default new Vuex.Store({
         })
         context.commit("SET_BALANCE", res.data)
       } catch (err) {
-        console.log(err);
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
+        }
+      }
+    },
+    async logoutHandler(context) {
+      try {
+        context.commit("SET_ISLOGGEDIN", false);
+        localStorage.clear();
+        swal('Logout Successful')
+      } catch (err) {
+        if (!Array.isArray(err.response.data.message)) {
+          swal(err.response.data.message);
+        } else {
+          swal(err.response.data.message[0]);
+        }
       }
     },
   },

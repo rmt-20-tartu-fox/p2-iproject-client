@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/historylist">History</router-link> |
-      <router-link to="/formcashflow">Data</router-link> |
-      <router-link to="/getcashflow"></router-link> |
-      <router-link to="/formBalance">Add Balance</router-link>
-    </div>
+    <Navbar></Navbar>
+
     <router-view />
   </div>
 </template>
 <script>
+import Navbar from "./components/Navbar.vue";
 export default {
+  components: { Navbar },
   name: "App",
   data() {
     return {};
@@ -40,16 +36,10 @@ export default {
         this.$store.commit("SET_ISLOGGEDIN", true);
       }
     },
-    async checkAll() {
-      await this.$store.dispatch("getUsd");
-      await this.$store.dispatch("getEur");
-      await this.$store.dispatch("getBtc");
-      await this.$store.dispatch("getEth");
-    },
   },
   created() {
     this.checkLog();
-    this.checkAll();
+    // this.checkAll();
   },
 };
 </script>
