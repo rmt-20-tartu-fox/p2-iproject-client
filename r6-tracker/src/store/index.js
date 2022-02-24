@@ -57,6 +57,7 @@ export default new Vuex.Store({
       // https://r6-tracker-v1.herokuapp.com/operators
       axios.get(`https://r6-tracker-v1.herokuapp.com/operators?role=${role}`)
         .then((resp) => {
+          // console.log("INI PERCOBAAN")
           console.log(resp.data)
           context.commit('SET_OPERATORS', resp.data)
         })
