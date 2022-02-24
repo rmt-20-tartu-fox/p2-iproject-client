@@ -2,11 +2,12 @@
   <div class="container">
     <h3 class="text-center">Profile</h3>
     <div class="border mb-1 bg-white">
-      {{registrationDetails, }}
+      
       <ul>
         <li>
+          
           <b>Nama</b>:
-          {{registrationDetails.name.givenName._text, }}
+          {{registrationDetails.name.givenName._text}}
           {{registrationDetails.name.surname._text }}
         </li>
         <li>
@@ -458,12 +459,14 @@ export default {
     },
   created() {
     this.fetchRegistrationDetails();
-    
+    console.log(this.$store.state.registrationDetails, "INI REGIST DI CREATED")
     this.fetchSourceList()
+    console.log(this.$store.state.sourceList, "INI SOURCE DI CREATED")
   },
 
   methods: {
     async fetchRegistrationDetails() {
+      console.log("ini fetch registration")
       await this.$store.dispatch("fetchRegistrationDetails");
     },
     async fetchSourceList() {
@@ -507,8 +510,10 @@ export default {
     // }
   },
   computed: {
-    registrationDetails() {
-      return this.$store.state.registrationDetails.registrationDetails;
+     registrationDetails() {
+      console.log(this.$store.state.registrationDetails, "INI DI COMPUTED")
+      
+      return  this.$store.state.registrationDetails.registrationDetails;
     },
     percentage() {
       return (this.$store.state.registrationDetails.fullNameCount + this.$store.state.registrationDetails.fullAddressCount + this.$store.state.registrationDetails.dobCount)/5*100

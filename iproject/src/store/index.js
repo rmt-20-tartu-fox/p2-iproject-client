@@ -7,8 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isRegister: localStorage.verificationId ? true : false,
-    registrationDetails: [],
-    fieldData: [],
+    registrationDetails: '',
+    fieldData: '',
     sourceList: [],
 
 
@@ -38,7 +38,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchRegistrationDetails(context) {
+     async fetchRegistrationDetails(context) {
       const verificationId = localStorage.getItem("verificationId")
       console.log(verificationId, "INI VERIFICATION ID")
       axios.get('http://localhost:3000/verify/sources', {

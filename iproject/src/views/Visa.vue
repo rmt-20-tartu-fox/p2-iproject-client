@@ -351,7 +351,7 @@
 
       <br />
       <button type="submit" class="btn btn-success" >Submit</button>
-      <button type="button" class="btn btn-warning">Back</button>
+      <button type="button" class="btn btn-warning" @click.prevent="backHandler">Back</button>
     </form>
   </div>
 </template>
@@ -366,6 +366,9 @@ export default {
         }
     },
   methods: {
+      backHandler() {
+           this.$router.push("/");
+        },
     submitHandler(submitEvent) {
        console.log(
         submitEvent.target.elements.surname.value,
