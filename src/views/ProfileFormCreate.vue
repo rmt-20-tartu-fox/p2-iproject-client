@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     createProfile: async function (value) {
+      // console.log(value);
       await this.$store.dispatch("createProfile", value);
       if (this.completed) {
         this.$router.push({ name: "Login" });
