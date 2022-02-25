@@ -73,23 +73,23 @@ export default new Vuex.Store({
     },
     createProfile: async function (context, payload) {
       try {
+        console.log("store", payload);
+
+        const data = new FormData();
+        data.append("name", payload.nama);
+        data.append("education", payload.education);
+        data.append("job", payload.job);
+        data.append("description", payload.description);
+        data.append("sex", payload.sex);
+        data.append("profilePhoto", payload.photo);
+
         const id = localStorage.getItem("user_id");
-        const profile = await datingApi.post(
-          `users/${id}/profiles`,
-          {
-            name: payload.nama,
-            education: payload.education,
-            job: payload.job,
-            description: payload.description,
-            sex: payload.sex,
+        const profile = await datingApi.post(`users/${id}/profiles`, data, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+            "Content-Type": "multipart/form-data",
           },
-          {
-            headers: {
-              access_token: localStorage.getItem("access_token"),
-            },
-          }
-        );
-        console.log(profile.status);
+        });
         if (profile.status === 201) {
           context.commit("SET_PROFILE_STATUS", true);
         }

@@ -3,13 +3,13 @@
     <div class="card h-100">
       <img :src="thisUser.Profile.photos" class="card-img-top" />
       <div class="card-body">
-        <div class="d-flex jjustify-content-between">
+        <div class="d-flex justify-content-between">
           <div>
             <h5 class="card-title">{{ thisUser.Profile.name }}, {{ thisUser.age }}</h5>
             <p class="card-text">{{ thisDistance }} km away</p>
           </div>
           <div>
-            <p>{{ thisPercentage }}%</p>
+            <p class="border border-danger rounded-circle p-2 text-center text-danger">{{ thisPercentage }}%</p>
           </div>
         </div>
       </div>
