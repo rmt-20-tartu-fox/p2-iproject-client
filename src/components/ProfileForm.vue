@@ -23,7 +23,7 @@
         </div>
         <div class="input-group mb-3 mt-3">
           <div class="custom-file">
-            <input name="profilePhoto" type="file" class="custom-file-input" id="inputGroupFile01" />
+            <input @change="receivePhoto" name="profilePhoto" type="file" class="custom-file-input" id="inputGroupFile01" />
             <label class="custom-file-label" for="inputGroupFile01">Choose photo</label>
           </div>
         </div>
@@ -39,6 +39,7 @@ export default {
   data: function () {
     return {
       data: {
+        photo: {},
         nama: "",
         education: "",
         job: "",
@@ -51,6 +52,13 @@ export default {
   methods: {
     submitHandler: function () {
       this.$emit("submitHandler", this.data);
+    },
+    receivePhoto: function (event) {
+      console.log("masuk");
+      console.log(event.target.files[0]);
+      // const file = event.target.files[];
+      // let filename = files[0].name
+      this.data.photo = event.target.files[0];
     },
   },
   computed: {

@@ -32,7 +32,7 @@
               <!-- Profile -->
             </div>
             <!-- Card -->
-            <profile-card v-bind:user="user" v-bind:distance="distance" v-on:nextPage="nextPage"></profile-card>
+            <profile-card v-bind:user="user" v-bind:distance="distance" v-on:nextPage="nextPage" v-bind:percentage="percentage"></profile-card>
             <!-- Card -->
           </div>
         </div>
@@ -91,6 +91,9 @@ export default {
     },
     distance: function () {
       return this.$store.state.usersData.dist;
+    },
+    percentage: function () {
+      return this.$store.state.usersData.percent;
     },
     currentPage: function () {
       return this.$store.state.currentPage;
