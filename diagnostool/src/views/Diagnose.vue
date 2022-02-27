@@ -142,6 +142,7 @@ export default {
   display: flex !important;
   flex-direction: column;
   flex-grow: 1 !important;
+  margin-top: 10px !important;
 }
 
 #diagnose label {
@@ -156,7 +157,7 @@ export default {
   text-align: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #diagnose h1 {
     font-size: 1.6rem !important;
   }
@@ -165,6 +166,9 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
+  #diagnose {
+    margin-top: 32px;
+  }
 }
 </style>

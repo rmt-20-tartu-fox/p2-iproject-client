@@ -57,11 +57,11 @@ export default {
   height: 800px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #patient .window {
     margin: auto !important;
-    width: 410px;
-    height: 50vh;
+    width: 380px !important;
+    height: 70vh;
   }
 
   #patient {
@@ -73,7 +73,7 @@ export default {
   }
 
   #patient input {
-    width: 200px !important;
+    width: 280px !important;
   }
   .features__container {
     width: 10px !important;
@@ -81,13 +81,18 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   #patient {
     margin: auto !important;
     padding: 16px;
     display: flex;
     flex-grow: 1;
-    height: 500px !important;
+  }
+
+  #patient .window {
+    margin: auto !important;
+    width: 550px;
+    height: 70vh;
   }
 }
 </style>
