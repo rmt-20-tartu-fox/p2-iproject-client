@@ -144,7 +144,7 @@ nav {
   color: #f7f7f7 !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #app h1 {
     font-size: 32px !important;
   }
@@ -167,7 +167,7 @@ nav {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   #app {
     width: 100%;
   }

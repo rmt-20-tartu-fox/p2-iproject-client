@@ -1,6 +1,6 @@
 <template>
   <section id="nearby-result">
-    <h2 class="mt-4 mb-2 fs-3">
+    <h2 class="mt-4 fs-3">
       Based on your location, this is list of hospitals nearby your location
     </h2>
     <b-card
@@ -72,12 +72,12 @@ export default {
   width: 700px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #my-card {
     width: 360px;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
 }
 </style>

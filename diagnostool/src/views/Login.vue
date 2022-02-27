@@ -80,4 +80,15 @@ export default {
   width: 420px;
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+}
+
+@media only screen and (max-width: 992px) {
+  #login {
+    max-height: 520px;
+    width: 520px;
+    text-align: center;
+  }
+}
 </style>

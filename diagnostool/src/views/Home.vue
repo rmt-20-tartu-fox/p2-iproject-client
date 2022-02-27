@@ -63,10 +63,11 @@ export default {
   width: 100%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #home {
+    margin-top: 36px !important;
     display: block;
-    padding: 24px;
+    padding: 12px !important;
   }
 
   #heading {
@@ -95,9 +96,10 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   #home {
     padding: 56px;
+    margin-top: 120px;
   }
 
   #heading h1 {

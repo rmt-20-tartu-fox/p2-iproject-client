@@ -112,7 +112,7 @@ export default {
   border-radius: 8px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   .features__container {
     width: 10px !important;
     display: none !important;
@@ -120,7 +120,7 @@ export default {
   .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around !important;
     align-items: center;
   }
   #doctor {
@@ -129,12 +129,14 @@ export default {
   }
 
   #doctor .window {
-    width: 420px !important;
-    height: 300px !important;
+    width: 380px !important;
+    height: 360px !important;
   }
 
   #doc-detail.card {
-    width: 400px;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 380px !important;
     height: 360px;
   }
 
@@ -148,7 +150,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -161,8 +163,8 @@ export default {
   }
 
   #doctor .window {
-    width: 500px !important;
-    height: 360px;
+    width: 500px;
+    height: 400px;
   }
 
   #doc-detail {
@@ -171,7 +173,7 @@ export default {
   }
 
   #doc-detail.card {
-    margin: 0 !important;
+    margin: 0;
   }
 
   .doc-img img {

@@ -99,7 +99,7 @@ export default {
   width: 560px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   #location {
     display: block;
   }
@@ -114,7 +114,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   #location {
     display: block;
   }
