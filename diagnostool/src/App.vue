@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
           <router-link id="brand-link" class="navbar-brand" to="/"
             ><i class="fa-solid fa-user-doctor"></i> | DiagnosTool</router-link
@@ -142,6 +142,10 @@ nav {
 #chat a:hover,
 #chat a:active {
   color: #f7f7f7 !important;
+}
+
+span.navbar-toggler-icon {
+  color: white !important;
 }
 
 @media only screen and (max-width: 576px) {
