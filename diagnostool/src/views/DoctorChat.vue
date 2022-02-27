@@ -115,8 +115,8 @@ export default {
 @media only screen and (max-width: 600px) {
   .features__container {
     width: 10px !important;
+    display: none !important;
   }
-
   .wrapper {
     display: flex;
     flex-direction: column;

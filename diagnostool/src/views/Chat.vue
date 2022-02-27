@@ -77,6 +77,7 @@ export default {
   }
   .features__container {
     width: 10px !important;
+    display: none !important;
   }
 }
 
