@@ -1,7 +1,7 @@
 <template>
   <section id="location">
     <section id="maps">
-      <h2 class="mt-4 mb-2">
+      <h2 class="mt-4 mb-2 fs-3">
         To view nearby hospitals, please enter your current location
       </h2>
       <Spinner v-if="isLoading"></Spinner>
@@ -97,5 +97,35 @@ export default {
 
 .form-search {
   width: 560px;
+}
+
+@media only screen and (max-width: 600px) {
+  #location {
+    display: block;
+  }
+
+  #maps {
+    background-color: white;
+    padding: 12px;
+  }
+
+  .form-search {
+    width: 360px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #location {
+    display: block;
+  }
+
+  #maps {
+    background-color: white;
+    padding: 12px;
+  }
+
+  .form-search {
+    width: 480px;
+  }
 }
 </style>

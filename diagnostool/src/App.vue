@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid row justify-content-between">
-          <router-link id="brand-link" class="navbar-brand col-2" to="/"
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+          <router-link id="brand-link" class="navbar-brand" to="/"
             ><i class="fa-solid fa-user-doctor"></i> | DiagnosTool</router-link
           >
           <button
-            class="navbar-toggler col-2"
+            class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -17,12 +17,8 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div
-            class="collapse navbar-collapse col-6 justify-content-end"
-            id="navbarNav"
-            align="right"
-          >
-            <ul class="navbar-nav">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2">
               <li class="nav-item">
                 <router-link class="nav-link" to="/diagnose"
                   >Symptom Checker</router-link
@@ -104,6 +100,15 @@ nav {
   border-radius: 10px 10px 0 0;
 }
 
+.navbar-nav {
+  margin-bottom: 0 !important;
+  vertical-align: center !important;
+}
+
+.nav-item {
+  vertical-align: center !important;
+}
+
 #footer {
   border-radius: 0 0 10px 10px;
   background-color: #051367 !important;
@@ -137,5 +142,42 @@ nav {
 #chat a:hover,
 #chat a:active {
   color: #f7f7f7 !important;
+}
+
+@media only screen and (max-width: 600px) {
+  #app h1 {
+    font-size: 32px !important;
+  }
+
+  #app {
+    width: 100%;
+  }
+
+  #chat.nav-item {
+    width: 40% !important;
+    margin: 0 auto;
+  }
+
+  nav {
+    border-radius: 0;
+  }
+
+  footer {
+    border-radius: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #app {
+    width: 100%;
+  }
+
+  nav {
+    border-radius: 0;
+  }
+
+  footer {
+    border-radius: 0;
+  }
 }
 </style>

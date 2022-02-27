@@ -111,4 +111,72 @@ export default {
   width: 400px;
   border-radius: 8px;
 }
+
+@media only screen and (max-width: 600px) {
+  .features__container {
+    width: 10px !important;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #doctor {
+    margin-top: 4px;
+    padding: 0 !important;
+  }
+
+  #doctor .window {
+    width: 420px !important;
+    height: 300px !important;
+  }
+
+  #doc-detail.card {
+    width: 400px;
+    height: 360px;
+  }
+
+  #doc-detail.card {
+    margin: 0 !important;
+  }
+
+  .doc-img img {
+    width: 300px;
+    border-radius: 8px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #doctor {
+    height: 40vh;
+    margin-top: 10px;
+  }
+
+  #doctor .window {
+    width: 500px !important;
+    height: 360px;
+  }
+
+  #doc-detail {
+    width: 600px;
+    height: 400px;
+  }
+
+  #doc-detail.card {
+    margin: 0 !important;
+  }
+
+  .doc-img img {
+    width: 300px;
+    border-radius: 8px;
+  }
+}
 </style>

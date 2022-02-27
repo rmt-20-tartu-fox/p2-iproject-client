@@ -155,4 +155,16 @@ export default {
 #result h1 {
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  #diagnose h1 {
+    font-size: 1.6rem !important;
+  }
+  #diagnose .card {
+    width: 360px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+}
 </style>
