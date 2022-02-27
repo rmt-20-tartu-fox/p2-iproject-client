@@ -4,7 +4,6 @@ import Home from "../views/Home.vue";
 import Diagnose from "../views/Diagnose.vue";
 import Result from "../views/Result.vue";
 import Location from "../views/Location.vue";
-import Nearby from "../views/NearbyPlace.vue";
 import Chat from "../views/Chat.vue";
 import DoctorChat from "../views/DoctorChat.vue";
 import LoginPage from "../views/Login.vue";
@@ -38,13 +37,6 @@ const routes = [
     path: "/location",
     name: "Location",
     component: Location,
-    children: [
-      {
-        path: "nearby",
-        name: "Nearby",
-        component: Nearby,
-      },
-    ],
   },
   {
     path: "/chat",

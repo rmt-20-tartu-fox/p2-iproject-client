@@ -1,7 +1,9 @@
 <template>
   <section id="home">
     <div id="heading">
-      <h1>We Are Providing Best Diagnostic Tool to Determine Your Disease</h1>
+      <h1 class="mb-4">
+        We Are Providing Best Diagnostic Tool to Determine Your Disease
+      </h1>
       <p>
         Our symptom checker algorithm can detect more than 700 hundreds disease
         to serve the needs of our user
@@ -59,5 +61,55 @@ export default {
 
 #image img {
   width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  #home {
+    display: block;
+    padding: 24px;
+  }
+
+  #heading {
+    display: block;
+    width: 100%;
+    text-align: center !important;
+  }
+
+  #heading h1,
+  #heading p {
+    text-align: center;
+  }
+
+  #heading button {
+    width: 240px;
+  }
+
+  #image {
+    width: 300px !important;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  #image img {
+    width: 300px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #home {
+    padding: 56px;
+  }
+
+  #heading h1 {
+    font-size: 48px;
+  }
+
+  #heading {
+    justify-content: flex-start;
+  }
+
+  #heading button {
+    width: 240px;
+  }
 }
 </style>

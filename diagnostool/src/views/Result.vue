@@ -1,7 +1,7 @@
 <template>
   <section id="result" class="mb-3">
     <h1>Based on your data, you might have these disease:</h1>
-    <div class="wrapper">
+    <div class="table-responsive table-responsive-sm table-responsive-md">
       <table class="table table-sm table-bordered table-hover">
         <thead>
           <tr>
@@ -58,13 +58,9 @@ export default {
   display: flex;
   flex-direction: column !important;
   flex-grow: 1;
+  padding: 36px;
 }
 #result > h1 {
   text-align: center;
-}
-
-.wrapper {
-  width: 85%;
-  margin: 0 auto;
 }
 </style>

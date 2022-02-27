@@ -46,7 +46,7 @@ export default {
 <style>
 #patient .window {
   margin: auto !important;
-  width: 700px;
+  width: 500px;
   height: 700px;
 }
 #patient {
@@ -55,5 +55,38 @@ export default {
   display: flex;
   flex-grow: 1;
   height: 800px;
+}
+
+@media only screen and (max-width: 600px) {
+  #patient .window {
+    margin: auto !important;
+    width: 410px;
+    height: 50vh;
+  }
+
+  #patient {
+    margin: auto !important;
+    padding: 16px;
+    display: flex;
+    flex-grow: 1;
+    height: 600px;
+  }
+
+  #patient input {
+    width: 200px !important;
+  }
+  .features__container {
+    width: 10px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #patient {
+    margin: auto !important;
+    padding: 16px;
+    display: flex;
+    flex-grow: 1;
+    height: 500px !important;
+  }
 }
 </style>

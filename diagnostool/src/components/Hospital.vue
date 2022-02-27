@@ -56,4 +56,20 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
+@media only screen and (max-width: 600px) {
+  #my-card {
+    width: 360px;
+  }
+
+  .gmap_canvas > iframe {
+    width: 310px !important;
+  }
+  #map {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+}
 </style>
