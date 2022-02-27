@@ -120,33 +120,24 @@ export default {
   .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around !important;
+    justify-content: space-evenly !important;
     align-items: center;
+    margin: auto !important;
   }
   #doctor {
     margin-top: 4px;
     padding: 0 !important;
+    height: 80vh !important;
   }
 
   #doctor .window {
+    margin: auto !important;
     width: 380px !important;
-    height: 360px !important;
+    height: 70vh !important;
   }
 
   #doc-detail.card {
-    padding-top: 0;
-    padding-bottom: 0;
-    width: 380px !important;
-    height: 360px;
-  }
-
-  #doc-detail.card {
-    margin: 0 !important;
-  }
-
-  .doc-img img {
-    width: 300px;
-    border-radius: 8px;
+    display: none !important;
   }
 }
 
